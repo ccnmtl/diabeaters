@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load render %}
+{% block sidenav %}
+{% ifequal module.label "Overview" %}
+	<!-- ###### Secondary Navigation ###### -->
+	<div id="secondary_navigation">
+		<div id="fadetop"></div>
+		<div class="block">
+			<h3>Sections</h3>
+			{% include "main/menu.html" %}
+		</div><!-- div id="block" -->
+		<div id="fadebottom"></div>
+	</div><!-- div id="secondary_navigation" -->
+{% endifequal %}
+{% endblock %}
+
+{% block content %}
+{% if needs_submit %}
+{% if is_submitted %}
+{% else %}
+<form action="." method="post">
+{% endif %}
+{% endif %}
+
+
+{% for block in section.pageblock_set.all %}
+{% if block.label %}<h3>{{block.label}}</h3>{% endif %}
+{% render block %}
+{% endfor %}
+
+
+{% if needs_submit %}
+{% if is_submitted %}
+{% else %}
+<input type="submit" value="Submit" />
+
+</form>
+{% endif %}
+{% endif %}
+
+{% endblock %}
+
+
+{% block content-nav %}
+
+<div class="content-nav">
+
+{% if section.get_previous %}
+<a href="{{section.get_previous.get_absolute_url}}" id="previous">« {{section.get_previous.label}}</a>
+{% endif %}
+
+{% if section.get_next %}
+{% with section.get_next as next_section %}
+<a href="{{section.get_next.get_absolute_url}}" id="next">{{section.get_next.label}} »</a>
+{% endwith %}
+{% endif %}
+</div><!-- div id="content-nav" -->
+{% endblock %}
