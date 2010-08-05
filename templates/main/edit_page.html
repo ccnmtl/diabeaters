@@ -106,7 +106,7 @@ var saveOrderOfPageBlocks = function() {
 <ul id="children-order-list" class="dragparent"> drag and drop to reorder
 {% for child in section.get_children %}
 <li class="draggable"
-    id="child-{{child.id}}">[<a href="/delete_section/{{child.id}}/">delete</a>]
+    id="child-{{child.id}}">[<a href="/pagetree/delete_section/{{child.id}}/">delete</a>]
   {{child.label}}
 </li>
 {% endfor %}
