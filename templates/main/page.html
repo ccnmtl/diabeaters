@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load render %}
 {% block sidenav %}
-{% ifequal module.label "Overview" %}
 	<!-- ###### Secondary Navigation ###### -->
 	<div id="secondary_navigation">
 		<div id="fadetop"></div>
@@ -11,7 +10,6 @@
 		</div><!-- div id="block" -->
 		<div id="fadebottom"></div>
 	</div><!-- div id="secondary_navigation" -->
-{% endifequal %}
 {% endblock %}
 
 {% block content %}
