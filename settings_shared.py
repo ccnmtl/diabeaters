@@ -70,10 +70,12 @@ INSTALLED_APPS = (
     'typogrify',
     'pagetree',
     'pageblocks',
+    'diabeaters.quiz',
     'diabeaters.main',
 )
 
 PAGEBLOCKS = ['pageblocks.TextBlock',
+              'quiz.Quiz',
               'pageblocks.HTMLBlock',
               'pageblocks.PullQuoteBlock',
               'pageblocks.ImageBlock',

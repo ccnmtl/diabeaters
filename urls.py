@@ -14,6 +14,7 @@ urlpatterns = patterns('',
                        ('^accounts/',include('djangowind.urls')),
                        (r'^admin/(.*)', admin.site.root),
                        (r'^pagetree/',include('pagetree.urls')),
+                       (r'^quiz/',include('quiz.urls')),
                        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
                        (r'^uploads/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
                        # very important that these two stay last and in this order
