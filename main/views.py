@@ -105,4 +105,4 @@ def home(request):
     return dict(profile=profile)
 
 def index(request):
-    return HttpResponseRedirect("/accounts/login/")
+    return HttpResponseRedirect("/intro/")
