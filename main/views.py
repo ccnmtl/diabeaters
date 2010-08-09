@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import permission_required
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from pagetree.models import Hierarchy, Section
 from django.contrib.auth.models import User
@@ -106,3 +106,6 @@ def home(request):
 
 def index(request):
     return HttpResponseRedirect("/intro/")
+
+def health_habit_plan(request):
+    return HttpResponse("not implemented yet")

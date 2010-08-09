@@ -15,6 +15,7 @@ urlpatterns = patterns('',
                        (r'^admin/(.*)', admin.site.root),
                        (r'^pagetree/',include('pagetree.urls')),
                        (r'^quiz/',include('quiz.urls')),
+                       (r'^health-habit-plan/','diabeaters.main.views.health_habit_plan'),
                        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
                        (r'^uploads/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
                        # very important that these two stay last and in this order
