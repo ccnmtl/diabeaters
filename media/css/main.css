@@ -832,3 +832,278 @@ body.fluid #content
 	border: 0;
 }
 
+
+#content .content-nav
+{
+	height: 1.5em;
+	margin: 2em 0 0 0;
+	padding: 0.5em 0;
+	border: 0;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+
+#content .content-nav a#previous
+{
+	display: block;
+	float: left;
+	width: auto;
+	line-height: 1.5em;
+}
+
+#content .content-nav a#next
+{
+	display: block;
+	float: right;
+	width: auto;
+	line-height: 1.5em;
+	text-align: right;
+}
+
+
+#secondary_navigation
+{
+	display: block;
+	float: left;
+	width: 201px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#secondary_navigation #fadetop
+{
+	display: block;
+	width: 201px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#secondary_navigation #fadebottom
+{
+	display: block;
+	width: 201px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+#secondary_navigation .block
+{
+	display: block;
+	width: 180px;
+	margin: 0 0 20px 20px;
+	padding: 0;
+	border: 0;
+	font-size: 0.95em;
+}
+
+#secondary_navigation .block h3
+{
+	display: block;
+	width: 165px;
+	margin: 0 0 10px 0;
+	padding: 0;
+	border: 0;
+	border-bottom: 1px dotted #faba42;
+	color: #c00;
+	font-weight: bold;
+}
+
+#secondary_navigation .block ul
+{
+	display: block;
+	width: 171px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	list-style: none;	
+}
+
+#secondary_navigation .block ul li
+{
+	margin: 0 0 2px 0;
+	padding: 0;
+	border: 0;
+	padding-left: 13px;
+	background: url('../img/bullet.gif') left 4px no-repeat;
+}
+
+#secondary_navigation .block ul ul
+{
+	display: block;
+	width: 151px;
+	margin: 0 0 0 0;
+	padding: 0;
+	border: 0;
+	list-style: none;	
+}
+
+#secondary_navigation .block ul ul li
+{
+	margin: 0 0 2px 0;
+	padding: 0;
+	border: 0;
+	padding-left: 13px;
+	background: url('../img/bullet_diamond.gif') left 4px no-repeat;
+}
+
+#secondary_navigation .block ul ul ul
+{
+	display: block;
+	width: 130px;
+	margin: 0 0 0 0;
+	padding: 0;
+	border: 0;
+	list-style: none;	
+}
+
+#secondary_navigation .block ul ul ul li
+{
+	margin: 0 0 2px 0;
+	padding: 0;
+	border: 0;
+	padding-left: 13px;
+	background: url('../img/bullet_diamond_hollow.gif') left 4px no-repeat;
+}
+
+/* Login page */
+
+.loginbox
+{
+	float: right;
+	width: 280px;
+	margin: 0 10px;
+	padding: 0;
+	border: 0;
+	background: #fff url('../img/bg_login_middle.gif') repeat-y top;
+}
+
+.loginbox .boxtop
+{
+	width: 280px;
+	height: 16px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: #fff url('../img/bg_login_top.gif') no-repeat top;
+}
+
+.loginbox .boxbottom
+{
+	width: 280px;
+	height: 16px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: #fff url('../img/bg_login_bottom.gif') no-repeat bottom;
+}
+
+.loginbox h2
+{
+	margin: 0 0 10px 10px !important;
+	padding: 0 !important;
+	border: 0 !important;
+	font: bold 16px Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif !important;
+}
+
+.loginbox h3
+{
+	margin: 0 0 10px 10px !important;
+	padding: 0 !important;
+	border: 0 !important;
+	font: bold 1em Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif !important;
+}
+
+.loginbox .alert
+{
+	margin: 0 0 10px 10px !important;
+	padding: 0 !important;
+	border: 0 !important;
+	font: bold italic 1em Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif !important;
+	color: #c00;
+}
+
+.loginbox .alert a
+{
+	text-decoration: underline;
+}
+
+.loginbox hr
+{
+	height: 1px;
+	margin: 15px 0;
+	padding: 0;
+	border: 0;
+	background-color: #999;
+	color: #999;
+}
+
+.loginbox form
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.loginbox input.regButton
+{
+	margin: 0 0 0 10px;
+	padding: 1px;
+	background-color: #e0e0e0;
+	border-top: 2px solid #fff;
+	border-left: 2px solid #fff;
+	border-right: 2px solid #666;
+	border-bottom: 2px solid #666;
+	font: normal 1em Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif;
+	cursor: pointer;
+}
+
+.loginbox input.regButton:active
+{
+	background-color: #ccc;
+	border-top: 2px solid #666;
+	border-left: 2px solid #666;
+	border-right: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+}
+
+.loginbox input#id_password,
+.loginbox input#id_username
+{
+	width: 170px;
+	margin: 0;
+	padding: 2px;
+	border: 1px solid #999;
+	background-color: white;
+	font: normal 12px Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif;
+	color: #000;
+	vertical-align: middle;
+}
+
+.loginbox table
+{
+	margin: 0 10px;
+	padding: 0;
+	border: 0;
+}
+
+.loginbox table td
+{
+	margin: 0;
+	padding: 3px 2px 3px 0;
+	border: 0;
+}
+
+.loginbox table td a
+{
+	font-size: 11px;
+	color: #069;
+	text-decoration: underline;
+}
+
+
+textarea {width: 100%;}
