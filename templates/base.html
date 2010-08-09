@@ -55,15 +55,19 @@
 {% endcomment %}
 
 			{% block primarynavtabs %}
-			<ul>
-				<li><a href="#">Item 1</a></li>
-				<li><a href="#">Item 2</a></li>
-				<li><a href="#">Item 3</a></li>
-				<li><a href="#">Item 4</a></li>
-			</ul><!-- id="primarynavtabs" -->
-			{% endblock %}
+
+<ul class="globalnav">
+  {% for section in root.get_children %}
+  <li{% ifequal section.id module.id %} class="active"{% endifequal %}><a href="{{section.get_absolute_url}}">{{section.label}}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
 			
-			{% block usernav %}{% endblock %}
+{% block usernav %}
+{% if user.username %}<li>{% if user.first_name %}{{user.first_name}}
+  {{user.last_name}}{% else %}{{ user.username }}{% endif %}</li>{% endif %}
+{% if user.username %}<li id="logout"><a href="/accounts/logout/">LOG OUT</a></li>{% endif %}
+{% endblock %}
 
 		</div><!-- id="leftside/rightside" -->
 	</div><!-- id="primarynav" -->
