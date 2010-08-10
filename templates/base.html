@@ -13,24 +13,17 @@
 	{% block js %}{% endblock %}
 	{% block feeds %}{% endblock %}
 </head>
-<body class="one_column {% block widthtype %}fixed{% endblock %}">
-{% comment %}
-###### FOR WIDTH TYPE--
-   fixed : fixed width, doesn't change with browser resize
-   fluid : variable width, changes with browser resize
-   You can move this to base template if you don't want to deal with it
-   all time in flatpages templates
-{% endcomment %}
+<body>
 
-<div id="container">
+<div id="pagecontainer">
 
 
 {% block masthead %}
 	<!-- ###### Site banner ###### -->
 	<div id="header">
-		<!-- Project title/logo --><h1 id="logo_project"><a href="./" title="Project Title: Project Django"><span>Project Title: Project Django </span></a></h1>	
+		<!-- Project title/logo --><h1 id="logo_project"><a href="./" title="DiaBeaters"><span>DiaBeaters</span></a></h1>	
 		{% block standardnav %}
-		<ul id="standardnav">
+		<ul id="standard_navigation">
 			<li><a href="/about/">About</a></li>
 			<li><a href="/help/">Help</a></li>
 			<li><a href="/contact/">Contact</a></li>
@@ -46,7 +39,7 @@
 
 {% block primarynav %}
 	<!-- ###### Primary navigation ###### -->
-	<div id="primarynav">
+	<div id="primary_navigation">
 		<div class="encase" id="{% block navalignment %}leftside{% endblock %}">
 {% comment %}
 ###### FOR ALIGNMENT OF TABS on the primary navigation--
