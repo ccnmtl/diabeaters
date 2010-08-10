@@ -5,8 +5,10 @@
 	<div id="secondary_navigation">
 		<div id="fadetop"></div>
 		<div class="block">
+		  {% if module.get_children %}
 			<h3>Sections</h3>
 			{% include "main/menu.html" %}
+		  {% endif %}
 		</div><!-- div id="block" -->
 		<div id="fadebottom"></div>
 	</div><!-- div id="secondary_navigation" -->
