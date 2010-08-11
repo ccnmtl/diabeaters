@@ -109,4 +109,9 @@ def add_answer_to_question(request,id):
 @rendered_with('quiz/edit_answer.html')
 def edit_answer(request,id):
     answer = get_object_or_404(Answer,id=id)
+    if request.method == "POST":
+        form = answer.edit_form(request.POST)
+        answer = form.save(commit=False)
+        answer.save()
+        return HttpResponseRedirect(reverse("edit-answer",args=[answer.id]))
     return dict(answer=answer)
