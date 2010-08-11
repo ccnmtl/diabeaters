@@ -88,6 +88,11 @@ def add_question_to_quiz(request,id):
 @rendered_with('quiz/edit_question.html')
 def edit_question(request,id):
     question = get_object_or_404(Question,id=id)
+    if request.method == "POST":
+        form = question.edit_form(request.POST)
+        question = form.save(commit=False)
+        question.save()
+        return HttpResponseRedirect(reverse("edit-question",args=[question.id]))
     return dict(question=question)
 
 def add_answer_to_question(request,id):
