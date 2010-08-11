@@ -39,10 +39,12 @@ Answer {{ answer.ordinality }}:
 {% endfor %}
 </ul>
 
+{% if question.answerable %}
 <form action="add_answer/" method="post">
 <table width="100%">
 {{ question.add_answer_form.as_table}}
 </table>
 <input type="submit" value="add answer" />
 </form>
+{% endif %}
 {% endblock %}
