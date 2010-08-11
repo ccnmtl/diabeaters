@@ -103,6 +103,13 @@ class Question(models.Model):
     def __unicode__(self):
         return self.text
 
+    def edit_form(self,request=None):
+        class EditForm(forms.ModelForm):
+            class Meta:
+                model = Question
+                exclude = ("quiz","ordinality")
+        return EditForm(request,instance=self)
+
     def add_answer_form(self,request=None):
         class AddAnswerForm(forms.ModelForm):
             class Meta:
