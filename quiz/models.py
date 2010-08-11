@@ -130,6 +130,18 @@ class Question(models.Model):
         """ whether it makes sense to have Answers associated with this """
         return self.question_type in ["multiple choice","single choice"]
 
+    def is_short_text(self):
+        return self.question_type == "short text"
+
+    def is_long_text(self):
+        return self.question_type == "long text"
+
+    def is_single_choice(self):
+        return self.question_type == "single choice"
+
+    def is_multiple_choice(self):
+        return self.question_type == "multiple choice"
+
 class Answer(models.Model):
     question = models.ForeignKey(Question)
     ordinality = models.IntegerField(default=1)
