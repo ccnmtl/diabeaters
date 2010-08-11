@@ -162,6 +162,14 @@ class Answer(models.Model):
     def __unicode__(self):
         return self.label
 
+    def edit_form(self,request=None):
+        class EditForm(forms.ModelForm):
+            class Meta:
+                model = Answer
+                exclude = ("question","ordinality")
+        return EditForm(request,instance=self)
+
+
 class Submission(models.Model):
     quiz = models.ForeignKey(Quiz)
     user = models.ForeignKey(User)
