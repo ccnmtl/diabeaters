@@ -126,6 +126,10 @@ class Question(models.Model):
             answer.ordinality = i + 1
             answer.save()
 
+    def answerable(self):
+        """ whether it makes sense to have Answers associated with this """
+        return self.question_type in ["multiple choice","single choice"]
+
 class Answer(models.Model):
     question = models.ForeignKey(Question)
     ordinality = models.IntegerField(default=1)
