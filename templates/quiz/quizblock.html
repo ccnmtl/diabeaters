@@ -18,7 +18,11 @@
                        <ol type="A">
 			 {% for answer in question.answer_set.all %}
 			 {% if block.rhetorical %}
+			 {% if question.is_single_choice %}
                          <li><input name="question{{question.id}}" value="{{answer.label}}" type="radio" />{{answer.label}}</li>
+			 {% else %}
+                         <li><input name="question{{question.id}}" value="{{answer.label}}" type="checkbox" />{{answer.label}}</li>
+			 {% endif %}
 			 {% else %}
                          <li><input name="pageblock-{{block.pageblock.id}}-question{{question.id}}" value="{{answer.value}}" type="radio" />{{answer.label}}</li>
 			 {% endif %}
@@ -51,6 +55,7 @@
            </div>
 	   {% if question.answerable %}
 	   {% if block.rhetorical %}
+	   {% if question.is_single_choice %}
            <div class="casesanswerdisplay">
                  <a href="#q{{question.id}}" class="moretoggle">Show answer &gt;&gt;</a>
                  <div id="q{{question.id}}" class="toggleable">
@@ -59,6 +64,27 @@
                  {{question.correct_answer_letter}}:</i>{% endif %} {{question.explanation|markdown}}</p>
                  </div>
            </div>
+	   {% endif %}
+	   {% if question.is_multiple_choice %}
+	   <div class="casesanswerdisplay">
+                 <a href="#q{{question.id}}" class="moretoggle">Show answer(s) &gt;&gt;</a>
+                 <div id="q{{question.id}}" class="toggleable">
+                 <p><i>The correct answer(s):</i></p>
+		   <ol type="A">
+		     {% for answer in question.answer_set.all %}
+		     <li>{% if answer.correct %}
+		       <span class="correctanswer">
+			 {% else %}
+			 <span class="incorrectanswer" %>
+			 {% endif %}
+		       <span class="answer-inner">{{answer.label}}</span></span></li>
+		     {% endfor %}
+		   </ol>
+
+<p>{{question.explanation|markdown}}</p>
+                 </div>
+           </div>
+	   {% endif %}
 	   {% endif %}
 	   {% else %}
 	   {% comment %} short/long text questions {% endcomment %}
