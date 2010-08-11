@@ -1148,3 +1148,7 @@ ul.tabbernav li.tabberactive a:hover
 .expert {color: orange;}
 
 .incorrect { border-bottom: #f00 solid 2px;}
+.correctanswer {border-bottom: #090 solid 1px;}
+
+.incorrectanswer {text-decoration: line-through;color: #f00; }
+.answer-inner {color: #000;}
