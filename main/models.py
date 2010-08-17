@@ -1,20 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from pagetree.models import Hierarchy
-
-def get_hierarchy():
-    return Hierarchy.objects.get_or_create(name="main",defaults=dict(base_url="/"))[0]
-
-def get_section_from_path(path):
-    h = get_hierarchy()
-    return h.get_section_from_path(path)
-
-def get_module(section):
-    """ get the top level module that the section is in"""
-    if section.is_root:
-        return None
-    return section.get_ancestors()[1]
-
+from pagetree.helpers import get_section_from_path, get_module
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)

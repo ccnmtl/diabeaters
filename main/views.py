@@ -2,8 +2,7 @@ from django.contrib.auth.decorators import permission_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
-from pagetree.models import Hierarchy, Section
-from django.contrib.auth.models import User
+from pagetree.helpers import get_hierarchy, get_section_from_path, get_module, needs_submit
 from models import UserProfile
 
 class rendered_with(object):
@@ -19,27 +18,6 @@ class rendered_with(object):
                 return items
 
         return rendered_func
-
-def get_hierarchy():
-    return Hierarchy.objects.get_or_create(name="main",defaults=dict(base_url="/"))[0]
-
-def get_section_from_path(path):
-    h = get_hierarchy()
-    return h.get_section_from_path(path)
-
-def get_module(section):
-    """ get the top level module that the section is in"""
-    if section.is_root:
-        return None
-    return section.get_ancestors()[1]
-
-def needs_submit(section):
-    """ if any blocks on the page need to be submitted """
-    for p in section.pageblock_set.all():
-        if hasattr(p.block(),'needs_submit'):
-            if p.block().needs_submit():
-                return True
-    return False
 
 @rendered_with('main/page.html')
 def page(request,path):
