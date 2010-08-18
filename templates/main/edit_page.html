@@ -1,29 +1,22 @@
 {% extends "base.html" %}
 
 {% block js %}
-<script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/themes/base/jquery-ui.css" type="text/css" media="all" /> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+        type="text/javascript" ></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/jquery-ui.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/site_media/js/tabber.js"></script>
-<script type="text/javascript" src="/site_media/js/dragdropreorder.js"></script>
 
 <script type="text/javascript">
-var saveOrder = function() {
-   saveOrderOfChildren();
-   saveOrderOfPageBlocks();
-};
-
 var saveOrderOfChildren = function() {
     var url = "/pagetree/reorder_section_children/{{section.id}}/?";
-    var p = $('children-order-list');
-    var lis = p.getElementsByTagName('li');
-    var cnt = 0;
-    for (var i = 0; i < lis.length; i++) {
-        var li = lis[i];
-        var id = li.id;
-        var parts = id.split("-");
-        url += "section_id_" + i + "=" + parts[1] + ";";
-        cnt++;
-    }
-    if (cnt > 1) {
+    var worktodo = 0;
+    jQuery("#children-order-list li").each(function(index,element) {
+       worktodo = 1;
+       var id = jQuery(element).attr('id').split("-")[1];
+       url += "section_id_" + index + "=" + id + ";";
+    });
+    if (worktodo == 1) {
         var req = new XMLHttpRequest();
         req.open("POST",url,true);
         req.send(null);
@@ -32,19 +25,14 @@ var saveOrderOfChildren = function() {
 
 var saveOrderOfPageBlocks = function() {
     var url = "/pagetree/reorder_pageblocks/{{section.id}}/?";
-    var p = $('blocks');
-    var divs = p.getElementsByTagName('div');
-    var cnt = 0;
-    for (var i = 0; i < divs.length; i++) {
-        var div = divs[i];
-	if (div.className.indexOf("draggable") != -1) {
-		var id = div.id;
-		var parts = id.split("-");
-		url += "pageblock_id_" + i + "=" + parts[1] + ";";
-                cnt++;
-        }
-    }
-    if (cnt > 1) {
+    var worktodo = 0;
+    jQuery("#blocks div").each(function(index,element) {
+      worktodo = 1;
+      var id = jQuery(element).attr('id').split("-")[1];
+      url += "pageblock_id_" + index + "=" + id + ";";
+    });
+    if (worktodo == 1) {
+        /* only bother submitting if there are elements to be sorted */
         var req = new XMLHttpRequest();
         req.open("POST",url,true);
         req.send(null);
@@ -53,6 +41,17 @@ var saveOrderOfPageBlocks = function() {
 }
 
 </script>
+
+<style type="text/css">
+	#blocks .draggable { background-color: #ddd; }
+	.draghandle {float: left;}
+	#children-order-list {list-style-type: none; margin: 0; padding: 0;}
+	#children li { margin: 0 3px 3px 3px; padding: 0.4em;
+	padding-left: 1.5em; 
+          background-color: #ddd;
+	}
+	#children li span { position: absolute; margin-left: -1.3em; }
+	</style>
 {% endblock %}
 
 {% block sidenav %}
@@ -78,10 +77,10 @@ var saveOrderOfPageBlocks = function() {
 <div id="blocks" class="tabbertab" title="edit blocks" class="dragparent"/>
 {% for block in section.pageblock_set.all %}
 <div class="block-edit draggable" id="pageblock-{{block.id}}">
-{% if block.label %}<h3>{{block.label}}</h3>{% endif %}
-<form action="{% url delete-pageblock block.id %}" method="post">
+<table width="100%" border="0"><tr><td><span title="drag to reorder pageblocks" class="draghandle ui-icon ui-icon-arrowthick-2-n-s"></span></td>
+<td align="right"><form action="{% url delete-pageblock block.id %}" method="post">
 <input type="submit" value="delete block {{block.ordinality}}" />
-</form>
+</form></td></tr></table>
 <form action="{% url edit-pageblock block.id %}" method="post"
 {% if block.edit_form.is_multipart %}enctype="multipart/form-data"{% endif %}>
 <table width="100%">
@@ -103,10 +102,10 @@ var saveOrderOfPageBlocks = function() {
 
 <div id="children" class="tabbertab" title="children">
 
-<ul id="children-order-list" class="dragparent"> drag and drop to reorder
+<ul id="children-order-list" class="dragparent">
 {% for child in section.get_children %}
 <li class="draggable"
-    id="child-{{child.id}}">[<a href="/pagetree/delete_section/{{child.id}}/">delete</a>]
+    id="child-{{child.id}}"><span title="drag to reorder pageblocks" class="draghandle ui-icon ui-icon-arrowthick-2-n-s"></span>[<a href="/pagetree/delete_section/{{child.id}}/">delete</a>]
   {{child.label}}
 </li>
 {% endfor %}
@@ -173,4 +172,26 @@ method="post">
 {% if section.get_next %}
 <a href="/edit{{section.get_next.get_absolute_url}}" id="next">{{section.get_next.label}} »</a>
 {% endif %}
+
+<script type="text/javascript">
+jQuery(function() {
+  jQuery("#children-order-list").sortable({
+    containment : 'parent'
+    ,axis : 'y'
+    ,handle: '.draghandle'
+    ,stop: function (event,ui) { saveOrderOfChildren();}
+  });
+  jQuery("#children-order-list").disableSelection();
+  jQuery("#blocks").sortable({
+    items : 'div'
+    ,axis: 'y'
+    ,containment: 'parent'
+    ,handle: '.draghandle'
+    ,opacity: 0.8 
+    ,stop: function (event,ui) { saveOrderOfPageBlocks();}
+  });
+  jQuery("#blocks").disableSelect();
+});
+</script>
+
 {% endblock %}
