@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import permission_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
-from pagetree.helpers import get_hierarchy, get_section_from_path, get_module, needs_submit
+from pagetree.helpers import get_hierarchy, get_section_from_path, get_module, needs_submit, submitted
 from models import UserProfile
 
 class rendered_with(object):
@@ -63,6 +63,7 @@ def page(request,path):
                     needs_submit=needs_submit(section),
                     module=get_module(section),
                     profile=profile,
+                    is_submitted=submitted(section,request.user),
                     root=h.get_root())
 
 

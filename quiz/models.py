@@ -32,12 +32,18 @@ class Quiz(models.Model):
         s = Submission.objects.create(quiz=self,user=user)
         for k in data.keys():
             if k.startswith('question'):
+                print str(k)
+                print str(data[k])
                 qid = int(k[len('question'):])
                 question = Question.objects.get(id=qid)
                 response = Response.objects.create(
                     submission=s,
                     question=question,
                     value=data[k])
+
+
+    def redirect_to_self_on_submit(self):
+        return True
 
     def unlocked(self,user):
         # meaning that the user can proceed *past* this one,
@@ -117,6 +123,9 @@ class Question(models.Model):
                 exclude = ("question","ordinality")
         return AddAnswerForm(request)
 
+    def correct_answer_values(self):
+        return [a.value for a in self.answer_set.filter(correct=True)]
+
     def correct_answer_number(self):
         if self.question_type != "single choice":
             return None
@@ -175,11 +184,17 @@ class Submission(models.Model):
     user = models.ForeignKey(User)
     submitted = models.DateTimeField(default=datetime.now)
 
+    def __unicode__(self):
+        return "quiz %d submission by %s at %s" % (self.quiz.id,unicode(self.user),self.submitted)
+
 class Response(models.Model):
     question = models.ForeignKey(Question)
     submission = models.ForeignKey(Submission)
     value = models.TextField(blank=True)
 
     def __unicode__(self):
-        return "response to %s by %s at %s" % (unicode(self.question),unicode(self.user),self.submitted)
+        return "response to %s [%s]" % (unicode(self.question),unicode(self.submission))
+
+    def is_correct(self):
+        return self.value in self.question.correct_answer_values()
 
