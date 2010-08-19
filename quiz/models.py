@@ -32,8 +32,6 @@ class Quiz(models.Model):
         s = Submission.objects.create(quiz=self,user=user)
         for k in data.keys():
             if k.startswith('question'):
-                print str(k)
-                print str(data[k])
                 qid = int(k[len('question'):])
                 question = Question.objects.get(id=qid)
                 response = Response.objects.create(
