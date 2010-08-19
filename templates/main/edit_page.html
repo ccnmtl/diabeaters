@@ -51,6 +51,7 @@ var saveOrderOfPageBlocks = function() {
           background-color: #ddd;
 	}
 	#children li span { position: absolute; margin-left: -1.3em; }
+	.dragging {border: #f60 solid 1px;}
 	</style>
 {% endblock %}
 
@@ -179,6 +180,7 @@ jQuery(function() {
     containment : 'parent'
     ,axis : 'y'
     ,tolerance: 'pointer'
+    ,activeClass: 'dragging'
     ,handle: '.draghandle'
     ,stop: function (event,ui) { saveOrderOfChildren();}
   });
@@ -188,6 +190,7 @@ jQuery(function() {
     ,axis: 'y'
     ,containment: 'parent'
     ,handle: '.draghandle'
+    ,activeClass: 'dragging'
     ,tolerance: 'pointer'
     ,stop: function (event,ui) { saveOrderOfPageBlocks();}
   });
