@@ -49,6 +49,8 @@ var saveOrder = function() {
 <input type="submit" value="save" />
 </form>
 
+{% if question.answerable %}
+<h2>Answers</h2>
 <ul class="dragparent" id="answers">
 {% for answer in question.answer_set.all %}
 <li class="draggable" id="answer-{{answer.id}}">
@@ -57,8 +59,10 @@ Answer {{ answer.ordinality }}:
 <a href="{% url edit-answer answer.id %}">{{answer.label}}</a></li>
 {% endfor %}
 </ul>
+{% endif %}
 
 {% if question.answerable %}
+<h2>Add Answer</h2>
 <form action="add_answer/" method="post">
 <table width="100%">
 {{ question.add_answer_form.as_table}}
