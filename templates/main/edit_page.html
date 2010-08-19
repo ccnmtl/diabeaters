@@ -178,6 +178,7 @@ jQuery(function() {
   jQuery("#children-order-list").sortable({
     containment : 'parent'
     ,axis : 'y'
+    ,tolerance: 'pointer'
     ,handle: '.draghandle'
     ,stop: function (event,ui) { saveOrderOfChildren();}
   });
@@ -187,7 +188,7 @@ jQuery(function() {
     ,axis: 'y'
     ,containment: 'parent'
     ,handle: '.draghandle'
-    ,opacity: 0.8 
+    ,tolerance: 'pointer'
     ,stop: function (event,ui) { saveOrderOfPageBlocks();}
   });
   jQuery("#blocks").disableSelect();
