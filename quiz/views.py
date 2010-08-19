@@ -103,6 +103,8 @@ def add_answer_to_question(request,id):
         answer = form.save(commit=False)
         answer.question = question
         answer.ordinality = question.answer_set.count() + 1
+        if answer.label == '':
+            answer.label = answer.value
         answer.save()
     return HttpResponseRedirect(reverse("edit-question",args=[question.id]))
 
