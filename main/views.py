@@ -83,6 +83,16 @@ def edit_page(request,path):
                 module=get_module(section),
                 root=h.get_root())
 
+@rendered_with('main/instructor_page.html')
+def instructor_page(request,path):
+    section = get_section_from_path(path)
+    h = get_hierarchy()
+    quizzes = [p.block() for p in section.pageblock_set.all() if p.block().needs_submit()]
+    return dict(section=section,
+                quizzes=quizzes,
+                module=get_module(section),
+                root=h.get_root())
+
 @rendered_with('main/home.html')
 def home(request):
     if hasattr(request.user,'get_profile'):

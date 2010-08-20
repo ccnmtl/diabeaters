@@ -20,6 +20,7 @@ urlpatterns = patterns('',
                        (r'^uploads/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
                        # very important that these two stay last and in this order
                        (r'^edit/(?P<path>.*)$','diabeaters.main.views.edit_page'),
+                       (r'^instructor/(?P<path>.*)$','diabeaters.main.views.instructor_page'),
                        (r'^(?P<path>.*)$','diabeaters.main.views.page'),
 
 ) 
