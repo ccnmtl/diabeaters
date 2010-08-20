@@ -1144,11 +1144,19 @@ ul.tabbernav li.tabberactive a:hover
 .hs-hide {display: none;}
 .hs-show {display: block;}
 
-.yours {color: green;}
+
+.yours {
+border: #666 solid 1px;
+padding-left: 1em;
+padding-right: 1em;
+}
+
 .expert {color: orange;}
 
-.incorrect { border-bottom: #f00 solid 2px;}
-.correctanswer {border-bottom: #090 solid 1px;}
+.incorrect { background-color: #f00;}
+.correct {background-color: #cfc;}
+.correctanswer {background-color: #090 solid 1px;}
+
 
 .incorrectanswer {text-decoration: line-through;color: #f00; }
 .answer-inner {color: #000;}

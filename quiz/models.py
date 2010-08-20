@@ -34,10 +34,17 @@ class Quiz(models.Model):
             if k.startswith('question'):
                 qid = int(k[len('question'):])
                 question = Question.objects.get(id=qid)
-                response = Response.objects.create(
-                    submission=s,
-                    question=question,
-                    value=data[k])
+                if type(data[k]) == type([]):
+                    for v in data[k]:
+                        response = Response.objects.create(
+                            submission=s,
+                            question=question,
+                            value=v)
+                else:
+                    response = Response.objects.create(
+                        submission=s,
+                        question=question,
+                        value=data[k])
 
 
     def redirect_to_self_on_submit(self):
@@ -155,6 +162,10 @@ class Question(models.Model):
 
     def is_multiple_choice(self):
         return self.question_type == "multiple choice"
+
+    def user_responses(self,user):
+        submission = Submission.objects.filter(user=user,quiz=self.quiz).order_by("-submitted")[0]
+        return Response.objects.filter(question=self,submission=submission)
 
 class Answer(models.Model):
     question = models.ForeignKey(Question)

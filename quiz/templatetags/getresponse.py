@@ -28,3 +28,36 @@ def getquestionresponse(parser, token):
     var_name = token.split_contents()[1:][2]
     return GetQuestionResponseNode(question,var_name)
 
+
+
+class IfAnswerInNode(template.Node):
+    def __init__(self, response, answer, nodelist_true, nodelist_false=None):
+        self.nodelist_true = nodelist_true
+        self.nodelist_false = nodelist_false
+        self.response = response
+        self.answer = answer
+
+    def render(self, context):
+        r = context[self.response]
+        q = r.question
+        a = context[self.answer]
+        u = context['request'].user
+        s = r.submission
+        if a.value in [r.value for r in q.user_responses(u)]:
+            return self.nodelist_true.render(context)
+        else:
+            return self.nodelist_false.render(context)
+
+@register.tag('ifanswerin')
+def ifanswerin(parser, token):
+    response = token.split_contents()[1:][0]
+    answer = token.split_contents()[1:][1]
+    nodelist_true = parser.parse(('else','endifanswerin'))
+    token = parser.next_token()
+    if token.contents == 'else':
+        nodelist_false = parser.parse(('endifanswerin',))
+        parser.delete_first_token()
+    else:
+        nodelist_false = None
+    return IfAnswerInNode(response, answer, nodelist_true, nodelist_false)
+

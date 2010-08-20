@@ -49,9 +49,17 @@ def page(request,path):
                     data = dict()
                     for k in request.POST.keys():
                         if k.startswith(prefix):
-                            data[k[len(prefix):]] = request.POST[k]
+                            # handle lists for multi-selects
+                            v = request.POST.getlist(k)
+                            if len(v) == 1:
+                                data[k[len(prefix):]] = request.POST[k]
+                            else:
+                                data[k[len(prefix):]] = v
                     p.block().submit(request.user,data)
                     if hasattr(p.block(),'redirect_to_self_on_submit'):
+                        # semi bug here?
+                        # proceed will only be set by the last submittable
+                        # block on the page. previous ones get ignored.
                         proceed = not p.block().redirect_to_self_on_submit()
         if proceed:
             return HttpResponseRedirect(section.get_next().get_absolute_url())
