@@ -87,7 +87,7 @@ def edit_page(request,path):
 def instructor_page(request,path):
     section = get_section_from_path(path)
     h = get_hierarchy()
-    quizzes = [p.block() for p in section.pageblock_set.all() if p.block().needs_submit()]
+    quizzes = [p.block() for p in section.pageblock_set.all() if hasattr(p.block(),'needs_submit') and p.block().needs_submit()]
     return dict(section=section,
                 quizzes=quizzes,
                 module=get_module(section),
