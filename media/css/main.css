@@ -1160,3 +1160,5 @@ padding-right: 1em;
 
 .incorrectanswer {text-decoration: line-through;color: #f00; }
 .answer-inner {color: #000;}
+
+.submissionheader th, .submissionheader td {background-color: #fff; }

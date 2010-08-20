@@ -34,6 +34,8 @@ class Quiz(models.Model):
             if k.startswith('question'):
                 qid = int(k[len('question'):])
                 question = Question.objects.get(id=qid)
+                # it might make more sense to just accept a QueryDict
+                # instead of a dict so we can use getlist()
                 if type(data[k]) == type([]):
                     for v in data[k]:
                         response = Response.objects.create(
@@ -200,6 +202,9 @@ class Response(models.Model):
     question = models.ForeignKey(Question)
     submission = models.ForeignKey(Submission)
     value = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ('question__ordinality',)
 
     def __unicode__(self):
         return "response to %s [%s]" % (unicode(self.question),unicode(self.submission))
