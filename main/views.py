@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
@@ -19,6 +20,7 @@ class rendered_with(object):
 
         return rendered_func
 
+@login_required
 @rendered_with('main/page.html')
 def page(request,path):
     section = get_section_from_path(path)
@@ -84,7 +86,7 @@ def page(request,path):
 
 
 
-
+@login_required
 @rendered_with('main/edit_page.html')
 def edit_page(request,path):
     section = get_section_from_path(path)
@@ -93,6 +95,7 @@ def edit_page(request,path):
                 module=get_module(section),
                 root=h.get_root())
 
+@login_required
 @rendered_with('main/instructor_page.html')
 def instructor_page(request,path):
     section = get_section_from_path(path)
@@ -103,6 +106,7 @@ def instructor_page(request,path):
                 module=get_module(section),
                 root=h.get_root())
 
+@login_required
 @rendered_with('main/home.html')
 def home(request):
     if hasattr(request.user,'get_profile'):
@@ -114,5 +118,6 @@ def home(request):
 def index(request):
     return HttpResponseRedirect("/intro/")
 
+@login_required
 def health_habit_plan(request):
     return HttpResponse("not implemented yet")
