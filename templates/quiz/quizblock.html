@@ -6,6 +6,7 @@
 
 {% for question in block.question_set.all %}
 {% getquestionresponse question as response %}
+
 <div class="cases">
      {{question.intro_text|markdown}}
 
