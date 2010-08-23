@@ -13,7 +13,7 @@ class GetQuestionResponseNode(template.Node):
         quiz = q.quiz
         r = Submission.objects.filter(quiz=quiz,user=u).order_by("-submitted")
         if r.count() == 0:
-            return None
+            return ''
         submission = r[0]
         r = Response.objects.filter(question=q,submission=submission)
         if r.count() > 0:
