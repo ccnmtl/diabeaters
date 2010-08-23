@@ -41,6 +41,13 @@ def page(request,path):
 
     if request.method == "POST":
         # user has submitted a form. deal with it
+        if request.POST.get('action','') == 'reset':
+            # it's a reset request
+            for p in section.pageblock_set.all():
+                if hasattr(p.block(),'needs_submit'):
+                    if p.block().needs_submit():
+                        p.block().clear_user_submissions(request.user)
+            return HttpResponseRedirect(section.get_absolute_url())
         proceed = True
         for p in section.pageblock_set.all():
             if hasattr(p.block(),'needs_submit'):
@@ -73,6 +80,9 @@ def page(request,path):
                     profile=profile,
                     is_submitted=submitted(section,request.user),
                     root=h.get_root())
+
+
+
 
 
 @rendered_with('main/edit_page.html')

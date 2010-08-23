@@ -96,6 +96,8 @@ class Quiz(models.Model):
             question.ordinality = i + 1
             question.save()
 
+    def clear_user_submissions(self,user):
+        Submission.objects.filter(user=user,quiz=self).delete()
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz)
@@ -168,6 +170,7 @@ class Question(models.Model):
     def user_responses(self,user):
         submission = Submission.objects.filter(user=user,quiz=self.quiz).order_by("-submitted")[0]
         return Response.objects.filter(question=self,submission=submission)
+
 
 class Answer(models.Model):
     question = models.ForeignKey(Question)

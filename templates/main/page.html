@@ -32,7 +32,10 @@
 
 {% if needs_submit %}
 {% if is_submitted %}
-[RESET button will go here]
+<form action="." method="post">
+<input type="hidden" name="action" value="reset" />
+<input type="submit" value="clear your answers and try again" />
+</form>
 {% else %}
 <input type="submit" value="Submit" />
 
