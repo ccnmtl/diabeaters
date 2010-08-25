@@ -39,4 +39,6 @@ def new_session(request):
 @rendered_with('healthhabitplan/session.html')
 def session(request,id):
     s = get_object_or_404(Session,id=id)
-    return dict(session=s)
+    return dict(session=s,
+                categories=Category.objects.all(),
+                )

@@ -30,6 +30,9 @@ class Session(models.Model):
     user = models.ForeignKey(User)
     saved = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ("user","saved")
+
     def __unicode__(self):
         return "session #%d for %s %s" % (self.number(),self.user.first_name, self.user.last_name)
 
