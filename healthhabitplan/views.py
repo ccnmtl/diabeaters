@@ -7,4 +7,7 @@ from django.shortcuts import render_to_response
 from models import *
 
 def index(request):
+    user = request.user
+    if request.user.is_anonymous():
+        return HttpResponseRedirect("/accounts/login/")
     return HttpResponse("this is the health habit plan")
