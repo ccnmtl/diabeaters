@@ -59,6 +59,7 @@ background-color: #00f;
 
 <h1>Health Habit Plan Exercise: Session {{session.number}}</h1>
 
+<div id="hhp-container">
 <table id="categories">
 {% for category in categories %}
 <tr>
@@ -79,11 +80,20 @@ background-color: #00f;
 <div id="fridge">
 
 </div>
+</div>
 
 <script type="text/javascript">
 
 jQuery(function() {
-   jQuery(".grabber").draggable();
+   jQuery(".grabber").draggable({
+
+   });
+
+   jQuery("#fridge").droppable({
+	drop: function(event, ui) {
+	$(this).addClass('ui-state-highlight');
+	}
+   });
 });
 
 </script>
