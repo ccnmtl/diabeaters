@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'pageblocks',
     'diabeaters.quiz',
     'diabeaters.main',
+    'diabeaters.healthhabitplan',
 )
 
 PAGEBLOCKS = ['pageblocks.TextBlock',
