@@ -24,4 +24,17 @@ class rendered_with(object):
 @rendered_with('healthhabitplan/index.html')
 def index(request):
     user = request.user
-    return dict(user=user)
+    sessions = Session.objects.filter(user=user)
+    return dict(user=user,
+                sessions=sessions)
+
+
+@login_required
+def new_session(request):
+    user = request.user
+    s = Session.objects.create(user=user)
+    return HttpResponseRedirect("/health-habit-plan/")
+
+@login_required
+def session(request,id):
+    return "foo"

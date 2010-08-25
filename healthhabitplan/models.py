@@ -30,6 +30,10 @@ class Session(models.Model):
     user = models.ForeignKey(User)
     saved = models.DateTimeField(auto_now=True)
 
+    def number(self):
+        r = Session.objects.filter(user=self.user,saved__lt=self.saved).count()
+        return r + 1
+
 class Magnet(models.Model):
     session = models.ForeignKey(Session)
     item = models.ForeignKey(Item)
