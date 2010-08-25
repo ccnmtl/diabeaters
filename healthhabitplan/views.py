@@ -20,10 +20,8 @@ class rendered_with(object):
 
         return rendered_func
 
+@login_required
 @rendered_with('healthhabitplan/index.html')
 def index(request):
     user = request.user
-    if request.user.is_anonymous():
-        return HttpResponseRedirect("/accounts/login/")
-    
     return dict(user=user)
