@@ -3,8 +3,14 @@
 {% block js %}
 
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/themes/base/jquery-ui.css" type="text/css" media="all" /> 
+<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css"
+      type="text/css" media="all" /> 
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" ></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/jquery-ui.min.js" type="text/javascript"></script>
+
+<script src="http://jquery-ui.googlecode.com/svn/tags/latest/external/jquery.bgiframe-2.1.1.js" type="text/javascript"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script> 
 
 <style type="text/css">
 
@@ -19,7 +25,7 @@ background-color: #fcc;
 #categories {
   float: left;
   width: 300px;
-  
+
 }
 
 .category-icon {
@@ -51,7 +57,33 @@ background-color: #00f;
 .ui-draggable-dragging {
   border: #f60 solid 2px;
 }
+.dropped {
+border: #f00 solid 1px;
+}
+.arrow {
+display: block;
+width: 10px;
+height: 10px;
+}
+
+.open {
+background-color: green;
+}
+
+.closed {
+background-color: red;
+}
+
 </style>
+
+<script type="text/javascript">
+var magnets = new Array();
+
+var saveMagnets = function () {
+   
+
+};
+</script>
 
 {% endblock %}
 
@@ -60,20 +92,24 @@ background-color: #00f;
 <h1>Health Habit Plan Exercise: Session {{session.number}}</h1>
 
 <div id="hhp-container">
+
 <table id="categories">
 {% for category in categories %}
-<tr>
-<td><!-- hideshow arrow goes here --></td>
-<td><div class="category-icon {{category.css}}"></div></td>
-<th>{{category.label}}</th></tr>
-{% for item in category.item_set.all %}
-<tr>
-<td></td>
-<td><div id="item-{{item.id}}-grabber" 
-	 class="grabber {{item.category.css}}"></div></td>
-<td>{{item.label}}</td>
+<tr class="category">
+<td><span class="arrow closed"></span></td>
+<td><span class="category-icon {{category.css}}"></span></td>
+<th>{{category.label}}</a></th>
 </tr>
-{% endfor %}
+<tr>
+<td colspan="3">
+<table width="100%">
+    {% for item in category.item_set.all %}
+<tr class="item">
+<td><div id="item-{{item.id}}-grabber" class="grabber {{item.category.css}}"></div></td>
+<td><p>{{item.label}}</p></td>
+</tr>
+    {% endfor %}
+</table></td></tr>
 {% endfor %}
 </table>
 
@@ -85,17 +121,31 @@ background-color: #00f;
 
 <script type="text/javascript">
 
+jQuery(document).ready(function(){
+	jQuery('.category').click(function() {
+		jQuery(this).next().toggle();
+                jQuery(this).find(".arrow").toggleClass("open");
+                jQuery(this).find(".arrow").toggleClass("closed");
+		return false;
+	}).next().hide();
+});
+
 jQuery(function() {
+
    jQuery(".grabber").draggable({
         revert: 'invalid'
+
    });
 
    jQuery("#fridge").droppable({
 	drop: function(event, ui) {
 	jQuery(this).addClass('ui-state-highlight');
+        saveMagnets();
 	}
-   });
+   }); 
 });
+
+
 
 </script>
 
