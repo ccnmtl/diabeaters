@@ -18,14 +18,13 @@
 display: block;
 width: 20px;
 height: 20px;
-border: #fff solid 3px;
+border: #000 solid 3px;
 background-color: #fcc;
 }
 
 #categories {
   float: left;
   width: 300px;
-
 }
 
 .category-icon {
@@ -100,16 +99,13 @@ var saveMagnets = function () {
 <td><span class="category-icon {{category.css}}"></span></td>
 <th>{{category.label}}</a></th>
 </tr>
-<tr>
-<td colspan="3">
-<table width="100%">
     {% for item in category.item_set.all %}
 <tr class="item">
+<td></td>
 <td><div id="item-{{item.id}}-grabber" class="grabber {{item.category.css}}"></div></td>
 <td><p>{{item.label}}</p></td>
 </tr>
     {% endfor %}
-</table></td></tr>
 {% endfor %}
 </table>
 
@@ -123,23 +119,24 @@ var saveMagnets = function () {
 
 jQuery(document).ready(function(){
 	jQuery('.category').click(function() {
-		jQuery(this).next().toggle();
+		jQuery(this).nextUntil("tr.category").toggle();
                 jQuery(this).find(".arrow").toggleClass("open");
-                jQuery(this).find(".arrow").toggleClass("closed");
+                jQuery(this).find(".arrow").toggleClass("closed"); 
 		return false;
-	}).next().hide();
+	}).nextUntil("tr.category").hide();
 });
 
 jQuery(function() {
-
    jQuery(".grabber").draggable({
         revert: 'invalid'
-
+        ,start: function(event, ui) {
+           /* going to want to do some stuff here */
+        }
    });
 
    jQuery("#fridge").droppable({
 	drop: function(event, ui) {
-	jQuery(this).addClass('ui-state-highlight');
+	jQuery(this).addClass('dropped');
         saveMagnets();
 	}
    }); 
