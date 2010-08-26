@@ -54,7 +54,7 @@ background-color: #00f;
 }
 
 .ui-draggable-dragging {
-  border: #f60 solid 2px;
+  border: #f60 solid 3px;
 }
 .dropped {
 border: #f00 solid 1px;
@@ -79,9 +79,18 @@ background-color: red;
 var magnets = new Array();
 
 var saveMagnets = function () {
-   
-
+/*    var offset = jQuery("#fridge").offset();
+    jQuery("#debugprint").append("<br />left: " + offset.left + ",
+top: " + offset.top); */
 };
+
+var saveMagnetPosition = function(id,x,y) {
+   jQuery("#debugprint").append("magnet: " + id + " left: " + x + ", top: " + y + "<br />" );
+   var req = new XMLHttpRequest();
+   var url = "save_magnet/?item_id=" + id + ";x=" + x + ";y=" + y;
+   req.open("POST",url,true);
+   req.send(null);
+}
 </script>
 
 {% endblock %}
@@ -112,6 +121,11 @@ var saveMagnets = function () {
 <div id="fridge">
 
 </div>
+
+<br style="clear:both"/>
+
+<p id="debugprint"></p>
+
 </div>
 
 
@@ -131,6 +145,15 @@ jQuery(function() {
         revert: 'invalid'
         ,start: function(event, ui) {
            /* going to want to do some stuff here */
+        }
+        ,stop: function(event, ui) {
+          var fridgeOffset = jQuery("#fridge").offset();
+          var offset = jQuery(this).offset();
+          var store_x = offset.left - fridgeOffset.left;
+          var store_y = offset.top - fridgeOffset.top;
+          /* this would be a good place to tell the server to save the
+             magnet position. for now we'll just print it out */
+          saveMagnetPosition(jQuery(this).attr("id").split("-")[1],store_x,store_y);
         }
    });
 
