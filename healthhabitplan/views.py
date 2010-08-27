@@ -42,3 +42,21 @@ def session(request,id):
     return dict(session=s,
                 categories=Category.objects.all(),
                 )
+
+@login_required
+def save_magnet(request,id):
+    s = get_object_or_404(Session,id=id)
+    if request.method == "POST":
+        item_id = request.GET['item_id']
+        item = get_object_or_404(Item,id=item_id)
+        x = request.GET['x']
+        y = request.GET['y']
+        r = Magnet.objects.filter(session=s,item=item)
+        if r.count() > 0:
+            m = r[0]
+            m.x = x
+            m.y = y
+            m.save()
+        else:
+            m = Magnet.objects.create(session=s,item=item,x=x,y=y)
+    return HttpResponse("ok");

@@ -84,10 +84,17 @@ var saveMagnets = function () {
 top: " + offset.top); */
 };
 
+var positionMagnet = function(magnet,x,y) {
+   var fridgeOffset = jQuery("#fridge").offset();
+   fridgeOffset.left = fridgeOffset.left + x;
+   fridgeOffset.top  = fridgeOffset.top + y;
+   magnet.offset(fridgeOffset);
+}
+
 var saveMagnetPosition = function(id,x,y) {
    jQuery("#debugprint").append("magnet: " + id + " left: " + x + ", top: " + y + "<br />" );
    var req = new XMLHttpRequest();
-   var url = "save_magnet/?item_id=" + id + ";x=" + x + ";y=" + y;
+   var url = "{% url health-habit-plan-save-magnet session.id %}?item_id=" + id + ";x=" + x + ";y=" + y;
    req.open("POST",url,true);
    req.send(null);
 }
@@ -121,6 +128,21 @@ var saveMagnetPosition = function(id,x,y) {
 <div id="fridge">
 
 </div>
+
+{% if session.magnet_set.count %}
+{% for magnet in session.magnet_set.all %}
+<div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}"></div>
+{% endfor %}
+
+<script type="text/javascript">
+jQuery(function() {
+{% for magnet in session.magnet_set.all %}    
+    positionMagnet(jQuery("#item-{{magnet.item.id}}-magnet"),{{magnet.x}},{{magnet.y}});
+{% endfor %}
+});
+</script>
+
+{% endif %}
 
 <br style="clear:both"/>
 
