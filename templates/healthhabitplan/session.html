@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load hhphelpers %}
 
 {% block js %}
 
@@ -118,7 +119,13 @@ var saveMagnetPosition = function(id,x,y) {
     {% for item in category.item_set.all %}
 <tr class="item">
 <td></td>
-<td><div id="item-{{item.id}}-grabber" class="grabber {{item.category.css}}"></div></td>
+<td>
+{% if_magnet_for_item_exists session item %}
+<!-- I guess a placeholder should go here -->
+{% else %}
+<div id="item-{{item.id}}-grabber" class="grabber {{item.category.css}}"></div>
+{% endif_magnet_for_item_exists %}
+</td>
 <td><p>{{item.label}}</p></td>
 </tr>
     {% endfor %}
