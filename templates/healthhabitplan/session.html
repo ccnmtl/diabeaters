@@ -173,16 +173,13 @@ jQuery(function() {
           var offset = jQuery(this).offset();
           var store_x = offset.left - fridgeOffset.left;
           var store_y = offset.top - fridgeOffset.top;
-          /* this would be a good place to tell the server to save the
-             magnet position. for now we'll just print it out */
           saveMagnetPosition(jQuery(this).attr("id").split("-")[1],store_x,store_y);
         }
    });
 
    jQuery("#fridge").droppable({
 	drop: function(event, ui) {
-	jQuery(this).addClass('dropped');
-        saveMagnets();
+          jQuery(this).addClass('dropped');
 	}
    }); 
 });
