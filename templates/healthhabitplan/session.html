@@ -74,6 +74,9 @@ background-color: green;
 background-color: red;
 }
 
+.disabled {
+  color: #ccc;
+}
 </style>
 
 <script type="text/javascript">
@@ -84,14 +87,19 @@ var positionMagnet = function(magnet,x,y) {
    fridgeOffset.left = fridgeOffset.left + x;
    fridgeOffset.top  = fridgeOffset.top + y;
    magnet.offset(fridgeOffset);
-}
+};
 
 var saveMagnetPosition = function(id,x,y) {
    var req = new XMLHttpRequest();
    var url = "{% url health-habit-plan-save-magnet session.id %}?item_id=" + id + ";x=" + x + ";y=" + y;
    req.open("POST",url,true);
    req.send(null);
-}
+};
+
+var disableLabel = function(magnet) {
+  jQuery("#item-" + magnet.attr("id").split("-")[1] + "-label").addClass("disabled");
+
+};
 </script>
 
 {% endblock %}
@@ -119,7 +127,7 @@ var saveMagnetPosition = function(id,x,y) {
 <div id="item-{{item.id}}-grabber" class="grabber {{item.category.css}}"></div>
 {% endif_magnet_for_item_exists %}
 </td>
-<td><p>{{item.label}}</p></td>
+<td><p id="item-{{item.id}}-label" class="{% if_magnet_for_item_exists session item %}disabled{%else%}{% endif_magnet_for_item_exists %}">{{item.label}}</p></td>
 </tr>
     {% endfor %}
 {% endfor %}
@@ -166,7 +174,7 @@ jQuery(function() {
    jQuery(".grabber").draggable({
         revert: 'invalid'
         ,start: function(event, ui) {
-           /* going to want to do some stuff here */
+           disableLabel(jQuery(this));
         }
         ,stop: function(event, ui) {
           var fridgeOffset = jQuery("#fridge").offset();
