@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from models import *
+from django.core.urlresolvers import reverse
 
 class rendered_with(object):
     def __init__(self, template_name):
@@ -21,25 +22,29 @@ class rendered_with(object):
         return rendered_func
 
 @login_required
-@rendered_with('healthhabitplan/index.html')
 def index(request):
     user = request.user
-    sessions = Session.objects.filter(user=user)
-    return dict(user=user,
-                sessions=sessions)
+    # let's just send them to the most recent session
+    newest = Session.objects.filter(user=user).order_by("-id")
+    if newest.count() == 0:
+        # create one
+        return HttpResponseRedirect(reverse('health-habit-plan-new-session'))
+    else:
+        return HttpResponseRedirect(reverse('health-habit-plan-session',args=[newest[0].id]))
 
 
 @login_required
 def new_session(request):
     user = request.user
     s = Session.objects.create(user=user)
-    return HttpResponseRedirect("/health-habit-plan/")
+    return HttpResponseRedirect(reverse('health-habit-plan-session',args=[s.id]))
 
 @login_required
 @rendered_with('healthhabitplan/session.html')
 def session(request,id):
     s = get_object_or_404(Session,id=id)
     return dict(session=s,
+                sessions=Session.objects.filter(user=request.user),
                 categories=Category.objects.all(),
                 )
 

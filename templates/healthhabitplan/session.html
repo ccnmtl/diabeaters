@@ -106,7 +106,18 @@ var disableLabel = function(magnet) {
 
 {% block content %}
 
-<h1>Health Habit Plan Exercise: Session {{session.number}}</h1>
+<ul id="sessions-menu">
+{% for s in sessions %}
+<li>{% ifequal s.id session.id %}
+Session {{s.number}}
+{% else %}
+<a href="{% url health-habit-plan-session s.id %}">Session {{s.number}}</a>
+{% endifequal %}
+</li>
+{% endfor %}
+
+<li><a title="create new session" href="{% url health-habit-plan-new-session %}">+</a></li>
+</div>
 
 <div id="hhp-container">
 
