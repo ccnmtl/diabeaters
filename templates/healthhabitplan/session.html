@@ -79,12 +79,6 @@ background-color: red;
 <script type="text/javascript">
 var magnets = new Array();
 
-var saveMagnets = function () {
-/*    var offset = jQuery("#fridge").offset();
-    jQuery("#debugprint").append("<br />left: " + offset.left + ",
-top: " + offset.top); */
-};
-
 var positionMagnet = function(magnet,x,y) {
    var fridgeOffset = jQuery("#fridge").offset();
    fridgeOffset.left = fridgeOffset.left + x;
@@ -93,7 +87,6 @@ var positionMagnet = function(magnet,x,y) {
 }
 
 var saveMagnetPosition = function(id,x,y) {
-   jQuery("#debugprint").append("magnet: " + id + " left: " + x + ", top: " + y + "<br />" );
    var req = new XMLHttpRequest();
    var url = "{% url health-habit-plan-save-magnet session.id %}?item_id=" + id + ";x=" + x + ";y=" + y;
    req.open("POST",url,true);
