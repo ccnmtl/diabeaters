@@ -91,7 +91,7 @@ var positionMagnet = function(magnet,x,y) {
 
 var saveMagnetPosition = function(id,x,y) {
    var req = new XMLHttpRequest();
-   var url = "{% url health-habit-plan-save-magnet session.id %}?item_id=" + id + ";x=" + x + ";y=" + y;
+   var url = "{% url health-habit-plan-save-magnet session.id %}?item_id=" + id + ";x=" + parseInt(x) + ";y=" + parseInt(y);
    req.open("POST",url,true);
    req.send(null);
 };
