@@ -8,7 +8,7 @@
 
 {% endif %}
 
-<fieldset>
+<fieldset class="login" id="logincu">
 
 <legend>Columbia Users</legend>
 
@@ -25,21 +25,26 @@
 
 </fieldset>
 
-<fieldset>
+<fieldset class="login" id="loginother">
 
 <legend>Other Users</legend>
 
 <form method="post" action=".">
 
-<label for="id_username">Username:</label></td><td>{{ form.username }}
-
-<label for="id_password">Password:</label></td><td>{{ form.password }}
-
+<label for="id_username">Username:</label> 
+<br />
+{{ form.username }}
+<br />
+<br />
+<label for="id_password">Password:</label><br />{{ form.password }}
+<br />
+<br />
 <input type="submit" value="Log In" />
 
 <input type="hidden" name="next" value="{{ next }}" />
 
 </form>
+
 </fieldset>
 
 {% endblock %}

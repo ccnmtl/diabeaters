@@ -1,8 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
 <head>
+
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>diabeaters: {% block title %}{% endblock %}</title>
+	
+	<title>{% block title %}{% endblock %} diaBeaters!</title>
+	
 	<link rel="stylesheet" href="/site_media/css/main.css" media="screen" />
 	<link rel="stylesheet" href="/site_media/css/print.css" media="print" />
 	<!--[if IE 6]>
@@ -12,7 +18,9 @@
 	{% block css %}{% endblock %}
 	{% block js %}{% endblock %}
 	{% block feeds %}{% endblock %}
+	
 </head>
+
 <body>
 
 <div id="pagecontainer">
@@ -24,6 +32,17 @@
 		<!-- Project title/logo --><h1 id="logo_project"><a href="./" title="DiaBeaters"><span>DiaBeaters</span></a></h1>	
 		{% block standardnav %}
 		<ul id="standard_navigation">
+			{% block usernav %}
+			{% if user.username %}
+			<li>Hello, {% if user.first_name %}{{user.first_name}}{{user.last_name}}{% else %}{{ user.username }}{% endif %}!</li>
+			{% endif %}
+			{% if user.username %}
+			<li><a href="/accounts/logout/">Log Out</a></li>
+			{% endif %}
+			{% if user.username %}
+			<li>|</li>
+			{% endif %}
+			{% endblock %}
 			<li><a href="/about/">About</a></li>
 			<li><a href="/help/">Help</a></li>
 			<li><a href="/contact/">Contact</a></li>
@@ -57,12 +76,7 @@
 </ul>
 {% endblock %}
 			
-{% block usernav %}
-{% if user.username %}<li>{% if user.first_name %}{{user.first_name}}
-  {{user.last_name}}{% else %}{{ user.username }}{% endif %}</li>{% endif %}
-{% if user.username %}<li id="logout"><a href="/accounts/logout/">LOG OUT</a></li>{% endif %}
-{% endblock %}
-
+</ul>
 		</div><!-- id="leftside/rightside" -->
 	</div><!-- id="primarynav" -->
 {% endblock %}

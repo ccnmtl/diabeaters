@@ -4,6 +4,37 @@
 {
 	display: none;
 }
+
+fieldset.login, legend {border: 1px solid #999; color: #666;}
+
+fieldset.login 
+{
+	margin-top: 30px; 
+	background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff));
+	background: -moz-linear-gradient(top, #eee, #fff);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	padding: 20px;
+	width: 350px;
+	height: 200px;
+}
+
+#logincu, #loginother {position: absolute; top: 0px;}
+
+#logincu {left: 30px;}
+
+#loginother{left: 480px;}
+
+legend 
+{
+	font-weight: bold; 
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	background: -moz-linear-gradient(top, #fff, #eee);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	padding: 5px 10px 5px 10px;
+}
+
  
 body
 {
@@ -262,6 +293,7 @@ a:visited
 	padding: 0 0 0 15px;
 	border: 0;
 	list-style: 0;
+	color: #fff;
 }
 
 #standard_navigation a
@@ -306,8 +338,6 @@ a:visited
 	padding: 0;
 	border: 0;
 	font: normal 14px/31px "lucida grande", arial, helvetica, sans-serif;
-	text-transform: uppercase;
-	color: #c00;
 	list-style: 0;
 	background: url('../img/nav_divider.jpg') right bottom no-repeat;
 }
@@ -316,19 +346,25 @@ a:visited
 {
 	display: block !important;
 	padding: 0 10px 0 8px;
-	color: #c00 !important;
+	font-weight: bold;
+	color: #fff !important;
 	text-decoration: none !important;
 }
 
 #primary_navigation ul.globalnav li a:hover
 {
-	color: #600 !important;
+	color: #fbf523 !important;
 	text-decoration: none !important;
 }
 
 #primary_navigation ul.globalnav li.active
 {
 	background: url('../img/nav_divider.jpg') left bottom repeat-x; 
+}
+
+#primary_navigation ul.globalnav li.active a
+{
+	color: #000 !important; 
 }
 
 #primary_navigation ul.usernav
@@ -387,6 +423,8 @@ a:visited
 #pagebody
 {
 	min-width: 912px;
+	min-height: 400px;
+	position: relative;
 	width: 912px;
 	margin: 0;
 	padding: 0;
