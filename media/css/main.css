@@ -1,4 +1,9 @@
 /* ***** Principal Elements ***** */
+
+.printonly
+{
+	display: none;
+}
  
 body
 {
@@ -6,10 +11,9 @@ body
 	margin: auto;
 	padding: 0;
 	border: 0;
-	background: #efefef url('../img/bg_body.jpg') left top repeat-x; 
-	font: normal 0.88em arial, helvetica, sans-serif;
+	background: #f1dfd8 url('../img/bg_body.jpg') left top repeat-x; 
+	font: normal 0.88em "lucida grande", arial, helvetica, sans-serif;
 	color: #000;
-/*	background-color: #efefef; */
 }
 
 h1, h2, h3, h4, h5, h6
@@ -17,7 +21,7 @@ h1, h2, h3, h4, h5, h6
 	margin: 0 0 0.7em 0;
 	padding: 0;
 	border: 0;
-	font-family: 'trebuchet ms', verdana, sans-serif;
+	font-family: "lucida grande", arial, helvetica, sans-serif;
 	font-weight: bold;
 }
 
@@ -193,34 +197,35 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/bg_header.jpg') left top no-repeat; 
+	background: url('../img/bg_header.jpg') left top no-repeat;
+	position: relative;
 }
 
 #header h1, #header h1 a
 {
 	display: block;
 	float: left;
-	width: 292px;
-	height: 79px;
+	width: 324px;
+	height: 57px;
 	overflow: hidden;
-	margin: 28px 0 0 18px;
+	margin: 40px 0 0 20px;
 	padding: 0;
 	border: 0;
-	background: url('../img/logo.jpg') left top no-repeat;
+	background: url('../img/logo.png') left top no-repeat;
 }
 
-#header h4, #header h4 a
+#header h4 a
 {
 	display: block;
-	clear: right;
-	float: right;
-	width: 145px;
-	height: 33px;
-	overflow: hidden;
-	margin: 0 18px 0 0;
+	position: absolute;
+	top: 56px;
+	left: 366px;
+	width: 219px;
+	height: 23px;
+	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/logo_ccnmtl.gif') right top no-repeat;
+	background: url('../img/logo_ccnmtl.png') right top no-repeat;
 }
 
 
@@ -300,7 +305,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font: normal 14px/31px "trebuchet ms", verdana, arial, helvetica, sans-serif;
+	font: normal 14px/31px "lucida grande", arial, helvetica, sans-serif;
 	text-transform: uppercase;
 	color: #c00;
 	list-style: 0;
@@ -343,7 +348,7 @@ a:visited
 	margin: 0;
 	padding: 0 16px 0 10px;
 	border: 0;
-	font: normal 14px/31px "trebuchet ms", verdana, arial, helvetica, sans-serif;
+	font: normal 14px/31px "lucida grande", arial, helvetica, sans-serif;
 	color: #c00;
 	list-style: 0;
 	text-decoration: none !important;
@@ -530,7 +535,7 @@ a:visited
 	margin: 0 0 0.5em 0;
 	padding: 0;
 	border: 0;
-	font: normal 28px "trebuchet ms", verdana, arial, sans-serif;
+	font: normal 28px "lucida grande", arial, helvetica, sans-serif;
 	color: #c00;
 }
 
@@ -539,7 +544,7 @@ a:visited
 	margin: 1em 0 0.5em 0;
 	padding: 0;
 	border: 0;
-	font: normal 20px "trebuchet ms", verdana, arial, sans-serif;
+	font: normal 20px "lucida grande", arial, helvetica, sans-serif;
 	color: #c00;
 }
 
@@ -548,7 +553,7 @@ a:visited
 	margin: 1em 0 0.5em 0;
 	padding: 0;
 	border: 0;
-	font: normal 20px "trebuchet ms", verdana, arial, sans-serif;
+	font: normal 20px "lucida grande", arial, helvetica, sans-serif;
 	color: #c00;
 }
 
@@ -621,7 +626,7 @@ a:visited
 	margin: 0 0 10px 10px !important;
 	padding: 0 !important;
 	border: 0 !important;
-	font: bold 16px Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif !important;
+	font: bold 16px "lucida grande", arial, helvetica, sans-serif !important;
 }
 
 .loginbox h3
@@ -629,7 +634,7 @@ a:visited
 	margin: 0 0 10px 10px !important;
 	padding: 0 !important;
 	border: 0 !important;
-	font: bold 1em Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif !important;
+	font: bold 1em "lucida grande", arial, helvetica, sans-serif !important;
 }
 
 .loginbox .alert
@@ -637,7 +642,7 @@ a:visited
 	margin: 0 0 10px 10px !important;
 	padding: 0 !important;
 	border: 0 !important;
-	font: bold italic 1em Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif !important;
+	font: bold italic 1em "lucida grande", arial, helvetica, sans-serif !important;
 	color: #c00;
 }
 
@@ -672,7 +677,7 @@ a:visited
 	border-left: 2px solid #fff;
 	border-right: 2px solid #666;
 	border-bottom: 2px solid #666;
-	font: normal 1em Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif;
+	font: normal 1em "lucida grande", arial, helvetica, sans-serif;
 	cursor: pointer;
 }
 
@@ -693,7 +698,7 @@ a:visited
 	padding: 2px;
 	border: 1px solid #999;
 	background-color: white;
-	font: normal 12px Arial, Helvetica, Verdana, "Lucida Grande", Lucida, sans-serif;
+	font: normal 12px "lucida grande", arial, helvetica, sans-serif !important;
 	color: #000;
 	vertical-align: middle;
 }
@@ -804,7 +809,7 @@ table th.tabletitle
 	border-bottom: 1px solid #999;
 	background-color: #e0e0e0;
 	color: #000;
-	font: normal 1em arial, helvetica, sans-serif;
+	font: normal 1em "lucida grande", arial, helvetica, sans-serif !important;
 }
 
 .surveyform
