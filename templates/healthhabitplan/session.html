@@ -4,79 +4,71 @@
 {% block js %}
 
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/themes/base/jquery-ui.css" type="text/css" media="all" /> 
-<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css"
-      type="text/css" media="all" /> 
+<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all" /> 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" ></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/jquery-ui.min.js" type="text/javascript"></script>
-
 <script src="http://jquery-ui.googlecode.com/svn/tags/latest/external/jquery.bgiframe-2.1.1.js" type="text/javascript"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script> 
 
 <style type="text/css">
 
-.grabber {
-display: block;
-width: 20px;
-height: 20px;
-border: #000 solid 3px;
-background-color: #fcc;
-}
-
-#categories {
-  float: left;
-  width: 300px;
-}
-
-.category-icon {
-  display: block;
-  border: #000 solid 3px;
-  width: 20px;
-  height: 20px;
-}
-
-.eat-smart {
-background-color: #f00;
-}
-.get-fit {
-background-color: #0f0;
-}
-.look-sharp {
-background-color: #00f;
-}
-
-#fridge {
-  display: block;
-  width: 300px;
-  height: 600px;
-  float: right;
-  background-color: #fff;
-  border: #000 solid 1px;
-}
-
-.ui-draggable-dragging {
-  border: #f60 solid 3px;
-}
-.dropped {
-border: #f00 solid 1px;
-}
-.arrow {
-display: block;
-width: 10px;
-height: 10px;
-}
-
-.open {
-background-color: green;
-}
-
-.closed {
-background-color: red;
-}
-
-.disabled {
-  color: #ccc;
-}
+	.grabber
+	{
+		display: block;
+		width: 20px;
+		height: 20px;
+		border: #000 solid 3px;
+		background-color: #fcc;
+	}
+	
+	#categories
+	{
+		float: left;
+		width: 300px;
+	}
+	
+	.category-icon
+	{
+		display: block;
+		border: #000 solid 3px;
+		width: 20px;
+		height: 20px;
+	}
+	
+	.eat-smart { background-color: #f00; }
+	
+	.get-fit { background-color: #0f0; }
+	
+	.look-sharp { background-color: #00f; }
+	
+	#fridge
+	{
+		display: block;
+		width: 300px;
+		height: 600px;
+		float: right;
+		background-color: #fff;
+		border: #000 solid 1px;
+	}
+	
+	.ui-draggable-dragging { border: #f60 solid 3px; }
+	
+	.dropped { border: #f00 solid 1px; }
+	
+	.arrow
+	{
+		display: block;
+		width: 10px;
+		height: 10px;
+	}
+	
+	.open { background-color: green; }
+	
+	.closed { background-color: red; }
+	
+	.disabled { color: #ccc; }
+	
 </style>
 
 <script type="text/javascript">
@@ -115,60 +107,68 @@ Session {{s.number}}
 {% endifequal %}
 </li>
 {% endfor %}
-
 <li><a title="create new session" href="{% url health-habit-plan-new-session %}">+</a></li>
-</div>
+</ul>
 
 <div id="hhp-container">
 
-<table id="categories">
-{% for category in categories %}
-<tr class="category">
-<td><span class="arrow closed"></span></td>
-<td><span class="category-icon {{category.css}}"></span></td>
-<th>{{category.label}}</a></th>
-</tr>
-    {% for item in category.item_set.all %}
-<tr class="item">
-<td></td>
-<td>
-{% if_magnet_for_item_exists session item %}
-<!-- I guess a placeholder should go here -->
-{% else %}
-<div id="item-{{item.id}}-grabber" class="grabber {{item.category.css}}"></div>
-{% endif_magnet_for_item_exists %}
-</td>
-<td><p id="item-{{item.id}}-label" class="{% if_magnet_for_item_exists session item %}disabled{%else%}{% endif_magnet_for_item_exists %}">{{item.label}}</p></td>
-</tr>
-    {% endfor %}
-{% endfor %}
-</table>
-
-<div id="fridge">
+	<table id="categories">
+	
+	{% for category in categories %}
+	
+	<tr class="category">
+	
+	<td><span class="arrow closed"></span></td>
+	<td><span class="category-icon {{category.css}}"></span></td>
+	<th>{{category.label}}</a></th>
+	
+	</tr>
+	
+	{% for item in category.item_set.all %}
+	    
+	<tr class="item">
+	<td></td>
+	<td>
+	{% if_magnet_for_item_exists session item %}
+	<!-- I guess a placeholder should go here -->
+	{% else %}
+	<div id="item-{{item.id}}-grabber" class="grabber {{item.category.css}}"></div>
+	{% endif_magnet_for_item_exists %}
+	</td>
+	<td><p id="item-{{item.id}}-label" class="{% if_magnet_for_item_exists session item %}disabled{%else%}{% endif_magnet_for_item_exists %}">{{item.label}}</p></td>
+	</tr>
+	
+	{% endfor %}
+	
+	{% endfor %}
+	
+	</table>
+	
+	<div id="fridge">
+	
+	</div>
+	
+	{% if session.magnet_set.count %}
+	{% for magnet in session.magnet_set.all %}
+	<div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}"></div>
+	{% endfor %}
+	
+	<script type="text/javascript">
+	jQuery(function() {
+	{% for magnet in session.magnet_set.all %}    
+	    positionMagnet(jQuery("#item-{{magnet.item.id}}-magnet"),{{magnet.x}},{{magnet.y}});
+	{% endfor %}
+	});
+	
+	</script>
+	
+	{% endif %}
+	
+	<br style="clear:both"/>
+	
+	<p id="debugprint"></p>
 
 </div>
-
-{% if session.magnet_set.count %}
-{% for magnet in session.magnet_set.all %}
-<div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}"></div>
-{% endfor %}
-
-<script type="text/javascript">
-jQuery(function() {
-{% for magnet in session.magnet_set.all %}    
-    positionMagnet(jQuery("#item-{{magnet.item.id}}-magnet"),{{magnet.x}},{{magnet.y}});
-{% endfor %}
-});
-</script>
-
-{% endif %}
-
-<br style="clear:both"/>
-
-<p id="debugprint"></p>
-
-</div>
-
 
 <script type="text/javascript">
 
