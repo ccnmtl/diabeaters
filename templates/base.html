@@ -34,7 +34,7 @@
 		<ul id="standard_navigation">
 			{% block usernav %}
 			{% if user.username %}
-			<li>Hello, {% if user.first_name %}{{user.first_name}}{{user.last_name}}{% else %}{{ user.username }}{% endif %}!</li>
+			<li>Hello, {% if user.first_name %}{{user.first_name}} {{user.last_name}}{% else %}{{ user.username }}{% endif %}!</li>
 			{% endif %}
 			{% if user.username %}
 			<li><a href="/accounts/logout/">Log Out</a></li>
