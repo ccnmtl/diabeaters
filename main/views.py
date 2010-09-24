@@ -24,6 +24,7 @@ class rendered_with(object):
 @rendered_with('main/page.html')
 def page(request,path):
     section = get_section_from_path(path)
+    section = section.get_first_leaf()  # redirects to first (welcome) page for parent nodes
     h = get_hierarchy()
 
     if not request.user.is_anonymous():
