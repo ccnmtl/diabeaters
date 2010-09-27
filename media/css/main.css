@@ -189,13 +189,13 @@ a
 
 a:hover
 {
-	color: #c00 !important;
+	color: #000 !important;
 	text-decoration: none;
 }
 
 a:active
 {
-	color: #c00;
+	color: #000;
 	text-decoration: none;
 }
 
@@ -385,7 +385,7 @@ a:visited
 	padding: 0 16px 0 10px;
 	border: 0;
 	font: normal 14px/31px "lucida grande", arial, helvetica, sans-serif;
-	color: #c00;
+	color: #000;
 	list-style: 0;
 	text-decoration: none !important;
 }
@@ -393,7 +393,7 @@ a:visited
 #primary_navigation ul.usernav li a
 {
 	display: block !important;
-	color: #c00 !important;
+	color: #000 !important;
 	text-decoration: none !important;
 }
 
@@ -414,7 +414,7 @@ a:visited
 {
 	display: block !important;
 	padding: 0 15px 0 20px;
-	color: #c00 !important;
+	color: #000 !important;
 	text-decoration: none !important;
 }
 
@@ -485,7 +485,7 @@ a:visited
 	padding: 0;
 	border: 0;
 	border-bottom: 1px dotted #faba42;
-	color: #c00;
+	color: #000;
 	font-weight: bold;
 }
 
@@ -575,7 +575,7 @@ a:visited
 	padding: 0;
 	border: 0;
 	font: normal 28px "lucida grande", arial, helvetica, sans-serif;
-	color: #c00;
+	color: #000;
 }
 
 #content h2
@@ -584,7 +584,7 @@ a:visited
 	padding: 0;
 	border: 0;
 	font: normal 20px "lucida grande", arial, helvetica, sans-serif;
-	color: #c00;
+	color: #000;
 }
 
 #content h3
@@ -593,7 +593,7 @@ a:visited
 	padding: 0;
 	border: 0;
 	font: normal 20px "lucida grande", arial, helvetica, sans-serif;
-	color: #c00;
+	color: #000;
 }
 
 #content p
@@ -682,7 +682,7 @@ a:visited
 	padding: 0 !important;
 	border: 0 !important;
 	font: bold italic 1em "lucida grande", arial, helvetica, sans-serif !important;
-	color: #c00;
+	color: #000;
 }
 
 .loginbox .alert a
