@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from models import *
 from django.core.urlresolvers import reverse
+from pagetree.helpers import get_hierarchy
 
 class rendered_with(object):
     def __init__(self, template_name):
@@ -43,9 +44,11 @@ def new_session(request):
 @rendered_with('healthhabitplan/session.html')
 def session(request,id):
     s = get_object_or_404(Session,id=id)
+    h = get_hierarchy()
     return dict(session=s,
                 sessions=Session.objects.filter(user=request.user),
                 categories=Category.objects.all(),
+                root = h.get_root()
                 )
 
 @login_required
