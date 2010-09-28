@@ -172,9 +172,10 @@ var disableLabel = function(magnet) {
 	<div class="sessions-session">
 	{% ifequal s.id session.id %}
 	<span class="session-active">Session {{s.number}}</span>
+		<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}">[X]</a>
 	{% else %}
 	<a href="{% url health-habit-plan-session s.id %}">Session {{s.number}}</a>
-	<a class="delete" title="Delete" href="#">[X]</a>
+	<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}">[X]</a>
 	{% endifequal %}
 	</div>
 	{% endfor %}

@@ -41,6 +41,13 @@ def new_session(request):
     return HttpResponseRedirect(reverse('health-habit-plan-session',args=[s.id]))
 
 @login_required
+def del_session(request, id=id):
+    user = request.user
+    s = Session.objects.get(id=id)
+    s.delete()
+    return HttpResponseRedirect(reverse('health-habit-plan-index'))
+
+@login_required
 @rendered_with('healthhabitplan/session.html')
 def session(request,id):
     s = get_object_or_404(Session,id=id)
