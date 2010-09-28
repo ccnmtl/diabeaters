@@ -51,12 +51,22 @@
 	
 	#hhp-container { }
 	
-	table#categories
+	#magnetwrapper
 	{
 		position: absolute;
 		top: 25px;
 		left: 240px;
 		width: 360px;
+		border-top: 1px solid #eee;
+		border-right: 1px solid #ccc;
+		border-bottom: 1px solid #666;
+		border-left: 1px solid #ccc;
+		height: 490px;
+		overflow: auto;
+	}
+	
+	table#categories
+	{
 		border: 0;
 	}
 	
@@ -173,12 +183,11 @@ var disableLabel = function(magnet) {
 
 <div id="hhp-container">
 
+	<div id="magnetwrapper">
 	<table id="categories">
-	
 	  <col id="left" />
 	  <col id="center" />
 	  <col id="right" />
-	<tr><th colspan="3">My Magnets</th></tr>
 	{% for category in categories %}
 	
 	<tr class="category">
@@ -223,6 +232,7 @@ var disableLabel = function(magnet) {
 	{% endfor %}
 	
 	</table>
+	</div>
 	
 	<div id="fridge"></div>
 	
