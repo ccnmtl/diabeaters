@@ -1190,7 +1190,7 @@ ul.tabbernav li.tabberactive a:hover
 
 
 .yours {
-border-top: #666 solid 1px;
+border-top: #999 dotted 1px;
 padding-left: 1em;
 padding-right: 1em;
 }
