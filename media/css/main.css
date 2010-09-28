@@ -1190,14 +1190,14 @@ ul.tabbernav li.tabberactive a:hover
 
 
 .yours {
-border: #666 solid 1px;
+border-top: #666 solid 1px;
 padding-left: 1em;
 padding-right: 1em;
 }
 
 .expert {color: orange;}
 
-.incorrect { background-color: #f00;}
+.incorrect { background-color: #f00; color: #fff;}
 .correct {background-color: #cfc;}
 .correctanswer {background-color: #090 solid 1px;}
 
