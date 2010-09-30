@@ -267,7 +267,11 @@ jQuery(document).ready(function(){
 
 jQuery(function() {
    jQuery(".grabber").draggable({
-        revert: 'invalid'
+        appendTo: '#fridge'
+        ,helper: 'clone'
+        ,revert: 'invalid'
+        ,zIndex: 1000
+        ,scroll: false
         ,start: function(event, ui) {
            disableLabel(jQuery(this));
         }
