@@ -267,7 +267,7 @@ jQuery(document).ready(function(){
 	}).nextUntil("tr.category").hide();
 });
 
-jQuery(function() {
+jQuery( function() {
    jQuery(".grabber").draggable({
         revert: 'invalid'
         , appendTo: '#fridge'
@@ -279,6 +279,11 @@ jQuery(function() {
    // hidden when the turnbuckle is closed, even if they're on the fridge)
    jQuery(".grabber-in-menu").each( function() {
      jQuery(this).draggable("option", "helper", 'clone');
+
+     // can't use .width() and .height() before images are loaded
+     var width = parseInt(jQuery(this).css('width'));
+     var height = parseInt(jQuery(this).css('height'));
+     jQuery(this).draggable("option", "cursorAt", {'top': height/2, 'left': width/2});
    });
 
    jQuery("#fridge").droppable({
