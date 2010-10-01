@@ -220,7 +220,7 @@ var disableLabel = function(magnet) {
 	{% if_magnet_for_item_exists session item %}
 	<!-- I guess a placeholder should go here -->
 	{% else %}
-	<div id="item-{{item.id}}-grabber" class="grabber {{item.category.css}}"></div>
+	<div id="item-{{item.id}}-grabber" class="grabber grabber-in-menu {{item.category.css}}"></div>
 	{% endif_magnet_for_item_exists %}
 	</td>
 	
@@ -269,11 +269,9 @@ jQuery(document).ready(function(){
 
 jQuery(function() {
    jQuery(".grabber").draggable({
-        appendTo: '#fridge'
-        ,helper: 'clone'
-        ,revert: 'invalid'
-        ,zIndex: 1000
-        ,scroll: false
+        revert: 'invalid'
+        , appendTo: '#fridge'
+        , scroll: false
         //,start: function(event, ui) {
         //   disableLabel(jQuery(this));
         //}
@@ -286,19 +284,34 @@ jQuery(function() {
         }
    });
 
+   // we need to use helper:clone for the divs in the menu, because otherwise
+   // they can't be dragged out of the overflow:hidden (and also get 
+   // hidden when the turnbuckle is closed, even if they're on the fridge)
+   jQuery(".grabber-in-menu").each( function(elem) {
+     jQuery(this).draggable("option", "helper", 'clone');
+   });
+
    jQuery("#fridge").droppable({
 	drop: function(event, ui) {
-          disableLabel(ui.draggable);
           jQuery(this).addClass('dropped');
 
-          // save the clone and put it where it's supposed to be
-          var clone = ui.draggable;
-          clone.appendTo(this);
+          // if we've got a clone, we need to actually save it and put it where it belongs
+          if( ui.draggable.hasClass('grabber-in-menu') ) {
+            var clone = ui.draggable;
+            disableLabel(clone);
 
-          // this is still weird 'cause it assumes the mouse grabbed in the middle of the div
-          var width = clone.width();
-          var height = clone.height();
-          ui.draggable.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
+            clone.appendTo(this);
+
+            // this is still weird 'cause it assumes the mouse grabbed in the middle of the div
+            var width = clone.width();
+            var height = clone.height();
+            clone.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
+            
+            clone.removeClass('grabber-in-menu');
+
+            // remove "clone" helper 'cause it causes more trouble than it's worth
+            clone.draggable("option", "helper", 'original');
+          }
 	}
    }); 
 });
