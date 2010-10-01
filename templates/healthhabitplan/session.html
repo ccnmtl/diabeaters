@@ -274,9 +274,9 @@ jQuery(function() {
         ,revert: 'invalid'
         ,zIndex: 1000
         ,scroll: false
-        ,start: function(event, ui) {
-           disableLabel(jQuery(this));
-        }
+        //,start: function(event, ui) {
+        //   disableLabel(jQuery(this));
+        //}
         ,stop: function(event, ui) {
           var fridgeOffset = jQuery("#fridge").offset();
           var offset = jQuery(this).offset();
@@ -288,7 +288,17 @@ jQuery(function() {
 
    jQuery("#fridge").droppable({
 	drop: function(event, ui) {
+          disableLabel(ui.draggable);
           jQuery(this).addClass('dropped');
+
+          // save the clone and put it where it's supposed to be
+          var clone = ui.draggable;
+          clone.appendTo(this);
+
+          // this is still weird 'cause it assumes the mouse grabbed in the middle of the div
+          var width = clone.width();
+          var height = clone.height();
+          ui.draggable.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
 	}
    }); 
 });
