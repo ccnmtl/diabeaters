@@ -272,47 +272,45 @@ jQuery(function() {
         revert: 'invalid'
         , appendTo: '#fridge'
         , scroll: false
-        //,start: function(event, ui) {
-        //   disableLabel(jQuery(this));
-        //}
-        ,stop: function(event, ui) {
-          var fridgeOffset = jQuery("#fridge").offset();
-          var offset = jQuery(this).offset();
-          var store_x = offset.left - fridgeOffset.left;
-          var store_y = offset.top - fridgeOffset.top;
-          saveMagnetPosition(jQuery(this).attr("id").split("-")[1],store_x,store_y);
-        }
    });
 
    // we need to use helper:clone for the divs in the menu, because otherwise
    // they can't be dragged out of the overflow:hidden (and also get 
    // hidden when the turnbuckle is closed, even if they're on the fridge)
-   jQuery(".grabber-in-menu").each( function(elem) {
+   jQuery(".grabber-in-menu").each( function() {
      jQuery(this).draggable("option", "helper", 'clone');
    });
 
    jQuery("#fridge").droppable({
-	drop: function(event, ui) {
-          jQuery(this).addClass('dropped');
+     drop: function(event, ui) {
+       jQuery(this).addClass('dropped');
 
-          // if we've got a clone, we need to actually save it and put it where it belongs
-          if( ui.draggable.hasClass('grabber-in-menu') ) {
-            var clone = ui.draggable;
-            disableLabel(clone);
+       var item = ui.draggable;
 
-            clone.appendTo(this);
+       // if we've got a clone, we need to actually save it and put it where it belongs
+       if( item.hasClass('grabber-in-menu') ) {
+         disableLabel(item);
 
-            // this is still weird 'cause it assumes the mouse grabbed in the middle of the div
-            var width = clone.width();
-            var height = clone.height();
-            clone.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
+         item.appendTo(this);
+
+         var width = item.width();
+         var height = item.height();
+         item.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
             
-            clone.removeClass('grabber-in-menu');
+         item.removeClass('grabber-in-menu');
 
-            // remove "clone" helper 'cause it causes more trouble than it's worth
-            clone.draggable("option", "helper", 'original');
-          }
-	}
+         // remove "clone" helper 'cause it causes more trouble than it's worth
+         item.draggable("option", "helper", 'original');
+         item.draggable("option", "cursorAt", false);
+       }
+       
+       // save the magnet's position
+       var fridgeOffset = jQuery(this).offset();
+       var offset = item.offset();
+       var store_x = offset.left - fridgeOffset.left;
+       var store_y = offset.top - fridgeOffset.top;
+       saveMagnetPosition(item.attr("id").split("-")[1],store_x,store_y);
+     }
    }); 
 });
 
