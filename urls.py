@@ -18,7 +18,6 @@ urlpatterns = patterns('',
                        (r'^health-habit-plan/',include('healthhabitplan.urls')),
                        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
                        (r'^uploads/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
-                       (r'^sentry/', include('sentry.urls')),
                        # very important that these two stay last and in this order
                        (r'^edit/(?P<path>.*)$','diabeaters.main.views.edit_page'),
                        (r'^instructor/(?P<path>.*)$','diabeaters.main.views.instructor_page'),
