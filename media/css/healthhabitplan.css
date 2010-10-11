@@ -7,17 +7,21 @@
 	background-color: #efcec5;
 }
 
-#sessions-add, .sessions-session
+#sessions-add, .sessions-session, #sessions-all
 {
 	background-color: #efcec5;
 	border: 1px solid #fff;
 	padding: 2px;
 }
 
-#sessions-add
+#sessions-add, #sessions-all
 {
 	background-color: #ee9d87;
 	border: 1px solid #fff;
+}
+
+#sessions-all {
+  margin-top: 25px;
 }
 
 #sessions-menu a

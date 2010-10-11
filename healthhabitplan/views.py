@@ -59,6 +59,14 @@ def session(request,id):
                 )
 
 @login_required
+@rendered_with('healthhabitplan/all_sessions.html')
+def all_sessions(request):
+    user = request.user
+    h = get_hierarchy()
+    sessions = Session.objects.filter(user=request.user)
+    return dict(sessions=sessions, categories=Category.objects.all(), root = h.get_root())
+
+@login_required
 def save_magnet(request,id):
     s = get_object_or_404(Session,id=id)
     if request.method == "POST":

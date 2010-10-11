@@ -1,10 +1,3 @@
-var positionMagnet = function(magnet,x,y) {
-   var fridgeOffset = jQuery("#fridge").offset();
-   fridgeOffset.left = fridgeOffset.left + x;
-   fridgeOffset.top  = fridgeOffset.top + y;
-   magnet.offset(fridgeOffset);
-};
-
 var saveMagnetPosition = function(id,x,y) {
    var req = new XMLHttpRequest();
    //var url = "{% url health-habit-plan-save-magnet session.id %}?item_id=" + id + ";x=" + parseInt(x) + ";y=" + parseInt(y);
@@ -127,22 +120,5 @@ jQuery( function() {
      }
    }); 
    
-   jQuery(".magnet").click(togglePopup);
-   
-   function togglePopup() {
-     // destroy any existing popups
-     jQuery(".magnet-popup").hide();
-
-     // position popup correctly
-     var popup = jQuery("#item-" + jQuery(this).attr("id").split("-")[1] + "-popup");
-     var windowOffsetTop = jQuery(window).scrollTop();
-     var windowOffsetLeft = jQuery(window).scrollLeft();
-     var fridgeOffset = jQuery("#fridge").offset()
-     popup.offset({'top': jQuery(this).offset().top - fridgeOffset.top - popup.height() + windowOffsetTop + 20,
-                   'left': jQuery(this).offset().left - fridgeOffset.left - popup.width() + windowOffsetLeft - 20 });
-     jQuery(popup).show();
-   }
-   
-   jQuery(".magnet-popup-close").click(function() { jQuery(this).parent(".magnet-popup").hide(); });
    jQuery(".magnet-trash").click(function() { deleteMagnet( jQuery(this) ); });
 });
