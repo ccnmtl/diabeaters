@@ -152,10 +152,18 @@
 	}*/
 	
 	.magnet-popup-close, .magnet-trash {
-	  width: 5px;
+	  width: 16px;
+	  height: 16px;
 	  float: right;
-	  margin-right: 5px;
 	  cursor: pointer;
+	}
+	
+	.magnet-popup-close {
+	  background: url("/site_media/img/icon_close.png") no-repeat;
+	}
+	
+	.magnet-trash {
+	  background: url("/site_media/img/icon_delete.png") no-repeat;
 	}
 	
 </style>
@@ -273,11 +281,11 @@ var deleteMagnet = function(elem) {
 	{% else %}
 	<div id="item-{{item.id}}-grabber" class="grabber grabber-in-menu {{item.category.css}}"></div>
    <div id="item-{{item.id}}-popup" class="magnet-popup">
-	  <div class="magnet-popup-close">X</div>
+	  <div class="magnet-popup-close"></div>
 	  <strong>{{item.category}}</strong><br />
 	  I can beat diabetes by:<br />
 	  <strong>{{item.label}}</strong>
-	  <div id="item-{{item.id}}-trash" class="magnet-trash">D</div>
+	  <div id="item-{{item.id}}-trash" class="magnet-trash"></div>
 	</div>
 	{% endif_magnet_for_item_exists %}
 	</td>
@@ -301,11 +309,11 @@ var deleteMagnet = function(elem) {
 	{% for magnet in session.magnet_set.all %}
   	  <div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}"></div>
 	  <div id="item-{{magnet.item.id}}-popup" class="magnet-popup">
-	    <div class="magnet-popup-close">X</div>
+	    <div class="magnet-popup-close"></div>
 	    <strong>{{magnet.item.category}}</strong><br />
 	    I can beat diabetes by:<br />
 	    <strong>{{magnet.item.label}}</strong>
-	    <div id="item-{{magnet.item.id}}-trash" class="magnet-trash">D</div>
+	    <div id="item-{{magnet.item.id}}-trash" class="magnet-trash"></div>
 	  </div>
 	{% endfor %}
 	
