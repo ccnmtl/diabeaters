@@ -1,13 +1,13 @@
 function initTurnbuckle() {
   var menuItem = jQuery("a:contains('Social Work Guide')");
   if( location.href.indexOf("social_work_guide") == -1) {
-    menuItem.parent("li").css("background", "url(/site_media/img/bullet_close.gif) no-repeat scroll left 4px transparent");
+    menuItem.parent("li").css("background", "url(/site_media/img/bullet_open.gif) no-repeat scroll left 4px transparent");
     menuItem.siblings().hide();
     menuItem.parent("li").toggle(showMenu, hideMenu);
   }
   
   else {
-    menuItem.parent("li").css("background", "url(/site_media/img/bullet_open.gif) no-repeat scroll left 4px transparent");
+    menuItem.parent("li").css("background", "url(/site_media/img/bullet_close.gif) no-repeat scroll left 4px transparent");
     menuItem.parent("li").toggle(hideMenu, showMenu);
   }
 }
@@ -24,7 +24,7 @@ function hideMenu(event) {
     }
   }
   jQuery(this).children("ul").hide();
-  jQuery(this).css("background", "url(/site_media/img/bullet_close.gif) no-repeat scroll left 4px transparent");
+  jQuery(this).css("background", "url(/site_media/img/bullet_open.gif) no-repeat scroll left 4px transparent");
 }
 
 function showMenu(event) {
@@ -37,5 +37,5 @@ function showMenu(event) {
     }
   }
   jQuery(this).children("ul").show();
-  jQuery(this).css("background", "url(/site_media/img/bullet_open.gif) no-repeat scroll left 4px transparent");
+  jQuery(this).css("background", "url(/site_media/img/bullet_close.gif) no-repeat scroll left 4px transparent");
 }
