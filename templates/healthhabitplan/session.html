@@ -147,9 +147,9 @@
 	  z-index: 1000;
 	}
 	
-	.magnet {
+	/*.magnet {
 	  position: absolute !important;
-	}
+	}*/
 	
 	.magnet-popup-close, .magnet-trash {
 	  width: 5px;
@@ -179,6 +179,10 @@ var saveMagnetPosition = function(id,x,y) {
 
 var disableLabel = function(magnet) {
   jQuery("#item-" + magnet.attr("id").split("-")[1] + "-label").addClass("disabled");
+  var grabber = jQuery("#item-" + magnet.attr("id").split("-")[1] + "-grabber");
+  grabber.addClass("category-icon");
+  grabber.removeClass("grabber");
+  grabber.draggable("option", "disabled", true);
 };
 
 var deleteMagnet = function(elem) {
@@ -191,20 +195,15 @@ var deleteMagnet = function(elem) {
   req.open("POST",url,true);
   req.send(null);
 
-  // replace in menu
+  // hide on fridge -- NOT using display:none so the others stay put
+  magnet.css("visibility", "hidden");
+
+  // enable in menu
   jQuery("#item-" + magnet.attr("id").split("-")[1] + "-label").removeClass("disabled");
-  jQuery("#item-" + magnet.attr("id").split("-")[1] + "-label").parent().prev("td").append(magnet);
-  magnet.addClass("grabber-in-menu");
-  magnet.removeClass("magnet");
-  magnet.css({'top':'', 'left':''});
-
-  // reset draggable options
-  magnet.draggable("option", "helper", 'clone');
-
-  // can't use .width() and .height() before images are loaded
-  var width = parseInt(jQuery(magnet).css('width'));
-  var height = parseInt(jQuery(magnet).css('height'));
-  magnet.draggable("option", "cursorAt", {'top': height/2, 'left': width/2});
+  var grabber = jQuery("#item-" + magnet.attr("id").split("-")[1] + "-grabber");
+  grabber.removeClass("category-icon");
+  grabber.addClass("grabber");
+  grabber.draggable("option", "disabled", false);
 
   // hide popup
   elem.parent().hide();
@@ -270,7 +269,7 @@ var deleteMagnet = function(elem) {
 	
 	<td>
 	{% if_magnet_for_item_exists session item %}
-	<!-- I guess a placeholder should go here -->
+	  <div id="item-{{item.id}}-grabber" class="grabber grabber-in-menu {{item.category.css}} grabber-disabled"></div>
 	{% else %}
 	<div id="item-{{item.id}}-grabber" class="grabber grabber-in-menu {{item.category.css}}"></div>
    <div id="item-{{item.id}}-popup" class="magnet-popup">
@@ -339,6 +338,7 @@ jQuery( function() {
         , appendTo: '#fridge'
         , scroll: false
    });
+   jQuery(".grabber-disabled").draggable("option", "disabled", true);
 
    // we need to use helper:clone for the divs in the menu, because otherwise
    // they can't be dragged out of the overflow:hidden (and also get 
@@ -360,25 +360,36 @@ jQuery( function() {
 
        // if we've got a clone, we need to actually save it and put it where it belongs
        if( item.hasClass('grabber-in-menu') ) {
-         disableLabel(item);
+         // if the magnet is already on the fridge (but hidden), just re-use that one
+         var magnet = jQuery("#item-" + item.attr('id').split("-")[1] + "-magnet");
+         if(magnet.length > 0) {
+           magnet.css('visibility', 'visible');
+         }
+         else {
+           magnet = item.clone();
+           magnet.attr("id", "item-" + magnet.attr('id').split("-")[1] + "-magnet");
+           magnet.removeClass('grabber-in-menu');
+           magnet.addClass('magnet');
+           magnet.click(togglePopup);
 
-         item.appendTo("#hhp-container");
+           magnet.appendTo("#hhp-container");
+         }
 
-         var width = item.width();
-         var height = item.height();
-         item.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
+         var width = magnet.width();
+         var height = magnet.height();
+         magnet.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
             
-         item.removeClass('grabber-in-menu');
-         item.addClass('magnet');
-         item.click(togglePopup);
+         magnet.draggable({
+           revert: 'invalid'
+           , appendTo: '#fridge'
+           , scroll: 'false'
+         });
 
-         // remove "clone" helper 'cause it causes more trouble than it's worth
-         item.draggable("option", "helper", 'original');
-         item.draggable("option", "cursorAt", false);
-         
          // take its popup label too
-         var popup = jQuery("#item-" + item.attr('id').split("-")[1] + "-popup");
+         var popup = jQuery("#item-" + magnet.attr('id').split("-")[1] + "-popup");
          popup.appendTo("#hhp-container");
+
+         item = magnet;  // so the code below saves its position correctly
        }
        
        // save the magnet's position
@@ -387,6 +398,8 @@ jQuery( function() {
        var store_x = offset.left - fridgeOffset.left;
        var store_y = offset.top - fridgeOffset.top;
        saveMagnetPosition(item.attr("id").split("-")[1],store_x,store_y);
+       
+       disableLabel(item);
      }
    }); 
    
