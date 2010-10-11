@@ -135,6 +135,29 @@
 	.open { background-image: url('/site_media/img/arrow-open.png'); }
 	.closed { background-image: url('/site_media/img/arrow-closed.png'); }
 	.disabled { color: #ccc; }
+	
+	.magnet-popup {
+	  display: none;
+	  position: absolute;
+	  width: 150px;
+	  left: -175px;
+	  background-color: lightgrey;
+	  border: 1px black solid;
+	  padding: 5px;
+	  z-index: 1000;
+	}
+	
+	.magnet {
+	  position: absolute !important;
+	}
+	
+	.magnet-popup-close, .magnet-trash {
+	  width: 5px;
+	  float: right;
+	  margin-right: 5px;
+	  cursor: pointer;
+	}
+	
 </style>
 
 <script type="text/javascript">
@@ -156,8 +179,37 @@ var saveMagnetPosition = function(id,x,y) {
 
 var disableLabel = function(magnet) {
   jQuery("#item-" + magnet.attr("id").split("-")[1] + "-label").addClass("disabled");
-
 };
+
+var deleteMagnet = function(elem) {
+  var id = elem.parent().attr("id").split("-")[1];
+  var magnet = jQuery("[id^=item-" + id + "].magnet");
+
+  // delete from session
+  var req = new XMLHttpRequest();
+  var url = "{% url health-habit-plan-delete-magnet session.id %}?item_id=" + id;
+  req.open("POST",url,true);
+  req.send(null);
+
+  // replace in menu
+  jQuery("#item-" + magnet.attr("id").split("-")[1] + "-label").removeClass("disabled");
+  jQuery("#item-" + magnet.attr("id").split("-")[1] + "-label").parent().prev("td").append(magnet);
+  magnet.addClass("grabber-in-menu");
+  magnet.removeClass("magnet");
+  magnet.css({'top':'', 'left':''});
+
+  // reset draggable options
+  magnet.draggable("option", "helper", 'clone');
+
+  // can't use .width() and .height() before images are loaded
+  var width = parseInt(jQuery(magnet).css('width'));
+  var height = parseInt(jQuery(magnet).css('height'));
+  magnet.draggable("option", "cursorAt", {'top': height/2, 'left': width/2});
+
+  // hide popup
+  elem.parent().hide();
+};
+
 </script>
 
 {% endblock %}
@@ -221,6 +273,13 @@ var disableLabel = function(magnet) {
 	<!-- I guess a placeholder should go here -->
 	{% else %}
 	<div id="item-{{item.id}}-grabber" class="grabber grabber-in-menu {{item.category.css}}"></div>
+   <div id="item-{{item.id}}-popup" class="magnet-popup">
+	  <div class="magnet-popup-close">X</div>
+	  <strong>{{item.category}}</strong><br />
+	  I can beat diabetes by:<br />
+	  <strong>{{item.label}}</strong>
+	  <div id="item-{{item.id}}-trash" class="magnet-trash">D</div>
+	</div>
 	{% endif_magnet_for_item_exists %}
 	</td>
 	
@@ -241,7 +300,14 @@ var disableLabel = function(magnet) {
 	
 	{% if session.magnet_set.count %}
 	{% for magnet in session.magnet_set.all %}
-	<div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}"></div>
+  	  <div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}"></div>
+	  <div id="item-{{magnet.item.id}}-popup" class="magnet-popup">
+	    <div class="magnet-popup-close">X</div>
+	    <strong>{{magnet.item.category}}</strong><br />
+	    I can beat diabetes by:<br />
+	    <strong>{{magnet.item.label}}</strong>
+	    <div id="item-{{magnet.item.id}}-trash" class="magnet-trash">D</div>
+	  </div>
 	{% endfor %}
 	
 	<script type="text/javascript">
@@ -277,7 +343,7 @@ jQuery( function() {
    // we need to use helper:clone for the divs in the menu, because otherwise
    // they can't be dragged out of the overflow:hidden (and also get 
    // hidden when the turnbuckle is closed, even if they're on the fridge)
-   jQuery(".grabber-in-menu").each( function() {
+   jQuery(".grabber-in-menu").each(function() {
      jQuery(this).draggable("option", "helper", 'clone');
 
      // can't use .width() and .height() before images are loaded
@@ -296,17 +362,23 @@ jQuery( function() {
        if( item.hasClass('grabber-in-menu') ) {
          disableLabel(item);
 
-         item.appendTo(this);
+         item.appendTo("#hhp-container");
 
          var width = item.width();
          var height = item.height();
          item.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
             
          item.removeClass('grabber-in-menu');
+         item.addClass('magnet');
+         item.click(togglePopup);
 
          // remove "clone" helper 'cause it causes more trouble than it's worth
          item.draggable("option", "helper", 'original');
          item.draggable("option", "cursorAt", false);
+         
+         // take its popup label too
+         var popup = jQuery("#item-" + item.attr('id').split("-")[1] + "-popup");
+         popup.appendTo("#hhp-container");
        }
        
        // save the magnet's position
@@ -317,6 +389,21 @@ jQuery( function() {
        saveMagnetPosition(item.attr("id").split("-")[1],store_x,store_y);
      }
    }); 
+   
+   jQuery(".magnet").click(togglePopup);
+   
+   function togglePopup() {
+     // destroy any existing popups
+     jQuery(".magnet-popup").hide();
+     // position popup correctly
+     var popup = jQuery("#item-" + jQuery(this).attr("id").split("-")[1] + "-popup");
+     popup.offset({'top': jQuery(this).offset().top - 150,
+                   'left': jQuery(this).offset().left - 400 });
+     jQuery(popup).show();
+   }
+   
+   jQuery(".magnet-popup-close").click(function() { jQuery(this).parent(".magnet-popup").hide(); });
+   jQuery(".magnet-trash").click(function() { deleteMagnet( jQuery(this) ); });
 });
 
 
