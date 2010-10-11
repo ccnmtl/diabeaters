@@ -47,6 +47,7 @@
 <div id="hhp-container">
 
 	<div id="magnetwrapper">
+	
 	<table id="categories">
 	  <col id="left" />
 	  <col id="center" />
@@ -108,16 +109,21 @@
 	
 	{% if session.magnet_set.count %}
 	{% for magnet in session.magnet_set.all %}
+	
   	  <div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}"></div>
 	  <div id="item-{{magnet.item.id}}-popup" class="magnet-popup">
 	    <div class="magnet-popup-close"></div>
-	    <strong>{{magnet.item.category}}</strong><br />
-	    I can beat diabetes by:<br />
-	    <strong>{{magnet.item.label}}</strong>
+	    <strong>{{magnet.item.category}}</strong>
+	    <br />
+	    <br />
+	    I can beat diabetes by<br />
+	    <span style="text-transform: lowercase; font-weight: bold;">{{magnet.item.label}}</span>
 	    <div id="item-{{magnet.item.id}}-trash" class="magnet-trash"></div>
 	  </div>
+	  
 	{% endfor %}
-	
+	{% endif %}
+
 	</div>
 	
 	<script type="text/javascript">
@@ -128,8 +134,6 @@
 	});
 	</script>
 	
-	{% endif %}
-
 </div>
 
 {% endblock %}
