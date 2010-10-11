@@ -147,10 +147,6 @@
 	  z-index: 1000;
 	}
 	
-	/*.magnet {
-	  position: absolute !important;
-	}*/
-	
 	.magnet-popup-close, .magnet-trash {
 	  width: 16px;
 	  height: 16px;
@@ -303,7 +299,7 @@ var deleteMagnet = function(elem) {
 	</table>
 	</div>
 	
-	<div id="fridge"></div>
+	<div id="fridge">
 	
 	{% if session.magnet_set.count %}
 	{% for magnet in session.magnet_set.all %}
@@ -316,6 +312,8 @@ var deleteMagnet = function(elem) {
 	    <div id="item-{{magnet.item.id}}-trash" class="magnet-trash"></div>
 	  </div>
 	{% endfor %}
+	
+	</div>
 	
 	<script type="text/javascript">
 	jQuery(function() {
@@ -378,9 +376,7 @@ jQuery( function() {
            magnet.attr("id", "item-" + magnet.attr('id').split("-")[1] + "-magnet");
            magnet.removeClass('grabber-in-menu');
            magnet.addClass('magnet');
-           magnet.click(togglePopup);
-
-           magnet.appendTo("#hhp-container");
+           magnet.appendTo("#fridge");
          }
 
          var width = magnet.width();
@@ -392,10 +388,11 @@ jQuery( function() {
            , appendTo: '#fridge'
            , scroll: 'false'
          });
+         magnet.click(togglePopup);
 
          // take its popup label too
          var popup = jQuery("#item-" + magnet.attr('id').split("-")[1] + "-popup");
-         popup.appendTo("#hhp-container");
+         popup.appendTo("#fridge");
 
          item = magnet;  // so the code below saves its position correctly
        }
@@ -408,6 +405,7 @@ jQuery( function() {
        saveMagnetPosition(item.attr("id").split("-")[1],store_x,store_y);
        
        disableLabel(item);
+       event.stopPropagation();
      }
    }); 
    
@@ -416,10 +414,14 @@ jQuery( function() {
    function togglePopup() {
      // destroy any existing popups
      jQuery(".magnet-popup").hide();
+
      // position popup correctly
      var popup = jQuery("#item-" + jQuery(this).attr("id").split("-")[1] + "-popup");
-     popup.offset({'top': jQuery(this).offset().top - 150,
-                   'left': jQuery(this).offset().left - 400 });
+     var windowOffsetTop = jQuery(window).scrollTop();
+     var windowOffsetLeft = jQuery(window).scrollLeft();
+     var fridgeOffset = jQuery("#fridge").offset()
+     popup.offset({'top': jQuery(this).offset().top - fridgeOffset.top - popup.height() + windowOffsetTop + 20,
+                   'left': jQuery(this).offset().left - fridgeOffset.left - popup.width() + windowOffsetLeft - 20 });
      jQuery(popup).show();
    }
    
