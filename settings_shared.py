@@ -1,12 +1,10 @@
 # Django settings for diabeaters project.
 import os.path
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    ('CCNMTL', 'ccnmtl-sysadmin@columbia.edu'),
-)
+ADMINS = ( )
 
 MANAGERS = ADMINS
 
@@ -68,12 +66,16 @@ INSTALLED_APPS = (
     'smartif',
     'template_utils',
     'typogrify',
+    'sentry.client',
     'pagetree',
     'pageblocks',
     'diabeaters.quiz',
     'diabeaters.main',
     'diabeaters.healthhabitplan',
 )
+
+SENTRY_REMOTE_URL = 'http://sentry.ccnmtl.columbia.edu/sentry/store/'
+SENTRY_KEY = 'EWv5EELZnZIrOY'
 
 PAGEBLOCKS = ['pageblocks.TextBlock',
               'quiz.Quiz',
