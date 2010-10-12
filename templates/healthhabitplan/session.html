@@ -28,23 +28,23 @@
 <div id="sessions-menu">
 
 	<div id="sessions-add">
-	<a title="create new session" href="{% url health-habit-plan-new-session %}">[+ Add Session]</a>
+	<a title="create new session" href="{% url health-habit-plan-new-session %}">Add a Session</a>
 	</div>
 	
 	{% for s in sessions %}
 	<div class="sessions-session">
 	{% ifequal s.id session.id %}
 	<span class="session-active">Session {{s.number}}</span>
-		<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}">[X]</a>
+		<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}">X</a>
 	{% else %}
 	<a href="{% url health-habit-plan-session s.id %}">Session {{s.number}}</a>
-	<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}">[X]</a>
+	<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}">X</a>
 	{% endifequal %}
 	</div>
 	{% endfor %}
 	
 	<div id="sessions-all">
-	  <a title="view all sessions" href="{% url health-habit-plan-all-sessions %}">[All Sessions]</a>
+	  <a title="view all sessions" href="{% url health-habit-plan-all-sessions %}">Review All Sessions</a>
 	</div>
 
 </div>
