@@ -1,3 +1,5 @@
+label {display: block; margin-top: 20px; margin-left: 20px; font-weight: bold;}
+
 #sessions-menu
 {
 	width: 200px;
@@ -18,10 +20,7 @@
 {
 	background-color: #ee9d87;
 	border: 1px solid #fff;
-}
-
-#sessions-all {
-  margin-top: 25px;
+	text-align: right;
 }
 
 #sessions-menu a
