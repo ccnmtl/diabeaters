@@ -1,7 +1,7 @@
 # Django settings for diabeaters project.
 import os.path
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ( )
