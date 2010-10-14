@@ -16,7 +16,13 @@
   {% endifnotequal %}
 
   {% if s.get_children %}<ul>{% else %}
-  {% if s.is_last_child %}</ul>{% endif %}{% endif %}
+  {% if s.is_last_child %}
+     {% for lc in s.closing_children %}
+     </ul>
+     {% endfor %}
+{% endif %}
+
+{% endif %}
 
 </li>
 
