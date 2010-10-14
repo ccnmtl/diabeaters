@@ -236,7 +236,7 @@ a:visited
 {
 	display: block;
 	float: left;
-	width: 324px;
+	width: 560px;
 	height: 57px;
 	overflow: hidden;
 	margin: 40px 0 0 20px;
@@ -249,10 +249,10 @@ a:visited
 {
 	display: block;
 	position: absolute;
-	top: 56px;
-	left: 366px;
-	width: 219px;
-	height: 23px;
+	top: 45px;
+	right: 30px;
+	width: 120px;
+	height: 43px;
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -276,14 +276,12 @@ a:visited
 #standard_navigation
 {
 	display: block;
-	float: right;
-	overflow: hidden;
-	margin: 0 18px 30px 0;
-	padding: 0;
-	border: 0;
+	margin: 0px
+	padding: 0px;
 	font-size: 12px;
-	line-height: 21px;
-	list-style: none;
+	position: absolute;
+	top: 2px;
+	right: 20px;
 }
 
 #standard_navigation li
@@ -292,7 +290,7 @@ a:visited
 	margin: 0;
 	padding: 0 0 0 15px;
 	border: 0;
-	list-style: 0;
+	list-style: none;
 	color: #fff;
 }
 
