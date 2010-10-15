@@ -71,6 +71,17 @@ jQuery(document).ready(function(){
 	<div id="magnetwrapper">
      {% for session in sessions %}
 	    <label><input type="checkbox" value="session-{{session.number}}" checked class="session-box" /> Session {{session.number}} Magnets</label>
+	  {% if session.magnet_set.count %}
+	    <div style="padding-left: 44px;">
+	    I can beat diabetes by:
+	    <ul style="padding-top: 5px;">
+	  {% for magnet in session.magnet_set.all %}
+	    <li style="text-transform: lowercase;">{{magnet.item.label}}</li>
+	  
+	  {% endfor %}
+	  </ul>
+	  </div>
+	  {% endif %}
 	  {% endfor %}
    </div>
 
