@@ -26,6 +26,13 @@ def page(request,path):
     section = get_section_from_path(path)
     section = section.get_first_leaf()  # redirects to first (welcome) page for parent nodes
     h = get_hierarchy()
+#    root = h.get_root()
+    import time
+    t1 = time.time()
+    res = h.get_tree()
+#    res = root.get_descendents()
+    t2 = time.time()
+    print 'took %0.3f ms' % ((t2-t1)*1000.0,)
 
     if not request.user.is_anonymous():
         try:
