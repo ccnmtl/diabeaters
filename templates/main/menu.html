@@ -4,7 +4,11 @@
 {% else %}
 <li class="menu-{{s.depth}}">
   {% ifnotequal s.id section.id %}
-     <a href="{{menu_base}}{{s.get_absolute_url}}">
+     {% ifequal s.label "Social Work Guide" %}
+        <a href="#section-ul-{{s.id}}" class="hs-control">
+	{% else %}
+        <a href="{{menu_base}}{{s.get_absolute_url}}">
+     {% endifequal %}
   {% else %}
      <b>
   {% endifnotequal %}
@@ -15,7 +19,9 @@
     </b>
   {% endifnotequal %}
 
-  {% if s.get_children %}<ul>{% else %}
+  {% if s.get_children %}
+     <ul class="hs-init-hide" id="section-ul-{{s.id}}">
+       {% else %}
   {% if s.is_last_child %}
      {% for lc in s.closing_children %}
      </ul>
