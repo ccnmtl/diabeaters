@@ -1111,19 +1111,17 @@ textarea {width: 100%;}
 
 
 .yours {
-border-top: #999 dotted 1px;
-padding-left: 1em;
-padding-right: 1em;
+border-top: #999 dotted 2px;
 }
 
 .expert {color: orange;}
 
-.incorrect { background-color: #f00; color: #fff;}
+//.incorrect { background-color: #f00; color: #fff;}
 .correct {background-color: #cfc;}
+
 .correctanswer {background-color: #090 solid 1px;}
+.incorrectanswer { background-color: #f00; color: #fff; }
 
-
-.incorrectanswer {text-decoration: line-through;color: #f00; }
 .answer-inner {color: #000;}
 
 .submissionheader th, .submissionheader td {background-color: #fff; }
