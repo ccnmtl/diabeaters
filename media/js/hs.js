@@ -2,7 +2,7 @@
 var hs_controls = new Array();
 
 function cookie_name(el) {
-    name =  "hsstate_" + document.location + "#" + el.id;
+    name =  "hsstate_" + "#" + el.id;
     return name.replace(/\W/g,"_");
 }
 
@@ -36,7 +36,7 @@ function getCookie(name) {
 function setCookie(name, value, expires, path, domain, secure) {
     	document.cookie= name + "=" + escape(value) +
         	((expires) ? "; expires=" + expires.toGMTString() : "") +
-        	((path) ? "; path=" + path : "") +
+        	"; path=/" +
         	((domain) ? "; domain=" + domain : "") +
         	((secure) ? "; secure" : "");
 }
