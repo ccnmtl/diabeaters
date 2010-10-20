@@ -1136,10 +1136,15 @@ padding-right: 1em;
 .hs-hide {display: none;}
 .hs-show {display: block;}
 
+li.hs-control-hide, li.hs-control-show {
+	margin-top: 10px !important;
+
+}
+
 li.hs-control-hide {
-   background: url(/site_media/img/bullet_open.gif) no-repeat scroll left 4px transparent !important;
+	background: url(/site_media/img/bullet_open.gif) no-repeat scroll left 4px transparent !important;
 }
 
 li.hs-control-show {
-   background: url(/site_media/img/bullet_close.gif) no-repeat scroll left 4px transparent;
+	background: url(/site_media/img/bullet_close.gif) no-repeat scroll left 4px transparent !important;
 }
