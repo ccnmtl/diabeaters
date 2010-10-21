@@ -1111,7 +1111,8 @@ textarea {width: 100%;}
 
 
 .yours {
-border-top: #999 dotted 2px;
+//border-top: #999 dotted 2px;
+background-color: #f00; color: #fff; 
 }
 
 .expert {color: orange;}
