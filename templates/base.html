@@ -39,7 +39,7 @@
 			<li>Hello, {% if user.first_name %}{{user.first_name}} {{user.last_name}}{% else %}{{ user.username }}{% endif %}!</li>
 			{% endif %}
 			{% if user.username %}
-			<li><a href="/accounts/logout/">Log Out</a></li>
+			<li><a href="/logout/">Log Out</a></li>
 			{% endif %}
 			{% if user.username %}
 			<li>|</li>
