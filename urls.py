@@ -10,6 +10,10 @@ site_media_root = os.path.join(os.path.dirname(__file__),"media")
 
 urlpatterns = patterns('',
                        (r'^$','diabeaters.main.views.index'),
+                       (r'^about/$','diabeaters.main.views.flatpage_hack'),
+                       (r'^credits/$','diabeaters.main.views.flatpage_hack'),
+                       (r'^contact/$','diabeaters.main.views.flatpage_hack'),
+
                        (r'^home/$','diabeaters.main.views.home'),
                        ('^accounts/',include('djangowind.urls')),
                        (r'^admin/(.*)', admin.site.root),
