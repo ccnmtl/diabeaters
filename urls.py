@@ -15,6 +15,7 @@ urlpatterns = patterns('',
                        (r'^contact/$','diabeaters.main.views.flatpage_hack'),
 
                        (r'^home/$','diabeaters.main.views.home'),
+                       (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/home/'}), 
                        ('^accounts/',include('djangowind.urls')),
                        (r'^admin/(.*)', admin.site.root),
                        (r'^pagetree/',include('pagetree.urls')),
