@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render_to_response
 from pagetree.helpers import get_hierarchy, get_section_from_path, get_module, needs_submit, submitted
 from models import UserProfile
@@ -19,6 +19,11 @@ class rendered_with(object):
                 return items
 
         return rendered_func
+
+def flatpage_hack(request):
+    # immediately 404 for about/contact/credits so flatpages
+    # handles them and we don't send them to auth first
+    return HttpResponseNotFound()
 
 @login_required
 @rendered_with('main/page.html')
