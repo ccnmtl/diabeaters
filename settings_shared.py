@@ -1,6 +1,7 @@
 # Django settings for diabeaters project.
 import os.path
 
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -76,6 +77,16 @@ INSTALLED_APPS = (
 
 SENTRY_REMOTE_URL = 'http://sentry.ccnmtl.columbia.edu/sentry/store/'
 SENTRY_KEY = 'EWv5EELZnZIrOY'
+import logging
+from sentry.client.handlers import SentryHandler
+
+logger = logging.getLogger()
+if SentryHandler not in map(lambda x: x.__class__, logger.handlers):
+    logger.addHandler(SentryHandler())
+    logger = logging.getLogger('sentry.errors')
+    logger.propagate = False
+    logger.addHandler(logging.StreamHandler())
+SENTRY_SITE = "diabeaters-dev"
 
 PAGEBLOCKS = ['pageblocks.TextBlock',
               'quiz.Quiz',

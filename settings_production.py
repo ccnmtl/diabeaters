@@ -13,3 +13,4 @@ STATICMEDIA_MOUNTS = (
 
 DEBUG = False
 TEMPLATE_DEBUG = True
+SENTRY_SITE = "diabeaters"
