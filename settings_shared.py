@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'diabeaters.quiz',
     'diabeaters.main',
     'diabeaters.healthhabitplan',
+    'munin',
 )
 
 SENTRY_REMOTE_URL = 'http://sentry.ccnmtl.columbia.edu/sentry/store/'
