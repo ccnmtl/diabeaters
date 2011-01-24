@@ -8,43 +8,57 @@
 
 {% endif %}
 
-<fieldset class="login" id="logincu">
 
-<legend>Columbia Users</legend>
 
-<form method="get" action="{{ wind_base }}login">
+<div style="float: right; margin: 0px -150px 0px 30px;">
 
-<input type="hidden" name="service" value="{{ wind_service }}" />
-<input type="hidden" name="destination" value="http://{{ request.get_host }}/accounts/windlogin/?next={{ next }}" />
+	<fieldset class="login">
+	
+	<legend>Columbia Users</legend>
+	
+	<form method="get" action="{{ wind_base }}login">
+	
+	<input type="hidden" name="service" value="{{ wind_service }}" />
+	<input type="hidden" name="destination" value="http://{{ request.get_host }}/accounts/windlogin/?next={{ next }}" />
+	
+	<input type="submit" value="Log In With Columbia UNI" />
+	
+	</form>
+	
+	</fieldset>
+	
+	<fieldset class="login">
+	
+	<legend>All Other Users</legend>
+	
+	<form method="post" action=".">
+	
+	<label for="id_username">User Name:</label> 
+	<br />
+	{{ form.username }}
+	<br />
+	<br />
+	<label for="id_password">Password:</label><br />{{ form.password }}
+	<br />
+	<br />
+	<input type="submit" value="Log In" />
+	
+	<input type="hidden" name="next" value="{{ next }}" />
+	
+	</form>
+	
+	</fieldset>
 
-<p>If you have a Columbia UNI, you already have an account and can login through WIND with it.</p>
+</div>
 
-<input type="submit" value="WIND Access" />
+<h2>Welcome! to diaBeaters!</h2>
 
-</form>
+<p>
+<b>diaBeaters!</b> is an online intervention created for social work graduate students and practitioners to use with families living with Type 2 Diabetes Mellitus (T2DM) in a child family member. 
+</p>
 
-</fieldset>
+<p>All Columbia faculty and students must log in through the "Columbia Users" area.</p>
 
-<fieldset class="login" id="loginother">
-
-<legend>Other Users</legend>
-
-<form method="post" action=".">
-
-<label for="id_username">Username:</label> 
-<br />
-{{ form.username }}
-<br />
-<br />
-<label for="id_password">Password:</label><br />{{ form.password }}
-<br />
-<br />
-<input type="submit" value="Log In" />
-
-<input type="hidden" name="next" value="{{ next }}" />
-
-</form>
-
-</fieldset>
+<p>If you are another user, log in through the "All Other Users" area with the user name and password you were assigned.</p>
 
 {% endblock %}

@@ -15,15 +15,8 @@ fieldset.login
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	padding: 20px;
-	width: 350px;
-	height: 200px;
+	width: 220px;
 }
-
-#logincu, #loginother {position: absolute; top: 0px;}
-
-#logincu {left: 30px;}
-
-#loginother{left: 480px;}
 
 legend 
 {
