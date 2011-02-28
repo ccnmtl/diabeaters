@@ -16,6 +16,11 @@
 	
 	<legend>Columbia Users</legend>
 	
+	
+	<p>
+	Columbia faculty and students must log in here.
+	</p>
+	
 	<form method="get" action="{{ wind_base }}login">
 	
 	<input type="hidden" name="service" value="{{ wind_service }}" />
@@ -27,9 +32,16 @@
 	
 	</fieldset>
 	
+	
+	
 	<fieldset class="login">
 	
-	<legend>All Other Users</legend>
+	<legend>Non-Columbia Users</legend>
+	
+	<p>
+	Non-Columbia users must log in with assigned user names and passwords here.
+	</p>
+	
 	
 	<form method="post" action=".">
 	
@@ -51,14 +63,25 @@
 
 </div>
 
-<h2>Welcome! to diaBeaters!</h2>
+<h2>Welcome to diaBeaters!</h2>
+
 
 <p>
-<b>diaBeaters!</b> is an online intervention created for social work graduate students and practitioners to use with families living with Type 2 Diabetes Mellitus (T2DM) in a child family member. 
+Welcome to diaBeaters! diaBeaters! is an online intervention created for social work graduate students and practitioners to use with families living with Type 2 Diabetes Mellitus (T2DM) in a child family member. 
 </p>
 
-<p>All Columbia faculty and students must log in through the "Columbia Users" area.</p>
+<p>
+Type 2 Diabetes, already a major health problem among adults, is the fastest growing pediatric epidemic of our decade. diaBeaters! provides a multi-stepped, online, interactive intervention for social work practitioners to guide parents and family caregivers to make optimal nutrition and fitness choices for their families and to teach their children appropriate health habits.
+</p>
 
-<p>If you are another user, log in through the "All Other Users" area with the user name and password you were assigned.</p>
+
+<p>
+For additional information about this project, please contact CCNMTL at <a href="mailto:ccnmtl-diabeaters@columbia.edu">ccnmtl-diabeaters@columbia.edu</a>.
+</p>
+
+
+
+
+
 
 {% endblock %}
