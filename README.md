@@ -11,8 +11,8 @@ mjanelli@columbia.edu if you have more questions.
 Installation
 ============
 
-  git clone git://github.com/ccnmtl/Diabeaters.git diabeaters
-  cd diabeaters
-  ./bootstrap.py
-  ./manage.py syncdb
-  ./manage.py runserver
+    git clone git://github.com/ccnmtl/Diabeaters.git diabeaters
+    cd diabeaters
+    ./bootstrap.py
+    ./manage.py syncdb
+    ./manage.py runserver
