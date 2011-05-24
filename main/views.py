@@ -193,8 +193,7 @@ from zipfile import ZipFile
 import tempfile
 import codecs
 def export(request):
-    hierarchy = request.get_host()
-    section = get_section_from_path('/', hierarchy=hierarchy)
+    section = get_section_from_path('/')
     root = section.hierarchy.get_root()
     hierarchy = section.hierarchy
 
