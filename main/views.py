@@ -203,7 +203,10 @@ def export(request):
     fd, xml_filename = tempfile.mkstemp(prefix="pagetree-site", suffix=".xml")
     xmlfile = codecs.open(xml_filename, 'w', encoding='utf8')
 
-    print >> xmlfile, "<hierarchy>"
+    print >> xmlfile, \
+        u"""<hierarchy name="%s" base_url="%s">""" % (
+        hierarchy.name, hierarchy.base_url)
+
     export_node(root, xmlfile, zipfile)
     print >> xmlfile, "</hierarchy>"
 
