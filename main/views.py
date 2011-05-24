@@ -127,3 +127,93 @@ def index(request):
 @login_required
 def health_habit_plan(request):
     return HttpResponse("not implemented yet")
+
+from pagetree.models import PageBlock
+def get_all_pageblocks(hierarchy):
+    return PageBlock.objects.filter(section__hierarchy=hierarchy)
+
+from pageblocks.models import *
+from diabeaters.quiz.models import *
+def text_exporter(block, xmlfile, zipfile):
+    print >> xmlfile, block.body
+def html_exporter(block, xmlfile, zipfile):
+    filename = "pageblocks/%s.html" % block.pageblock().pk
+    zipfile.writestr(filename, block.html)
+    print >> xmlfile, """<html src="%s" />""" % filename
+def image_exporter(block, xmlfile, zipfile):
+    filename = os.path.basename(block.image.file.name)
+    filename = "pageblocks/%s" % filename
+    zipfile.write(block.image.file.name, arcname=filename)
+    print >> xmlfile, \
+        u"""<img src="%s" caption="%s" alt="%s" />""" % (
+        filename, block.caption, block.alt)
+def quiz_exporter(block, xmlfile, zipfile):
+    print >> xmlfile, u"""<quiz rhetorical="%s">""" % block.rhetorical
+    print >> xmlfile, block.description
+    for question in block.question_set.all():
+        print >> xmlfile, u"""<question type="%s" ordinality="%s">""" % (
+            question.question_type, question.ordinality)
+        print >> xmlfile, u"<text>\n%s\n</text>" % question.text
+        print >> xmlfile, u"<explanation>\n%s\n</explanation>" % question.explanation
+        print >> xmlfile, u"<introtext>\n%s\n</introtext>" % question.intro_text
+        for answer in question.answer_set.all():
+            print >> xmlfile, \
+                u"""<answer label="%s" value="%s" ordinality="%s" correct="%s" />""" % (
+                answer.label, answer.value, answer.ordinality, answer.correct)
+
+        print >> xmlfile, "</question>"
+    print >> xmlfile, "</quiz>"
+pageblock_exporters = {
+    TextBlock: ('text', text_exporter),
+    HTMLBlock: ('html', html_exporter),
+    PullQuoteBlock: ('pullquote', text_exporter),
+    ImageBlock: ('image', image_exporter),
+    ImagePullQuoteBlock: ('imagepullquote', image_exporter),
+    Quiz: ('quiz', quiz_exporter),
+    }
+def export_block(block, xmlfile, zipfile):
+    object = block.content_object
+    type, export_fn = pageblock_exporters[object.__class__]
+    print >> xmlfile, \
+        u"""<pageblock id="%s" type="%s" label="%s" ordinality="%s">""" % (
+        block.pk, type, block.label, block.ordinality)
+    export_fn(object, xmlfile, zipfile)
+    print >> xmlfile, "</pageblock>"
+def export_node(node, xmlfile, zipfile):
+    print >> xmlfile, \
+        u"""<section slug="%s" label="%s">""" % (
+        node.slug, node.label)
+    for block in node.pageblock_set.all():
+        export_block(block, xmlfile, zipfile)
+    for child in node.get_children():
+        export_node(child, xmlfile, zipfile)
+    print >> xmlfile, "</section>"
+
+from zipfile import ZipFile
+import tempfile
+import codecs
+def export(request):
+    hierarchy = request.get_host()
+    section = get_section_from_path('/', hierarchy=hierarchy)
+    root = section.hierarchy.get_root()
+    hierarchy = section.hierarchy
+
+    fd, zip_filename = tempfile.mkstemp(prefix="pagetree-export", suffix=".zip")
+    zipfile = ZipFile(zip_filename, 'w')
+
+    fd, xml_filename = tempfile.mkstemp(prefix="pagetree-site", suffix=".xml")
+    xmlfile = codecs.open(xml_filename, 'w', encoding='utf8')
+
+    print >> xmlfile, "<hierarchy>"
+    export_node(root, xmlfile, zipfile)
+    print >> xmlfile, "</hierarchy>"
+
+    xmlfile.close()
+    zipfile.write(xml_filename, arcname="site.xml")
+    os.unlink(xml_filename)
+
+    zipfile.close()
+    with open(zip_filename) as zipfile:
+        resp = HttpResponse(zipfile.read())
+    resp['Content-Disposition'] = "attachment; filename=%s.zip" % hierarchy.name
+    return resp
