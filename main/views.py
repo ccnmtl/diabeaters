@@ -139,7 +139,7 @@ def export(request):
 
     with open(zip_filename) as zipfile:
         resp = HttpResponse(zipfile.read())
-    resp['Content-Disposition'] = "attachment; filename=%s.zip" % hierarchy.name
+    resp['Content-Disposition'] = "attachment; filename=%s.zip" % section.hierarchy.name
 
     os.unlink(zip_filename)
     return resp
