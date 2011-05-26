@@ -1,5 +1,6 @@
 import cgi
 import codecs
+from django.core.files import File
 from diabeaters.quiz.models import *
 import lxml.etree as etree
 from pageblocks.models import *
@@ -98,24 +99,58 @@ def export_zip(hierarchy):
     zipfile.close()
     return zip_filename
 
-def text_importer(node):
-    tb = TextBlock(body="Fleem")
-    tb.save()
-    return tb
+def text_importer(node, zipfile):
+    children = node.getchildren()
+    assert len(children) == 1 and children[0].tag == "text"
+    path = children[0].get("src")
+    body = zipfile.read(path)
+    b = TextBlock(body=body)
+    b.save()
+    return b
 
-def html_importer(node):
-    pass
+def html_importer(node, zipfile):
+    children = node.getchildren()
+    assert len(children) == 1 and children[0].tag == "html"
+    path = children[0].get("src")
+    body = zipfile.read(path)
+    b = HtmlBlock(html=body)
+    b.save()
+    return b
 
-def pullquote_importer(node):
-    pass
+def pullquote_importer(node, zipfile):
+    children = node.getchildren()
+    assert len(children) == 1 and children[0].tag == "text"
+    path = children[0].get("src")
+    body = zipfile.read(path)    
+    b = PullQuoteBlock(body=body)
+    b.save()
+    return b
 
-def image_importer(node):
-    pass
+def image_importer(node, zipfile):
+    children = node.getchildren()
+    assert len(children) == 1 and children[0].tag == "img"
+    path = children[0].get("src")
+    caption = children[0].get("caption")
+    file = zipfile.open(path)
+    file.size = zipfile.getinfo(path).file_size
+    b = ImageBlock(caption=caption, image='')
+    b.save_image(File(file))
+    b.save()
+    return b
 
-def imagepullquote_importer(node):
-    pass
+def imagepullquote_importer(node, zipfile):
+    children = node.getchildren()
+    assert len(children) == 1 and children[0].tag == "img"
+    path = children[0].get("src")
+    caption = children[0].get("caption")
+    file = zipfile.open(path)
+    file.size = zipfile.getinfo(path).file_size
+    b = ImagePullQuoteBlock(caption=caption, image='')
+    b.save_image(File(file))
+    b.save()
+    return b
 
-def quiz_importer(node):
+def quiz_importer(node, zipfile):
     pass
 
 pageblock_importers = {
@@ -127,17 +162,17 @@ pageblock_importers = {
     'quiz': quiz_importer,
     }
 
-def import_pageblock(hierarchy, section, pageblock):
+def import_pageblock(hierarchy, section, pageblock, zipfile):
     type = pageblock.get("type")
     label = pageblock.get("label")
     ordinality = pageblock.get("ordinality")
 
-    block = pageblock_importers['text'](pageblock)
+    block = pageblock_importers[type](pageblock, zipfile)
     pb = PageBlock(section=section, ordinality=ordinality, label=label, content_object=block)
     pb.save()
     return pb
 
-def import_node(hierarchy, section):
+def import_node(hierarchy, section, zipfile):
     slug = section.get("slug")
     label = section.get("label")
     is_root = asbool(section.get("is_root"))
@@ -146,9 +181,9 @@ def import_node(hierarchy, section):
     
     for child in section.iterchildren():
         if child.tag == "pageblock":
-            import_pageblock(hierarchy, s, child)
+            import_pageblock(hierarchy, s, child, zipfile)
         elif child.tag == "section":
-            import_node(hierarchy, child)
+            import_node(hierarchy, child, zipfile)
         else:
             raise TypeError("Badly formatted zipfile")
 
@@ -167,5 +202,5 @@ def import_zip(zipfile):
     hierarchy.save()
 
     for section in structure.iterchildren():
-        import_node(hierarchy, section)
+        import_node(hierarchy, section, zipfile)
 
