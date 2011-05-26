@@ -1,5 +1,6 @@
 import codecs
 from diabeaters.quiz.models import *
+import lxml.etree as etree
 from pageblocks.models import *
 from pagetree.models import PageBlock
 import tempfile
@@ -65,7 +66,7 @@ def export_node(node, xmlfile, zipfile):
         export_node(child, xmlfile, zipfile)
     print >> xmlfile, "</section>"
 
-def export_to_zip(hierarchy):
+def export_zip(hierarchy):
     root = hierarchy.get_root()
 
     fd, zip_filename = tempfile.mkstemp(prefix="pagetree-export", suffix=".zip")
@@ -88,5 +89,8 @@ def export_to_zip(hierarchy):
     zipfile.close()
     return zip_filename
 
-def import_zipfile(zipfile):
-    pass
+def import_zip(zipfile):
+    if 'site.xml' not in zipfile.namelist():
+        raise TypeError("Badly formatted zipfile")
+    structure = etree.fromstring(zipfile.read("site.xml"))
+    import pdb; pdb.set_trace()
