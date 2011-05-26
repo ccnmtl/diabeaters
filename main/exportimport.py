@@ -214,18 +214,24 @@ def import_pageblock(hierarchy, section, pageblock, zipfile):
     pb.save()
     return pb
 
-def import_node(hierarchy, section, zipfile):
+def import_node(hierarchy, section, zipfile, parent=None):
     slug = section.get("slug")
     label = section.get("label")
     is_root = asbool(section.get("is_root"))
-    s = Section(label=label, slug=slug, hierarchy=hierarchy, is_root=is_root)
-    s.save()
-    
+    assert (parent and not is_root) or (is_root and not parent)
+
+    if parent is None:
+        s = Section(label=label, slug=slug, hierarchy=hierarchy, is_root=is_root)
+        s.save()
+    else:
+        s = parent.append_child(label, slug)
+        s.save()
+
     for child in section.iterchildren():
         if child.tag == "pageblock":
             import_pageblock(hierarchy, s, child, zipfile)
         elif child.tag == "section":
-            import_node(hierarchy, child, zipfile)
+            import_node(hierarchy, child, zipfile, parent=s)
         else:
             raise TypeError("Badly formatted zipfile")
 
