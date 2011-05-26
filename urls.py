@@ -11,6 +11,7 @@ site_media_root = os.path.join(os.path.dirname(__file__),"media")
 urlpatterns = patterns('',
                        (r'^$','diabeaters.main.views.index'),
                        (r'^export/$','diabeaters.main.views.export'),
+                       (r'^import/$','diabeaters.main.views.import_'),
                        (r'^about/$','diabeaters.main.views.flatpage_hack'),
                        (r'^credits/$','diabeaters.main.views.flatpage_hack'),
                        (r'^contact/$','diabeaters.main.views.flatpage_hack'),

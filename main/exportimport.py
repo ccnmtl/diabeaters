@@ -88,3 +88,5 @@ def export_to_zip(hierarchy):
     zipfile.close()
     return zip_filename
 
+def import_zipfile(zipfile):
+    pass

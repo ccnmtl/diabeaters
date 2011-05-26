@@ -1,4 +1,5 @@
-from diabeaters.main.export import export_to_zip
+from diabeaters.main.exportimport import export_zip
+from diabeaters.main.exportimport import import_zip
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
@@ -8,6 +9,7 @@ from models import UserProfile
 import os
 from pagetree.helpers import (get_hierarchy, get_section_from_path, get_module, 
                               needs_submit, submitted)
+from zipfile import ZipFile
 
 class rendered_with(object):
     def __init__(self, template_name):
@@ -133,7 +135,7 @@ def health_habit_plan(request):
 
 def export(request):
     section = get_section_from_path('/')
-    zip_filename = export_to_zip(section.hierarchy)
+    zip_filename = export_zip(section.hierarchy)
 
     with open(zip_filename) as zipfile:
         resp = HttpResponse(zipfile.read())
@@ -141,3 +143,13 @@ def export(request):
 
     os.unlink(zip_filename)
     return resp
+
+@rendered_with("main/import.html")
+def import_(request):
+    if request.method == "GET":
+        return {}
+    file = request.FILES['file']
+    zipfile = ZipFile(file)
+    import_zip(zipfile)
+    return
+
