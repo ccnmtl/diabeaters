@@ -92,6 +92,7 @@ def export_zip(hierarchy):
 
     fd, zip_filename = tempfile.mkstemp(prefix="pagetree-export", suffix=".zip")
     zipfile = ZipFile(zip_filename, 'w')
+    zipfile.writestr("version.txt", "1")
 
     fd, xml_filename = tempfile.mkstemp(prefix="pagetree-site", suffix=".xml")
     xmlfile = codecs.open(xml_filename, 'w', encoding='utf8')
@@ -233,13 +234,17 @@ def import_node(hierarchy, section, zipfile, parent=None):
         elif child.tag == "section":
             import_node(hierarchy, child, zipfile, parent=s)
         else:
-            raise TypeError("Badly formatted zipfile")
+            raise TypeError("Badly formatted import file")
 
     return s
 
 def import_zip(zipfile):
     if 'site.xml' not in zipfile.namelist():
-        raise TypeError("Badly formatted zipfile")
+        raise TypeError("Badly formatted import file")
+    if 'version.txt' not in zipfile.namelist():
+        raise TypeError("Badly formatted import file")
+    if zipfile.read("version.txt") != "1":
+        raise TypeError("Badly formatted import file")
     structure = zipfile.read("site.xml")
     structure = etree.fromstring(structure)
 
