@@ -2,7 +2,7 @@ import cgi
 import codecs
 from django.core.files import File
 from diabeaters.quiz.models import *
-import lxml.etree as etree
+from xml.etree import ElementTree as etree
 from pageblocks.models import *
 from pagetree.models import *
 import tempfile
@@ -170,7 +170,7 @@ def quiz_importer(node, zipfile):
     description = zipfile.read(path)
     q = Quiz(rhetorical=rhetorical, description=description)
     q.save()
-    for child in children[0].iterchildren():
+    for child in children[0].getchildren():
         assert child.tag == "question"
         type = child.get("type")
         ordinality = child.get("ordinality")
@@ -228,7 +228,7 @@ def import_node(hierarchy, section, zipfile, parent=None):
         s = parent.append_child(label, slug)
         s.save()
 
-    for child in section.iterchildren():
+    for child in section.getchildren():
         if child.tag == "pageblock":
             import_pageblock(hierarchy, s, child, zipfile)
         elif child.tag == "section":
@@ -254,7 +254,7 @@ def import_zip(zipfile):
     hierarchy = Hierarchy(name=name, base_url=base_url)
     hierarchy.save()
 
-    for section in structure.iterchildren():
+    for section in structure.getchildren():
         import_node(hierarchy, section, zipfile)
 
     return hierarchy
