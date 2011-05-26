@@ -150,6 +150,9 @@ def import_(request):
         return {}
     file = request.FILES['file']
     zipfile = ZipFile(file)
-    import_zip(zipfile)
-    return
+    hierarchy = import_zip(zipfile)
+
+    url = hierarchy.get_absolute_url()
+    url = '/' + url.lstrip('/') # sigh
+    return HttpResponseRedirect(url)
 
