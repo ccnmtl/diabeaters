@@ -142,11 +142,11 @@ def html_exporter(block, xmlfile, zipfile):
     print >> xmlfile, """<html src="%s" />""" % filename
 def image_exporter(block, xmlfile, zipfile):
     filename = os.path.basename(block.image.file.name)
-    filename = "pageblocks/%s" % filename
+    filename = "pageblocks/%s-%s" % (block.pk, filename)
     zipfile.write(block.image.file.name, arcname=filename)
     print >> xmlfile, \
-        u"""<img src="%s" caption="%s" alt="%s" />""" % (
-        filename, block.caption, block.alt)
+        u"""<img src="%s" caption="%s" />""" % (
+        filename, block.caption)
 def quiz_exporter(block, xmlfile, zipfile):
     print >> xmlfile, u"""<quiz rhetorical="%s">""" % block.rhetorical
     print >> xmlfile, block.description
