@@ -222,7 +222,9 @@ def import_node(hierarchy, section, zipfile, parent=None):
     assert (parent and not is_root) or (is_root and not parent)
 
     if parent is None:
-        s = Section(label=label, slug=slug, hierarchy=hierarchy, is_root=is_root)
+        s = hierarchy.get_root()
+        s.slug = slug
+        s.label = label
         s.save()
     else:
         s = parent.append_child(label, slug)
@@ -238,6 +240,8 @@ def import_node(hierarchy, section, zipfile, parent=None):
 
     return s
 
+from pagetree.helpers import get_hierarchy
+
 def import_zip(zipfile):
     if 'site.xml' not in zipfile.namelist():
         raise TypeError("Badly formatted import file")
@@ -251,7 +255,8 @@ def import_zip(zipfile):
     name = structure.get("name")
     base_url = structure.get("base_url")
 
-    hierarchy = Hierarchy(name=name, base_url=base_url)
+    hierarchy = get_hierarchy(name=name)
+    hierarchy.base_url = base_url
     hierarchy.save()
 
     for section in structure.getchildren():
