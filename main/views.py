@@ -2,6 +2,7 @@ from diabeaters.main.exportimport import export_zip
 from diabeaters.main.exportimport import import_zip
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render_to_response
@@ -10,6 +11,9 @@ import os
 from pagetree.helpers import (get_hierarchy, get_section_from_path, get_module, 
                               needs_submit, submitted)
 from zipfile import ZipFile
+
+def staff_required(login_url=None):
+    return user_passes_test(lambda u: u.is_staff, login_url=login_url)
 
 class rendered_with(object):
     def __init__(self, template_name):
@@ -133,6 +137,7 @@ def index(request):
 def health_habit_plan(request):
     return HttpResponse("not implemented yet")
 
+@staff_required()
 def export(request):
     section = get_section_from_path('/')
     zip_filename = export_zip(section.hierarchy)
@@ -144,6 +149,7 @@ def export(request):
     os.unlink(zip_filename)
     return resp
 
+@staff_required()
 @rendered_with("main/import.html")
 def import_(request):
     if request.method == "GET":
