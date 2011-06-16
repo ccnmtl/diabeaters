@@ -1,10 +1,15 @@
+from diabeaters.main.exportimport import export_zip
+from diabeaters.main.exportimport import import_zip
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render_to_response
-from pagetree.helpers import get_hierarchy, get_section_from_path, get_module, needs_submit, submitted
 from models import UserProfile
+import os
+from pagetree.helpers import (get_hierarchy, get_section_from_path, get_module, 
+                              needs_submit, submitted)
+from zipfile import ZipFile
 
 class rendered_with(object):
     def __init__(self, template_name):
@@ -127,3 +132,27 @@ def index(request):
 @login_required
 def health_habit_plan(request):
     return HttpResponse("not implemented yet")
+
+def export(request):
+    section = get_section_from_path('/')
+    zip_filename = export_zip(section.hierarchy)
+
+    with open(zip_filename) as zipfile:
+        resp = HttpResponse(zipfile.read())
+    resp['Content-Disposition'] = "attachment; filename=%s.zip" % section.hierarchy.name
+
+    os.unlink(zip_filename)
+    return resp
+
+@rendered_with("main/import.html")
+def import_(request):
+    if request.method == "GET":
+        return {}
+    file = request.FILES['file']
+    zipfile = ZipFile(file)
+    hierarchy = import_zip(zipfile)
+
+    url = hierarchy.get_absolute_url()
+    url = '/' + url.lstrip('/') # sigh
+    return HttpResponseRedirect(url)
+
