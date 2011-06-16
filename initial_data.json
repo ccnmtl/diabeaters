@@ -1,0 +1,509 @@
+[
+  {
+    "pk": 2, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "About", 
+      "url": "/about/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "<p>\r\n<b>diaBeaters!</b> is an online intervention created for social work graduate students and practitioners to use with families living with Type 2 Diabetes Mellitus (T2DM) in a child family member. Type 2 Diabetes, already a major health problem among adults, is the fastest growing pediatric epidemic of our decade. diaBeaters provides a multi-stepped, online, interactive intervention for social work practitioners to guide parents and family caregivers to make optimal nutrition and fitness choices for their families and to teach their children appropriate health habits.\r\n</p>\r\n\r\n<p>\r\nCreated in partnership with Professor Mary Sormanti at the Columbia School of Social Work and Helaine Ciporen, clinical instructor at Mount Sinai Medical Center, diaBeaters adapts a series of interventions from Ciporen's forthcoming book. The intervention provides educational modules that include interactive learning activities, printable certificates to award children when they reach milestones, and administrative tools that enable students to manage the intervention. diaBeaters is employed by students in the Advanced Clinical Practices courses at Columbia University and may also be made available in the future to professionals at other institutions. \r\n</p>", 
+      "enable_comments": false
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "Contact", 
+      "url": "/contact/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "For technical assistance, please <a href=\"mailto:ccnmtl-diabeaters@columbia.edu\">send an email to us</a>.<br><br>\r\n\r\nFor more information about how this project is used at the School of Social Work, please contact:<br><br>\r\n\r\n<b>Mary Sormanti</b><br>\r\nProfessor of Professional Practice<br>\r\nColumbia University School of Social Work<br>\r\n212.851.2249<br>\r\n<a href=\"mailto:ms778@columbia.edu\">ms778[at]columbia.edu</a><br><br>\r\n\r\nFor more information about the sessions developed in this project, please contact:<br><br>\r\n\r\n<b>Helaine Ciporen</b><br>\r\nSocial Worker<br>\r\nThe Mount Sinai Medical Center<br>\r\n212.241.8727<br>\r\n<a href=\"mailto:helaine.ciporen@mountsinai.org\">helaine.ciporen[at]mountsinai.org</a>\r\n   </div>\r\n", 
+      "enable_comments": false
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "Credits", 
+      "url": "/credits/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "<h5>Partners</h5>\r\n\r\n<p>\r\nMary Sormanti is a Professor of Professional Practice at the Columbia University School of Social Work. She is using diaBeaters in her teaching.\r\n</p>\r\n\r\n<p>\r\nHelaine Ciporen, a licensed clinical social worker and CSSW graduate, is a social worker worker at Mount Sinai's Hall Family Center for Pediatric Endocrinology and Diabetes. She developed this five session intervention based on her clinical work with children diagnosed with, or at risk for type 2 diabetes.\r\n</p>\r\n\r\n<h5>Columbia Center for New Media Teaching and Learning</h5>\r\n\r\n<p>\r\nExecutive Producers: Frank Moretti and Maurice Matiz\r\n</p>\r\n\r\n<p>\r\nProducer: Ryan Kelsey\r\n</p>\r\n\r\n<p>\r\nProject Manager: Maria Janelli\r\n</p>\r\n\r\n<p>\r\nDesigner: Marc Raymond\r\n</p>\r\n\r\n<p>\r\nProgrammers: Kathryn Hagan and Anders Pearson\r\n</p>\r\n\r\n<p>\r\nCommunications: Briana Ferrigno\r\n</p>\r\n", 
+      "enable_comments": false
+    }
+  },
+  {
+    "pk": 1, 
+    "model": "healthhabitplan.category", 
+    "fields": {
+      "position": 0, 
+      "label": "Eat Smart!"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "healthhabitplan.category", 
+    "fields": {
+      "position": 1, 
+      "label": "Get Fit!"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "healthhabitplan.category", 
+    "fields": {
+      "position": 2, 
+      "label": "Think Positive!"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "healthhabitplan.category", 
+    "fields": {
+      "position": 3, 
+      "label": "Look Sharp!"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 0, 
+      "description": "", 
+      "label": "Eat more fruit."
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 3, 
+      "_order": 0, 
+      "description": "", 
+      "label": "Do it now!"
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 0, 
+      "description": "", 
+      "label": "Exercise more."
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 0, 
+      "description": "", 
+      "label": "Go to the doctor."
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 1, 
+      "description": "", 
+      "label": "Eat more vegetables."
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 1, 
+      "description": "", 
+      "label": "Take a bath/shower."
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 3, 
+      "_order": 1, 
+      "description": "", 
+      "label": "Keep a to do list."
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 1, 
+      "description": "", 
+      "label": "Play a sport."
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 2, 
+      "description": "", 
+      "label": "Go for walks."
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 3, 
+      "_order": 2, 
+      "description": "", 
+      "label": "Help someone."
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 2, 
+      "description": "", 
+      "label": "Brush my teeth."
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 2, 
+      "description": "", 
+      "label": "Drink more water."
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 3, 
+      "description": "", 
+      "label": "Wash my hands."
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 3, 
+      "description": "", 
+      "label": "Drink less soda."
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 3, 
+      "_order": 3, 
+      "description": "", 
+      "label": "Face a challenge."
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 3, 
+      "description": "", 
+      "label": "Watch less TV."
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 4, 
+      "description": "", 
+      "label": "Play fewer video games."
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 4, 
+      "description": "", 
+      "label": "Eat less candy."
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 4, 
+      "description": "", 
+      "label": "Help clean the house."
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 3, 
+      "_order": 4, 
+      "description": "", 
+      "label": "Apologize."
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 5, 
+      "description": "", 
+      "label": "Choose healthier snacks."
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 5, 
+      "description": "", 
+      "label": "Bike, walk, or skate to school."
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 3, 
+      "_order": 5, 
+      "description": "", 
+      "label": "Forgive."
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 5, 
+      "description": "", 
+      "label": "Help with laundry."
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 3, 
+      "_order": 6, 
+      "description": "", 
+      "label": "Express myself."
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 6, 
+      "description": "", 
+      "label": "Take the stairs."
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 6, 
+      "description": "", 
+      "label": "Plant a garden."
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 6, 
+      "description": "", 
+      "label": "Eat home-cooked meals."
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 7, 
+      "description": "", 
+      "label": "Get plenty of sleep."
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 7, 
+      "description": "", 
+      "label": "Find a fitness buddy."
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 7, 
+      "description": "", 
+      "label": "Choose wheat bread."
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 3, 
+      "_order": 7, 
+      "description": "", 
+      "label": "Meditate or pray."
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 8, 
+      "description": "", 
+      "label": "Keep a fitness journal."
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 8, 
+      "description": "", 
+      "label": "Skip dessert."
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 4, 
+      "_order": 8, 
+      "description": "", 
+      "label": "Listen to my body."
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 9, 
+      "description": "", 
+      "label": "Don't eat fast food."
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 9, 
+      "description": "", 
+      "label": "Play outside."
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 10, 
+      "description": "", 
+      "label": "Eat baked food, not fried food."
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 2, 
+      "_order": 10, 
+      "description": "", 
+      "label": "Dance."
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 11, 
+      "description": "", 
+      "label": "Keep a food diary."
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 12, 
+      "description": "", 
+      "label": "Eat the right portion."
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 13, 
+      "description": "", 
+      "label": "Skip seconds."
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "healthhabitplan.item", 
+    "fields": {
+      "category": 1, 
+      "_order": 14, 
+      "description": "", 
+      "label": "Eat dinner with family."
+    }
+  }
+]
