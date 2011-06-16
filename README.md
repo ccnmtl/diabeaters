@@ -18,6 +18,7 @@ Installation
     mkdir /var/www/diabeaters
     mkdir /var/www/diabeaters/uploads
     ./manage.py syncdb
+    ./manage.py import_diabeaters
     ./manage.py runserver
 
 Content Import
