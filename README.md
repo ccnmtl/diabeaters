@@ -8,18 +8,24 @@ Released under GPL2.
 Contact anders@columbia.edu, jonah@ccnmtl.columbia.edu, or
 mjanelli@columbia.edu if you have more questions.
 
-Installation
+Quickstart Installation
 ============
+    # These installation notes are abridged.
+    # They assume you have a database configured and running
+    # Please modify settings_shared.py for alternative configurations
 
     git clone git://github.com/ccnmtl/Diabeaters.git diabeaters
     cd diabeaters
     ./bootstrap.py
-    createdb diabeaters
+    createdb diabeaters # create a postgres database instance. 
     mkdir /var/www/diabeaters
     mkdir /var/www/diabeaters/uploads
+     # will also import the fixtures, which include the project's flat pages
     ./manage.py syncdb
-    ./manage.py import_diabeaters
-    ./manage.py runserver
+    # imports the diabeaters site content
+    ./manage.py import_diabeaters 
+    # for a development installation. See the django docs and this project's apache/ dir for production deployment 
+    ./manage.py runserver  
 
 Content Import
 ==============
