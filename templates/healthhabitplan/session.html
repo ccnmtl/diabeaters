@@ -52,37 +52,23 @@
 <div id="hhp-container">
 
 	<div id="magnetwrapper">
-	
-	<table id="categories">
-	  <col id="left" />
-	  <col id="center" />
-	  <col id="right" />
+
+	<div id="categories">
+
+	  <ul>
+	    {% for category in categories %}
+		<li><a href="#category-{{forloop.counter}}">
+		    {{category.label}}
+		</a></li>
+		{% endfor %}
+	  </ul>
+
 	{% for category in categories %}
-	
-	<tr class="category">
-	
-	<td>
-	<span class="arrow closed"></span>
-	</td>
-	
-	<td>
-	<span class="category-icon {{category.css}}"></span>
-	</td>
-	
-	<th>
-	{{category.label}}
-	</th>
-	
-	</tr>
-	
+	<div id="category-{{forloop.counter}}">
+	  <table>
 	{% for item in category.item_set.all %}
-	    
-	<tr class="item">
-	
-	<td>
-	</td>
-	
-	<td>
+	    <tr>
+	      <td>
 	{% if_magnet_for_item_exists session item %}
 	  <div id="item-{{item.id}}-grabber" class="grabber grabber-in-menu {{item.category.css}} grabber-disabled"></div>
 	{% else %}
@@ -95,21 +81,18 @@
 	  <div id="item-{{item.id}}-trash" class="magnet-trash"></div>
 	</div>
 	{% endif_magnet_for_item_exists %}
-	</td>
-	
-	<td>
+   </td>
+	      <td>
 	<span id="item-{{item.id}}-label" class="{% if_magnet_for_item_exists session item %}disabled{%else%}{% endif_magnet_for_item_exists %}">{{item.label}}</span>
 	</td>
-	
-	</tr>
-	
+	      </tr>
 	{% endfor %}
-	
-	{% endfor %}
-	
-	</table>
+	    </table>
 	</div>
-	
+
+	{% endfor %}
+	</div>
+
 	<div id="fridge">
 	
 	{% if session.magnet_set.count %}
@@ -130,12 +113,15 @@
 	{% endif %}
 
 	</div>
-	
+
 	<script type="text/javascript">
 	jQuery(function() {
 	{% for magnet in session.magnet_set.all %}    
 	    positionMagnet(jQuery("#item-{{magnet.item.id}}-magnet"),{{magnet.x}},{{magnet.y}});
 	{% endfor %}
+	});
+	jQuery(function() {
+	    jQuery( "#categories" ).tabs();
 	});
 	</script>
 

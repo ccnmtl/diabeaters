@@ -44,22 +44,18 @@ label {display: block; margin-top: 20px; margin-left: 20px; font-weight: bold;}
 	left: 240px;
 	overflow: auto;
 	height: 490px;
-	width: 360px;
+	width: 630px;
 	border: 1px solid #ddd;
 }
 
-table#categories
+div#categories
 {
 	border: 0;
 	width: 300px;
 	margin: 8px;
 }
 
-table#categories col#left { width: 32px; }
-table#categories col#center { width: 32px; }
-table#categories col#right { }
-
-table#categories th, table#categories td
+div#categories th, div#categories td
 {
 	text-align: left;
 	border: 0;
