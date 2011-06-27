@@ -44,7 +44,7 @@ jQuery(document).ready(function(){
 	jQuery('.category').click(function() {
 		jQuery(this).nextUntil("tr.category").toggle();
                 jQuery(this).find(".arrow").toggleClass("open");
-                jQuery(this).find(".arrow").toggleClass("closed"); 
+                jQuery(this).find(".arrow").toggleClass("closed");
 		return false;
 	}).nextUntil("tr.category").hide();
 });
@@ -58,10 +58,12 @@ jQuery( function() {
    jQuery(".grabber-disabled").draggable("option", "disabled", true);
 
    // we need to use helper:clone for the divs in the menu, because otherwise
-   // they can't be dragged out of the overflow:hidden (and also get 
+   // they can't be dragged out of the overflow:hidden (and also get
    // hidden when the turnbuckle is closed, even if they're on the fridge)
    jQuery(".grabber-in-menu").each(function() {
-     jQuery(this).draggable("option", "helper", 'clone');
+				     jQuery(this).draggable({
+         helper: 'clone'
+							    });
 
      // can't use .width() and .height() before images are loaded
      var width = parseInt(jQuery(this).css('width'));
@@ -93,7 +95,7 @@ jQuery( function() {
          var width = magnet.width();
          var height = magnet.height();
          magnet.offset({'top':event.pageY-height/2 , 'left':event.pageX-width/2 })
-            
+
          magnet.draggable({
            revert: 'invalid'
            , appendTo: '#fridge'
@@ -107,18 +109,18 @@ jQuery( function() {
 
          item = magnet;  // so the code below saves its position correctly
        }
-       
+
        // save the magnet's position
        var fridgeOffset = jQuery(this).offset();
        var offset = item.offset();
        var store_x = offset.left - fridgeOffset.left;
        var store_y = offset.top - fridgeOffset.top;
        saveMagnetPosition(item.attr("id").split("-")[1],store_x,store_y);
-       
+
        disableLabel(item);
        event.stopPropagation();
      }
-   }); 
-   
+   });
+
    jQuery(".magnet-trash").click(function() { deleteMagnet( jQuery(this) ); });
 });

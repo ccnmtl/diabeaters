@@ -70,20 +70,28 @@
 	    <tr>
 	      <td>
 	{% if_magnet_for_item_exists session item %}
-	  <div id="item-{{item.id}}-grabber" class="grabber grabber-in-menu {{item.category.css}} grabber-disabled"></div>
+	  <div id="item-{{item.id}}-grabber"
+	       class="grabber grabber-in-menu 
+		      {{item.category.css}}
+		      grabber-disabled">
+	<span id="item-{{item.id}}-label" class="label {% if_magnet_for_item_exists session item %}disabled{%else%}{% endif_magnet_for_item_exists %}">{{item.label}}</span>
+	  </div>
 	{% else %}
-	<div id="item-{{item.id}}-grabber" class="grabber grabber-in-menu {{item.category.css}}"></div>
-   <div id="item-{{item.id}}-popup" class="magnet-popup">
+	  <div id="item-{{item.id}}-grabber" class="grabber
+						    grabber-in-menu
+						    {{item.category.css}}">
+	<span id="item-{{item.id}}-label" class="label {% if_magnet_for_item_exists session item %}disabled{%else%}{% endif_magnet_for_item_exists %}">{{item.label}}</span>
+</div>
+	  
+	  <div id="item-{{item.id}}-popup" class="magnet-popup">
 	  <div class="magnet-popup-close"></div>
 	  <strong>{{item.category}}</strong><br />
 	  I can beat diabetes if I:<br />
 	  <strong>{{item.label}}</strong>
 	  <div id="item-{{item.id}}-trash" class="magnet-trash"></div>
-	</div>
+	  </div>
 	{% endif_magnet_for_item_exists %}
-   </td>
-	      <td>
-	<span id="item-{{item.id}}-label" class="{% if_magnet_for_item_exists session item %}disabled{%else%}{% endif_magnet_for_item_exists %}">{{item.label}}</span>
+
 	</td>
 	      </tr>
 	{% endfor %}
@@ -98,7 +106,8 @@
 	{% if session.magnet_set.count %}
 	{% for magnet in session.magnet_set.all %}
 	
-  	  <div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}"></div>
+  	  <div id="item-{{magnet.item.id}}-magnet" class="magnet grabber {{magnet.item.category.css}}">
+	<span id="item-{{magnet.item.id}}-label" class="label">{{magnet.item.label}}</span></div>
 	  <div id="item-{{magnet.item.id}}-popup" class="magnet-popup">
 	    <div class="magnet-popup-close"></div>
 	    <strong>{{magnet.item.category}}</strong>

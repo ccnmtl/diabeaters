@@ -138,3 +138,21 @@ div#categories th, div#categories td
 
 .magnet-popup-close { background: url("/site_media/img/icon_close.png") no-repeat; }
 .magnet-trash { background: url("/site_media/img/icon_delete.png") no-repeat; }
+
+.grabber .label { display: block;
+		  position: absolute;
+		  left: 56px;
+		  height: 56px;
+		  background-color: #fff;
+		  width: 150px;
+		  padding-left: 10px;
+}
+.ui-state-disabled .label {
+    display: block;
+    position: absolute;
+    left: 56px;
+    height: 56px;
+    background-color: #fff;
+    width: 150px;
+    padding-left: 10px;
+}
