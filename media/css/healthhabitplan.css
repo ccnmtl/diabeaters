@@ -71,7 +71,7 @@
 	font-family: "lucida grande";
 }
 
-#categorytabs { }
+#categorytabs {margin-bottom: 5px; }
 
 #categories li
 {
@@ -108,6 +108,8 @@
 	border: 4px solid white;
 }
 
+li.ui-corner-top {margin-left: 3px !important;}
+
 .eat-smart { background-image: url('/site_media/img/icon_eatsmart.png'); }
 .get-fit { background-image: url('/site_media/img/icon_getfit.png'); }
 .look-sharp { background-image: url('/site_media/img/icon_looksharp.png'); }
@@ -140,12 +142,12 @@
 	display: none;
 	position: absolute;
 	width: 250px;
-	top: 0px;
-	left: 0px;
 	background-color: #ffc;
 	padding: 5px;
 	z-index: 1000;
 	border: 1px solid gray;
+	margin: 48px 0px 0px 140px;
+	opacity: .9;
 }
 
 .magnet-popup-close, .magnet-trash
