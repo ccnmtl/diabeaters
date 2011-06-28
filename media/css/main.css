@@ -1003,8 +1003,7 @@ body#poctools a#poctools
 	margin: 0;
 	padding: 0;
 	border: 0;
-
-	background: url('../img/bg_footer.jpg') left top no-repeat; 
+	background: url('../img/bg_footer.jpg') left top no-repeat;
 }
 
 .block-edit {

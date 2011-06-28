@@ -41,82 +41,96 @@ jQuery(document).ready(function(){
 
 {% block content %}
 
-<div id="sessions-menu">
-
-	<div id="sessions-add">
-	<a title="create new session" href="{% url health-habit-plan-new-session %}">Add a Session</a>
-	</div>
-	
-	{% for s in sessions %}
-	<div class="sessions-session">
-	{% ifequal s.id session.id %}
-	<span class="session-active">Session {{s.number}}</span>
-		<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}">X</a>
-	{% else %}
-	<a href="{% url health-habit-plan-session s.id %}">Session {{s.number}}</a>
-	<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}">X</a>
-	{% endifequal %}
-	</div>
-	{% endfor %}
-	
-	<div id="sessions-all">
-	  <a title="view all sessions" href="{% url health-habit-plan-all-sessions %}">Review All Sessions</a>
-	</div>
-	
-	
-</div>
-
 <div id="hhp-container">
 
-	<div id="magnetwrapper">
-     {% for session in sessions %}
-	    <label><input type="checkbox" value="session-{{session.number}}" checked class="session-box" /> Session {{session.number}} Magnets</label>
-	  {% if session.magnet_set.count %}
-	    <div style="padding-left: 44px;">
-	    I can beat diabetes if I:
-	    <ul style="padding-top: 5px;">
-	  {% for magnet in session.magnet_set.all %}
-	    <li style="text-transform: lowercase;">{{magnet.item.label}}</li>
-	  
-	  {% endfor %}
-	  </ul>
-	  </div>
-	  {% endif %}
-	  {% endfor %}
-   </div>
+	<div id="sessions-container">
 
-	<div id="fridge">
-	{% for session in sessions %}
+		<div id="sessions-add">
+		<a title="create new session" href="{% url health-habit-plan-new-session %}">Add a Session</a>
+		</div>
+		
+		{% for s in sessions %}
+		<div class="sessions-session">
+		{% ifequal s.id session.id %}
+		<span class="session-active">Session {{s.number}}</span>
+			<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}" onclick="return confirm('Are you sure you want to deleteAre you sure you want to delete Session {{s.number}}?')">X</a>
+		{% else %}
+		<a href="{% url health-habit-plan-session s.id %}">Session {{s.number}}</a>
+		<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}" onclick="return confirm('Are you sure you want to delete Session {{s.number}}?')">X</a>
+		{% endifequal %}
+		</div>
+		{% endfor %}
+		
+		<div id="sessions-all">
+		  <a title="view all sessions" href="{% url health-habit-plan-all-sessions %}">Review All Sessions</a>
+		</div>
 	
-	  {% if session.magnet_set.count %}
-	  {% for magnet in session.magnet_set.all %}
-	
-  	  <div id="session-{{session.number}}-item-{{magnet.item.id}}-magnet" class="session-{{session.number}}-magnet magnet grabber {{magnet.item.category.css}}"></div>
-	  <div id="session-{{session.number}}-item-{{magnet.item.id}}-popup" class="magnet-popup">
-	    <div class="magnet-popup-close"></div>
-	    <strong>{{magnet.item.category}}</strong>
-	    <br />
-	    <br />
-	    I can beat diabetes if I<br />
-	    <span style="text-transform: lowercase; font-weight: bold;">{{magnet.item.label}}</span>
-	  </div>
-	  
-	  {% endfor %}
-	  {% endif %}
-	{% endfor %}
-
 	</div>
-	
-	<script type="text/javascript">
-	jQuery(function() {
-	{% for session in sessions %}
-	  {% for magnet in session.magnet_set.all %}    
-	    positionMagnet(jQuery("#session-{{session.number}}-item-{{magnet.item.id}}-magnet"),{{magnet.x}},{{magnet.y}});
-	  {% endfor %}
-	{% endfor %}
-	});
 
-	</script>
+	<div id="plan-container">
+	<div id="plan-container-inner">
+	
+		<div id="content-container">
+		
+			<div id="allsessions" style="height: 500px; overflow: auto;">
+			
+				{% for session in sessions %}
+				<label><input type="checkbox" value="session-{{session.number}}" checked class="session-box" /> Session {{session.number}} Magnets</label>
+				{% if session.magnet_set.count %}
+				<div style="padding-left: 44px;">
+				I can beat diabetes if I:
+				<ul style="padding-top: 5px;">
+				{% for magnet in session.magnet_set.all %}
+				<li style="text-transform: lowercase;">{{magnet.item.label}}</li>
+				{% endfor %}
+				</ul>
+				</div>
+				{% endif %}
+				{% endfor %}
+		
+			</div>
+		
+		</div>
+
+		<div id="fridge">
+		
+			{% for session in sessions %}
+			{% if session.magnet_set.count %}
+			{% for magnet in session.magnet_set.all %}
+	
+			<div id="session-{{session.number}}-item-{{magnet.item.id}}-magnet" class="session-{{session.number}}-magnet magnet grabber {{magnet.item.category.css}}">
+			<span id="item-{{magnet.item.id}}-label" class="label">{{magnet.item.label}}</span>
+			</div>
+
+			<div id="session-{{session.number}}-item-{{magnet.item.id}}-popup" class="magnet-popup">
+				<div class="magnet-popup-close"></div>
+				<strong>{{magnet.item.category}}</strong>
+				<br />
+				<br />
+				I can beat diabetes by<br />
+				<span style="text-transform: lowercase; font-weight: bold;">{{magnet.item.label}}</span>
+			</div>
+	  
+			{% endfor %}
+			{% endif %}
+			{% endfor %}
+
+		</div>
+	
+		<script type="text/javascript">
+		jQuery(function() {
+		{% for session in sessions %}
+		  {% for magnet in session.magnet_set.all %}    
+		    positionMagnet(jQuery("#session-{{session.number}}-item-{{magnet.item.id}}-magnet"),{{magnet.x}},{{magnet.y}});
+		  {% endfor %}
+		{% endfor %}
+		});
+	
+		</script>
+	
+	</div>
+	</div>
+
 </div>
 
 {% endblock %}

@@ -1,11 +1,16 @@
-label {display: block; margin-top: 20px; margin-left: 20px; font-weight: bold;}
+#hhp-container
+{
+	position: relative;
+	width: 870px;
+	height: 500px;
+}
 
-#sessions-menu
+#sessions-container
 {
 	width: 200px;
 	position: absolute;
-	top: 25px;
-	left: 20px;
+	top: 0px;
+	left: 0px;
 	background-color: #efcec5;
 }
 
@@ -23,55 +28,68 @@ label {display: block; margin-top: 20px; margin-left: 20px; font-weight: bold;}
 	text-align: right;
 }
 
-#sessions-menu a
+#sessions-container a
 {
 	font-weight: bold;
 	color: #fff;
 }
 
-#sessions-menu a.delete { float: right; }
+#sessions-container a.delete { float: right; }
 
-#sessions-menu a:hover, .session-active
+#sessions-container a:hover, .session-active
 {
 	font-weight: bold;
 	color: #e85631 !important;
 }
 
-#magnetwrapper
+#plan-container
+{
+	width: 650px;
+	position: absolute;
+	top: 0px;
+	left: 215px;
+}
+
+#plan-container-inner
+{
+	position: relative;
+	height: 500px;
+}
+
+#content-container
 {
 	position: absolute;
-	top: 25px;
-	left: 240px;
-	overflow: auto;
-	height: 490px;
-	width: 630px;
-	border: 1px solid #ddd;
+	top: 0px;
+	left: 00px;
+	width: 370px;
+	height: 500px;
 }
 
-div#categories
+#categories
 {
-	border: 0;
-	width: 300px;
-	margin: 8px;
+	border: 0px;
+	font-family: "lucida grande";
 }
 
-div#categories th, div#categories td
+#categorytabs { }
+
+#categories li
 {
-	text-align: left;
-	border: 0;
-	height: 50px;
+	font-size: 11px;
+	font-family: "lucida grande";
 }
 
 #fridge
 {
 	width: 270px;
-	height: 510px;
+	height: 500px;
 	background-color: #FFF;
 	background-image: url('/site_media/img/fridge.png');
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: 0px;
+	right: 0px;
 }
+
 
 .grabber
 {
@@ -104,6 +122,7 @@ div#categories th, div#categories td
 }
 
 /*.dropped { border: #f00 solid 1px; }*/
+/*
 .arrow
 {
 	display: block;
@@ -114,15 +133,16 @@ div#categories th, div#categories td
 .open { background-image: url('/site_media/img/arrow-open.png'); }
 .closed { background-image: url('/site_media/img/arrow-closed.png'); }
 .disabled { color: #ccc; }
+*/
 
 .magnet-popup
 {
 	display: none;
 	position: absolute;
 	width: 250px;
-	top:  0px;
+	top: 0px;
 	left: 0px;
-	background-color: #fff;
+	background-color: #ffc;
 	padding: 5px;
 	z-index: 1000;
 	border: 1px solid gray;
@@ -139,20 +159,38 @@ div#categories th, div#categories td
 .magnet-popup-close { background: url("/site_media/img/icon_close.png") no-repeat; }
 .magnet-trash { background: url("/site_media/img/icon_delete.png") no-repeat; }
 
-.grabber .label { display: block;
-		  position: absolute;
-		  left: 56px;
-		  height: 56px;
-		  background-color: #fff;
-		  width: 150px;
-		  padding-left: 10px;
+
+#categories .label
+{
+	width: 230px;
 }
-.ui-state-disabled .label {
-    display: block;
-    position: absolute;
-    left: 56px;
-    height: 56px;
-    background-color: #fff;
-    width: 150px;
-    padding-left: 10px;
+
+.ui-state-disabled .label
+{
+	display: block;
+	position: absolute;
+	left: 56px;
+	width: 230px;
+	padding-left: 10px;
+	padding-top: 16px;
+	padding-right: 10px;
 }
+
+.grabber .label
+{
+	display: block;
+	position: absolute;
+	top: -4px;
+	left: 56px;
+	height: 40px;
+	background-color: #fff;
+	width: 50px;
+	padding-left: 10px;
+	padding-top: 20px;
+	padding-right: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+
+}
+
