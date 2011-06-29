@@ -85,8 +85,8 @@
 						<div id="item-{{item.id}}-popup" class="magnet-popup">
 							<div class="magnet-popup-close"></div>
 							<strong>{{item.category}}</strong><br />
-							 I can beat diabetes if I:<br />
-							<strong>{{item.label}}</strong>
+							 I can beat diabetes by<br />
+							<strong  style="text-transform: lowercase;">{{item.label}}.</strong>
 							<div id="item-{{item.id}}-trash" class="magnet-trash"></div>
 						</div>
 						{% endif_magnet_for_item_exists %}
@@ -116,7 +116,7 @@
 				<br />
 				<br />
 				I can beat diabetes by<br />
-				<span style="text-transform: lowercase; font-weight: bold;">{{magnet.item.label}}</span>
+				<span style="text-transform: lowercase;">{{magnet.item.label}}.</span>
 				<div id="item-{{magnet.item.id}}-trash" class="magnet-trash"></div>
 			</div>
 	  
