@@ -20,7 +20,7 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'diabeaters',
         'HOST' : '',
-        'PORT' : 5432,
+        'PORT' : 6432,
         'USER' : '',
         'PASSWORD' : '',
         }
