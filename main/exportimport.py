@@ -1,30 +1,41 @@
 import cgi
 import codecs
 from django.core.files import File
-from diabeaters.quiz.models import *
 from xml.etree import ElementTree as etree
-from pageblocks.models import *
-from pagetree.models import *
+from pageblocks.models import TextBlock, HTMLBlock, PullQuoteBlock
+from pageblocks.models import ImageBlock, ImagePullQuoteBlock
+from pageblocks.models import Quiz, Question, Answer
+from pagetree.models import PageBlock
+import os
 import tempfile
 from zipfile import ZipFile
+from pagetree.helpers import get_hierarchy
+
 
 def asbool(str):
     return str.lower() == "true"
 
+
 def sanitize(label):
     return cgi.escape(label, True)
-    
+
+
 def get_all_pageblocks(hierarchy):
     return PageBlock.objects.filter(section__hierarchy=hierarchy)
+
 
 def text_exporter(block, xmlfile, zipfile):
     filename = "pageblocks/%s.txt" % block.pageblock().pk
     zipfile.writestr(filename, block.body.encode("utf8"))
     print >> xmlfile, """<text src="%s" />""" % filename
+
+
 def html_exporter(block, xmlfile, zipfile):
     filename = "pageblocks/%s.html" % block.pageblock().pk
     zipfile.writestr(filename, block.html.encode("utf8"))
     print >> xmlfile, """<html src="%s" />""" % filename
+
+
 def image_exporter(block, xmlfile, zipfile):
     filename = os.path.basename(block.image.file.name)
     filename = "pageblocks/%s-%s" % (block.pk, filename)
@@ -32,6 +43,8 @@ def image_exporter(block, xmlfile, zipfile):
     print >> xmlfile, \
         u"""<img src="%s" caption="%s" />""" % (
         filename, block.caption)
+
+
 def quiz_exporter(block, xmlfile, zipfile):
     filename = "pageblocks/%s-description.txt" % block.pageblock().pk
     zipfile.writestr(filename, block.description.encode("utf8"))
@@ -40,25 +53,30 @@ def quiz_exporter(block, xmlfile, zipfile):
     for question in block.question_set.all():
         print >> xmlfile, u"""<question type="%s" ordinality="%s">""" % (
             question.question_type, question.ordinality)
-        filename = "pageblocks/%s-%s-text.txt" % (block.pageblock().pk, question.pk)
+        filename = "pageblocks/%s-%s-text.txt" % (block.pageblock().pk,
+                                                  question.pk)
         zipfile.writestr(filename, question.text.encode("utf8"))
         print >> xmlfile, u"<text src='%s' />" % filename
 
-        filename = "pageblocks/%s-%s-explanation.txt" % (block.pageblock().pk, question.pk)
+        filename = "pageblocks/%s-%s-explanation.txt" % (block.pageblock().pk,
+                                                         question.pk)
         zipfile.writestr(filename, question.explanation.encode("utf8"))
         print >> xmlfile, u"<explanation src='%s' />" % filename
 
-        filename = "pageblocks/%s-%s-introtext.txt" % (block.pageblock().pk, question.pk)
+        filename = "pageblocks/%s-%s-introtext.txt" % (block.pageblock().pk,
+                                                       question.pk)
         zipfile.writestr(filename, question.intro_text.encode("utf8"))
         print >> xmlfile, u"<introtext src='%s' />" % filename
 
         for answer in question.answer_set.all():
-            print >> xmlfile, \
-                u"""<answer label="%s" value="%s" ordinality="%s" correct="%s" />""" % (
-                sanitize(answer.label), answer.value, answer.ordinality, answer.correct)
+            print >> xmlfile, (u"""<answer label="%s" value="%s" """
+                               u"""ordinality="%s" correct="%s" />""" % (
+                    sanitize(answer.label),
+                    answer.value, answer.ordinality, answer.correct))
 
         print >> xmlfile, "</question>"
     print >> xmlfile, "</quiz>"
+
 pageblock_exporters = {
     TextBlock: ('text', text_exporter),
     HTMLBlock: ('html', html_exporter),
@@ -68,6 +86,7 @@ pageblock_exporters = {
     Quiz: ('quiz', quiz_exporter),
     }
 
+
 def export_block(block, xmlfile, zipfile):
     object = block.content_object
     type, export_fn = pageblock_exporters[object.__class__]
@@ -76,6 +95,7 @@ def export_block(block, xmlfile, zipfile):
         block.pk, type, sanitize(block.label), block.ordinality)
     export_fn(object, xmlfile, zipfile)
     print >> xmlfile, "</pageblock>"
+
 
 def export_node(node, xmlfile, zipfile):
     print >> xmlfile, \
@@ -87,10 +107,12 @@ def export_node(node, xmlfile, zipfile):
         export_node(child, xmlfile, zipfile)
     print >> xmlfile, "</section>"
 
+
 def export_zip(hierarchy):
     root = hierarchy.get_root()
 
-    fd, zip_filename = tempfile.mkstemp(prefix="pagetree-export", suffix=".zip")
+    fd, zip_filename = tempfile.mkstemp(prefix="pagetree-export",
+                                        suffix=".zip")
     zipfile = ZipFile(zip_filename, 'w')
     zipfile.writestr("version.txt", "1")
 
@@ -111,6 +133,7 @@ def export_zip(hierarchy):
     zipfile.close()
     return zip_filename
 
+
 def text_importer(node, zipfile):
     children = node.getchildren()
     assert len(children) == 1 and children[0].tag == "text"
@@ -119,6 +142,7 @@ def text_importer(node, zipfile):
     b = TextBlock(body=body)
     b.save()
     return b
+
 
 def html_importer(node, zipfile):
     children = node.getchildren()
@@ -129,14 +153,16 @@ def html_importer(node, zipfile):
     b.save()
     return b
 
+
 def pullquote_importer(node, zipfile):
     children = node.getchildren()
     assert len(children) == 1 and children[0].tag == "text"
     path = children[0].get("src")
-    body = zipfile.read(path)    
+    body = zipfile.read(path)
     b = PullQuoteBlock(body=body)
     b.save()
     return b
+
 
 def image_importer(node, zipfile):
     children = node.getchildren()
@@ -150,6 +176,7 @@ def image_importer(node, zipfile):
     b.save()
     return b
 
+
 def imagepullquote_importer(node, zipfile):
     children = node.getchildren()
     assert len(children) == 1 and children[0].tag == "img"
@@ -161,6 +188,7 @@ def imagepullquote_importer(node, zipfile):
     b.save_image(File(file))
     b.save()
     return b
+
 
 def quiz_importer(node, zipfile):
     children = node.getchildren()
@@ -175,15 +203,16 @@ def quiz_importer(node, zipfile):
         type = child.get("type")
         ordinality = child.get("ordinality")
 
-        text, explanation, introtext, answers = child.getchildren()[:3] + [child.getchildren()[3:]]        
+        (text, explanation, introtext, answers) = (child.getchildren()[:3]
+                                                   + [child.getchildren()[3:]])
         path = text.get("src")
         text = zipfile.read(path)
         path = explanation.get("src")
         explanation = zipfile.read(path)
         path = introtext.get("src")
         introtext = zipfile.read(path)
-        question = Question(quiz=q, text=text, question_type=type, 
-                            ordinality=ordinality, explanation=explanation, 
+        question = Question(quiz=q, text=text, question_type=type,
+                            ordinality=ordinality, explanation=explanation,
                             intro_text=introtext)
         question.save()
         for answer in answers:
@@ -191,7 +220,7 @@ def quiz_importer(node, zipfile):
             value = answer.get("value")
             ordinality = answer.get("ordinality")
             correct = asbool(answer.get("correct"))
-            answer = Answer(question=question, ordinality=ordinality, 
+            answer = Answer(question=question, ordinality=ordinality,
                             value=value, label=label, correct=correct)
             answer.save()
     return q
@@ -205,15 +234,18 @@ pageblock_importers = {
     'quiz': quiz_importer,
     }
 
+
 def import_pageblock(hierarchy, section, pageblock, zipfile):
     type = pageblock.get("type")
     label = pageblock.get("label")
     ordinality = pageblock.get("ordinality")
 
     block = pageblock_importers[type](pageblock, zipfile)
-    pb = PageBlock(section=section, ordinality=ordinality, label=label, content_object=block)
+    pb = PageBlock(section=section, ordinality=ordinality, label=label,
+                   content_object=block)
     pb.save()
     return pb
+
 
 def import_node(hierarchy, section, zipfile, parent=None):
     slug = section.get("slug")
@@ -240,7 +272,6 @@ def import_node(hierarchy, section, zipfile, parent=None):
 
     return s
 
-from pagetree.helpers import get_hierarchy
 
 def import_zip(zipfile):
     if 'site.xml' not in zipfile.namelist():
