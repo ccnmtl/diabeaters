@@ -1,6 +1,6 @@
 # Django settings for diabeaters project.
 import os.path
-
+import sys
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -19,6 +19,27 @@ DATABASES = {
         'PASSWORD' : '',
         }
 }
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default' : {
+            'ENGINE' : 'django.db.backends.sqlite3',
+            'NAME' : ':memory:',
+            'HOST' : '',
+            'PORT' : '',
+            'USER' : '',
+            'PASSWORD' : '',
+            }
+    }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    ('--cover-package=diabeaters.main,'
+     'diabeaters.healthhabitplan,diabeaters.quiz'),
+]
+
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
