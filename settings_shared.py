@@ -97,6 +97,7 @@ INSTALLED_APPS = (
     'diabeaters.healthhabitplan',
     'munin',
     'django_statsd',
+    'raven.contrib.django',
 )
 
 STATSD_CLIENT = 'statsd.client'
