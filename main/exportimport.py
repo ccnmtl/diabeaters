@@ -4,7 +4,7 @@ from django.core.files import File
 from xml.etree import ElementTree as etree
 from pageblocks.models import TextBlock, HTMLBlock, PullQuoteBlock
 from pageblocks.models import ImageBlock, ImagePullQuoteBlock
-from pageblocks.models import Quiz, Question, Answer
+from quiz.models import Quiz, Question, Answer
 from pagetree.models import PageBlock
 import os
 import tempfile
