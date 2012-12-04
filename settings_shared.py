@@ -40,6 +40,7 @@ NOSE_ARGS = [
      'diabeaters.healthhabitplan,diabeaters.quiz'),
 ]
 
+SOUTH_TESTS_MIGRATE = False
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
@@ -98,6 +99,7 @@ INSTALLED_APPS = (
     'munin',
     'django_statsd',
     'raven.contrib.django',
+    'south',
 )
 
 STATSD_CLIENT = 'statsd.client'
