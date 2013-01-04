@@ -36,8 +36,8 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = [
     '--with-coverage',
-    ('--cover-package=diabeaters.main,'
-     'diabeaters.healthhabitplan,diabeaters.quiz'),
+    ('--cover-package=main,'
+     'healthhabitplan,quiz'),
 ]
 
 SOUTH_TESTS_MIGRATE = False
@@ -93,9 +93,9 @@ INSTALLED_APPS = (
     'sentry.client',
     'pagetree',
     'pageblocks',
-    'diabeaters.quiz',
-    'diabeaters.main',
-    'diabeaters.healthhabitplan',
+    'quiz',
+    'main',
+    'healthhabitplan',
     'munin',
     'django_statsd',
     'raven.contrib.django',
