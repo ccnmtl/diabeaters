@@ -1,6 +1,8 @@
 Diabeaters
 ==========
 
+[![Build Status](https://travis-ci.org/ccnmtl/Diabeaters.png)](https://travis-ci.org/ccnmtl/Diabeaters)
+
 Developed by the Columbia Center For New Media Teaching and Learning. 
 
 Released under GPL2. 
