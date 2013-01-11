@@ -2,13 +2,11 @@ language: python
 python:
   - "2.6"
   - "2.7"
-services:
-  - postgres
 before_script:
   - sql -c 'create database diabeaters;' -U postgres
 install:
   - ./bootstrap.py
-  - ./manage.py syncdb --migrate --noinput
-  - ./manage.py import_diabeaters
+  - ./manage.py syncdb --migrate --noinput --settings=diabeaters.settings_travis
+  - ./manage.py import_diabeaters --settings=diabeaters.settings_travis
 script:
   - ./manage.py test
