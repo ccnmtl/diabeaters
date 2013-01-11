@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block hometabclass %} class="active"{% endblock %}
+
+{% block content_div_class %}class="content_one_column"{% endblock %}
+
+
+{% block content %}
+
+<!-- ############ Survey ############ -->
+
+<h1>Welcome 
+{% if user.first_name %}
+{{user.first_name}}
+{% else %}
+{{ user.username }}{% endif %}</h1>
+
+{% if not profile %}
+
+{# Note to self: this is the survey part #}
+
+<p>Please provide us some information about yourself.</p>
+
+
+<form action="/survey/" method="post">
+
+<div class="surveyform">
+
+	<div id="programfield">
+		<label>Program:</label>
+		<select class="dropdownmenu" name="program">
+		<option>Please select:</option>
+		<option>MD student</option>
+		<option>DDS student</option>
+		<option>PNP</option>
+		<option>FNP</option>
+		<option>Other NP</option>
+		<option>Pediatrics resident</option>
+		<option>Other resident</option>
+		<option>Other</option>
+		</select>
+	</div><!-- div class="programfield" -->
+	
+	<div id="yearfield">
+		<label>Graduation year:</label>
+		<select class="dropdownmenu" name="year">
+		<option>Please select:</option>
+		<option>2009</option>
+		<option>2010</option>
+		<option>2011</option>
+		<option>2012</option>
+		<option>2013</option>
+		<option>2014</option>
+		<option>2015</option>
+		<option>2016</option>
+		<option>2017</option>
+		</select>
+	</div><!-- div class="yearfield" -->
+	
+	<div id="experiencefield">
+		<label>Do you have previous experience (beyond that in your current program) related to interpreting labs?:</label>
+		<br /><input type="radio" name="lab_experience"
+		value="yes, worked"/> Yes, I worked as a lab assistant.
+		<br /><input type="radio"  name="lab_experience"
+		value="yes, experience"/> Yes, I have experience interpreting labs.
+		<br /><input type="radio"  name="lab_experience"
+		value="yes, course"/> Yes I took a related course in another program.
+		<br /><input type="radio"  name="lab_experience"
+		value="no"/> No, I do not have previous experience interpreting labs.
+	</div><!-- div class="experiencefield" -->
+<br />
+<input type="submit" />
+</div><!-- div class="surveyform" -->
+
+</form>
+
+{% else %}
+
+<!-- ############ Home after survey completed ############ -->
+
+{# Note to self: below is Home after survey is completed #}
+
+<p>Some instructionals text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pellentesque purus eu erat sagittis semper eget a felis. Maecenas in odio eget nisl congue semper. Phasellus cursus, enim aliquam tristique semper, massa enim semper nunc, non auctor justo leo in magna. Etiam sit amet sagittis nisi. In hac habitasse platea dictumst. Nunc lobortis malesuada hendrerit. Praesent ullamcorper rutrum turpis nec lacinia.</p>
+
+<p>You can visit the <a href="/overview/introduction/">Overview</a> site to read the background of the Labs, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pellentesque purus eu erat sagittis semper eget a felis.</p>
+
+{% if profile.no_labs_completed %}
+
+<p>You've not completed any of the Labs. Please choose one to begin:<br />
+
+{% for cm in profile.completed_modules %}
+<p><b><a href="{{cm.module.get_absolute_url}}">{{cm.module.label}} Case Exercise</a></b></p>
+{% endfor %}
+
+{% endif %}
+
+{% if profile.lab_in_progress %}
+<i>One of your labs is currently in progress.  Once you've completed the ongoing lab, you can proced to the next one.<br />
+
+<a href="/{{profile.current_location}}">Continue in {{ profile.current_module.label }} Case Exercise</a>
+{% endif %}
+
+{% if profile.some_labs_completed %}
+
+<i>Please choose a lab:<br />
+
+{% for cm in profile.completed_modules %}
+{% ifequal cm.module.label "The CBC Test" %}
+<p><b><a href="{{cm.module.get_first_leaf.get_absolute_url}}">{{cm.module.label}} Case Exercise</a></b>
+  {% if cm.completed %}(completed){% endif %}</p>
+{% endifequal %}
+{% endfor %}
+
+{% endif %}
+
+{% if profile.all_labs_completed %}
+all completed
+<i>You've completed all Labs</p>
+
+{% for cm in profile.completed_modules %}
+{% ifequal cm.module.label "The CBC Test" %}
+<p><b><a href="{{cm.module.get_first_leaf.get_absolute_url}}">{{cm.module.label}} Case Exercise</a></b></p>
+{% endifequal %}
+{% endfor %}
+
+{% endif %}
+
+
+
+
+{% endif %}
+{% endblock %}
