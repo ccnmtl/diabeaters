@@ -1,3 +1,4 @@
+from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -5,23 +6,6 @@ from django.shortcuts import render_to_response, get_object_or_404
 from models import Session, Category, Item, Magnet
 from django.core.urlresolvers import reverse
 from pagetree.helpers import get_hierarchy
-
-
-class rendered_with(object):
-    def __init__(self, template_name):
-        self.template_name = template_name
-
-    def __call__(self, func):
-        def rendered_func(request, *args, **kwargs):
-            items = func(request, *args, **kwargs)
-            if type(items) == type({}):
-                return render_to_response(
-                    self.template_name, items,
-                    context_instance=RequestContext(request))
-            else:
-                return items
-
-        return rendered_func
 
 
 @login_required
@@ -53,7 +37,7 @@ def del_session(request, id=id):
 
 
 @login_required
-@rendered_with('healthhabitplan/session.html')
+@render_to('healthhabitplan/session.html')
 def session(request, id):
     s = get_object_or_404(Session, id=id)
     h = get_hierarchy()
@@ -65,7 +49,7 @@ def session(request, id):
 
 
 @login_required
-@rendered_with('healthhabitplan/all_sessions.html')
+@render_to('healthhabitplan/all_sessions.html')
 def all_sessions(request):
     h = get_hierarchy()
     sessions = Session.objects.filter(user=request.user)

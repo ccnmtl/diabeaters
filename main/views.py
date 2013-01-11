@@ -1,3 +1,4 @@
+from annoying.decorators import render_to
 from diabeaters.main.exportimport import export_zip
 from diabeaters.main.exportimport import import_zip
 from django.contrib.auth.decorators import login_required
@@ -17,23 +18,6 @@ def staff_required(login_url=None):
     return user_passes_test(lambda u: u.is_staff, login_url=login_url)
 
 
-class rendered_with(object):
-    def __init__(self, template_name):
-        self.template_name = template_name
-
-    def __call__(self, func):
-        def rendered_func(request, *args, **kwargs):
-            items = func(request, *args, **kwargs)
-            if type(items) == type({}):
-                return render_to_response(
-                    self.template_name, items,
-                    context_instance=RequestContext(request))
-            else:
-                return items
-
-        return rendered_func
-
-
 def flatpage_hack(request):
     # immediately 404 for about/contact/credits so flatpages
     # handles them and we don't send them to auth first
@@ -41,7 +25,7 @@ def flatpage_hack(request):
 
 
 @login_required
-@rendered_with('main/page.html')
+@render_to('main/page.html')
 def page(request, path):
     section = get_section_from_path(path)
     # redirects to first (welcome) page for parent nodes
@@ -107,7 +91,7 @@ def page(request, path):
 
 
 @login_required
-@rendered_with('main/edit_page.html')
+@render_to('main/edit_page.html')
 def edit_page(request, path):
     section = get_section_from_path(path)
     h = get_hierarchy()
@@ -117,7 +101,7 @@ def edit_page(request, path):
 
 
 @login_required
-@rendered_with('main/instructor_page.html')
+@render_to('main/instructor_page.html')
 def instructor_page(request, path):
     section = get_section_from_path(path)
     h = get_hierarchy()
@@ -131,7 +115,7 @@ def instructor_page(request, path):
 
 
 @login_required
-@rendered_with('main/home.html')
+@render_to('main/home.html')
 def home(request):
     if hasattr(request.user, 'get_profile'):
         profile = request.user.get_profile()
@@ -164,7 +148,7 @@ def export(request):
 
 
 @staff_required()
-@rendered_with("main/import.html")
+@render_to("main/import.html")
 def import_(request):
     if request.method == "GET":
         return {}
