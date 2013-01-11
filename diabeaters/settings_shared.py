@@ -139,4 +139,4 @@ WIND_AFFIL_HANDLERS = ['djangowind.auth.AffilGroupMapper','djangowind.auth.Staff
 WIND_STAFF_MAPPER_GROUPS = ['tlc.cunix.local:columbia.edu']
 WIND_SUPERUSER_MAPPER_GROUPS = ['anp8','jb2410','zm4','sbd12','egr2107','kmh2124','sld2131','amm8','mar227','ed2198','mj2402', 'mar227', 'ej2223']
 
-AUTH_PROFILE_MODULE = "diabeaters.main.UserProfile"
+AUTH_PROFILE_MODULE = "main.UserProfile"

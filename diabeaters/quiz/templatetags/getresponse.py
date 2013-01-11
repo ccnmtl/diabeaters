@@ -1,5 +1,5 @@
 from django import template
-from quiz.models import Response, Submission
+from diabeaters.quiz.models import Response, Submission
 
 register = template.Library()
 
