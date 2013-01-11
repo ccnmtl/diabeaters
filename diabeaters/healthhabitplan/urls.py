@@ -2,7 +2,7 @@ from django.conf.urls.defaults import patterns
 
 
 urlpatterns = patterns(
-    'healthhabitplan.views',
+    'diabeaters.healthhabitplan.views',
     (r'^$', 'index', {}, 'health-habit-plan-index'),
     (r'^new_session/$', 'new_session', {}, 'health-habit-plan-new-session'),
     (r'^del_session/(?P<id>\d+)/$', 'del_session', {},
