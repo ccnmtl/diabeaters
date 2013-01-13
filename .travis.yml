@@ -4,9 +4,8 @@ python:
   - "2.7"
 before_script:
   - psql -c 'create database diabeaters;' -U postgres
+  - ./manage.py syncdb --migrate --noinput --settings=diabeaters.settings_travis
 install:
   - ./bootstrap.py
 script:
-  - ./manage.py syncdb --migrate --noinput --settings=diabeaters.settings_travis
-  - ./manage.py import_diabeaters --settings=diabeaters.settings_travis
   - ./manage.py test
