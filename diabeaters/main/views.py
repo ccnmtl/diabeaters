@@ -3,10 +3,8 @@ from diabeaters.main.exportimport import export_zip
 from diabeaters.main.exportimport import import_zip
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
-from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import HttpResponseNotFound
-from django.shortcuts import render_to_response
 from models import UserProfile
 import os
 from pagetree.helpers import (get_hierarchy, get_section_from_path, get_module,

@@ -69,8 +69,9 @@ def quiz_exporter(block, xmlfile, zipfile):
         print >> xmlfile, u"<introtext src='%s' />" % filename
 
         for answer in question.answer_set.all():
-            print >> xmlfile, (u"""<answer label="%s" value="%s" """
-                               u"""ordinality="%s" correct="%s" />""" % (
+            print >> xmlfile, (
+                u"""<answer label="%s" value="%s" """
+                u"""ordinality="%s" correct="%s" />""" % (
                     sanitize(answer.label),
                     answer.value, answer.ordinality, answer.correct))
 
@@ -84,7 +85,7 @@ pageblock_exporters = {
     ImageBlock: ('image', image_exporter),
     ImagePullQuoteBlock: ('imagepullquote', image_exporter),
     Quiz: ('quiz', quiz_exporter),
-    }
+}
 
 
 def export_block(block, xmlfile, zipfile):
@@ -232,7 +233,7 @@ pageblock_importers = {
     'image': image_importer,
     'imagepullquote': imagepullquote_importer,
     'quiz': quiz_importer,
-    }
+}
 
 
 def import_pageblock(hierarchy, section, pageblock, zipfile):

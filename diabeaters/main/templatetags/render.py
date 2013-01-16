@@ -25,7 +25,7 @@ class RenderNode(template.Node):
             context_dict.update(d)
         # can only take string keys
         for k in context_dict.keys():
-            if type(k) != type(''):
+            if isinstance(k, str):
                 del context_dict[k]
         return b.render(**context_dict)
 

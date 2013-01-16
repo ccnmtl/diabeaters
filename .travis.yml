@@ -8,4 +8,5 @@ before_script:
 install:
   - ./bootstrap.py
 script:
+  - ./ve/bin/flake8 diabeaters
   - ./manage.py test

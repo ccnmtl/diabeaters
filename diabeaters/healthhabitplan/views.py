@@ -1,8 +1,7 @@
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import get_object_or_404
 from models import Session, Category, Item, Magnet
 from django.core.urlresolvers import reverse
 from pagetree.helpers import get_hierarchy

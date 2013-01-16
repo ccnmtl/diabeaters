@@ -36,7 +36,7 @@ class Quiz(models.Model):
                 question = Question.objects.get(id=qid)
                 # it might make more sense to just accept a QueryDict
                 # instead of a dict so we can use getlist()
-                if type(data[k]) == type([]):
+                if isinstance(data[k], list):
                     for v in data[k]:
                         Response.objects.create(
                             submission=s,
@@ -145,7 +145,7 @@ class Question(models.Model):
 
     def correct_answer_letter(self):
         if (self.question_type != "single choice"
-            or self.answer_set.count() == 0):
+                or self.answer_set.count() == 0):
             return None
         return chr(ord('A') + self.correct_answer_number() - 1)
 
