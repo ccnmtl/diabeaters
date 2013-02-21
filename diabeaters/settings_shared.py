@@ -9,6 +9,10 @@ ADMINS = ()
 
 MANAGERS = ADMINS
 
+ALLOWED_HOSTS = [
+    ".ccnmtl.columbia.edu",
+    "localhost"]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
