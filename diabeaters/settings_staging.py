@@ -26,7 +26,8 @@ DATABASES = {
         }
 }
 
-SENTRY_SITE = 'diabeaters'
+SENTRY_SITE = 'diabeaters-staging'
+STATSD_PREFIX = 'diabeaters-staging'
 
 if 'migrate' not in sys.argv:
     import logging
@@ -38,7 +39,6 @@ if 'migrate' not in sys.argv:
         logger = logging.getLogger('sentry.errors')
         logger.propagate = False
         logger.addHandler(logging.StreamHandler())
-
 
 try:
     from local_settings import *
