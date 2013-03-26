@@ -88,6 +88,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'waffle.middleware.WaffleMiddleware',
+    'impersonate.middleware.ImpersonateMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
@@ -124,6 +125,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'django_jenkins',
     'waffle',
+    'impersonate',
 )
 
 INTERNAL_IPS = ('127.0.0.1', )
@@ -182,3 +184,4 @@ WIND_SUPERUSER_MAPPER_GROUPS = ['anp8', 'jb2410', 'zm4', 'sbd12', 'egr2107',
                                 'ed2198', 'mj2402', 'mar227', 'ej2223']
 
 AUTH_PROFILE_MODULE = "main.UserProfile"
+LOGIN_REDIRECT_URL = "/"

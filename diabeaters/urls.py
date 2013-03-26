@@ -1,15 +1,16 @@
-from django.conf.urls.defaults import patterns, include
+from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 import os.path
 admin.autodiscover()
 from django.views.generic.simple import direct_to_template
 
-site_media_root = os.path.join(os.path.dirname(__file__), "media")
+site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
 urlpatterns = patterns(
     '',
     (r'^$', 'diabeaters.main.views.index'),
+    url(r'^_impersonate/', include('impersonate.urls')),
     (r'^export/$', 'diabeaters.main.views.export'),
     (r'^import/$', 'diabeaters.main.views.import_'),
     (r'^about/$', 'diabeaters.main.views.flatpage_hack'),
@@ -31,7 +32,7 @@ urlpatterns = patterns(
     (r'^uploads/(?P<path>.*)$',
      'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^_stats/', direct_to_template, {'template': 'main/stats.html'}),
-    # very important that these two stay last and in this order
+    # very important that these three stay last and in this order
     (r'^edit/(?P<path>.*)$', 'diabeaters.main.views.edit_page'),
     (r'^instructor/(?P<path>.*)$', 'diabeaters.main.views.instructor_page'),
     (r'^(?P<path>.*)$', 'diabeaters.main.views.page'),
