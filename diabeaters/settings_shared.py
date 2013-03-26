@@ -185,3 +185,6 @@ WIND_SUPERUSER_MAPPER_GROUPS = ['anp8', 'jb2410', 'zm4', 'sbd12', 'egr2107',
 
 AUTH_PROFILE_MODULE = "main.UserProfile"
 LOGIN_REDIRECT_URL = "/"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = True
