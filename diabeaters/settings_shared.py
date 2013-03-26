@@ -24,7 +24,7 @@ DATABASES = {
     }
 }
 
-if 'test' in sys.argv:
+if 'test' in sys.argv or 'jenkins' in sys.argv:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -45,6 +45,20 @@ NOSE_ARGS = [
 ]
 
 SOUTH_TESTS_MIGRATE = False
+
+JENKINS_TASKS = (
+    'django_jenkins.tasks.run_pylint',
+    'django_jenkins.tasks.with_coverage',
+    'django_jenkins.tasks.django_tests',
+    'django_jenkins.tasks.run_pep8',
+    'django_jenkins.tasks.run_pyflakes',
+)
+
+PROJECT_APPS = [
+    'diabeaters.main',
+    'diabeaters.quiz',
+    'diabeaters.healthhabitplan',
+]
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
@@ -106,6 +120,7 @@ INSTALLED_APPS = (
     'south',
     'smoketest',
     'debug_toolbar',
+    'django_jenkins',
 )
 
 INTERNAL_IPS = ('127.0.0.1', )
