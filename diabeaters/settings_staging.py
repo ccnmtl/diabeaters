@@ -14,6 +14,8 @@ STATICMEDIA_MOUNTS = (
 
 DEBUG = False
 TEMPLATE_DEBUG = True
+STAGING_ENV = True
+
 
 DATABASES = {
     'default' : {
