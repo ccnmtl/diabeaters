@@ -44,6 +44,12 @@ class TrivialViewsTest(TestCase):
         response = self.c.get("/session-2/")
         self.assertEquals(response.status_code, 200)
 
+        response = self.c.post("/session-2/", {'action': 'reset'})
+        self.assertEquals(response.status_code, 302)
+
+        response = self.c.post("/session-2/", {})
+        self.assertEquals(response.status_code, 302)
+
         response = self.c.get("/edit/session-2/")
         self.assertEquals(response.status_code, 200)
 
