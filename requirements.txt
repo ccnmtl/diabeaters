@@ -27,7 +27,6 @@ pylint==0.26.0
 djangowind==0.10.3
 sorl==3.1
 template_utils==0.4p2
-typogrify==1.0
 django-staticmedia==0.2
 pagetree==0.5.4
 django-pageblocks==0.5.9

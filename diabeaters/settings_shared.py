@@ -110,7 +110,6 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'django.contrib.admin',
     'template_utils',
-    'typogrify',
     'pagetree',
     'pageblocks',
     'diabeaters.quiz',
