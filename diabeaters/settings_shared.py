@@ -99,7 +99,7 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
 )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -124,7 +124,7 @@ INSTALLED_APPS = (
     'django_jenkins',
     'waffle',
     'impersonate',
-)
+]
 
 INTERNAL_IPS = ('127.0.0.1', )
 DEBUG_TOOLBAR_PANELS = (
