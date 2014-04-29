@@ -14,8 +14,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script> 
 
 <script type="text/javascript">
-	var saveURL = "{% url health-habit-plan-save-magnet session.id %}";
-	var deleteURL = "{% url health-habit-plan-delete-magnet session.id %}";
+	var saveURL = "{% url 'health-habit-plan-save-magnet' session.id %}";
+	var deleteURL = "{% url 'health-habit-plan-delete-magnet' session.id %}";
 </script>
 
 <script src="/site_media/js/healthhabitplan.js" type="text/javascript"></script>
@@ -30,23 +30,23 @@
 	<div id="sessions-container">
 
 	<div id="sessions-add">
-	<a title="create new session" href="{% url health-habit-plan-new-session %}">Add a Session</a>
+	<a title="create new session" href="{% url 'health-habit-plan-new-session' %}">Add a Session</a>
 	</div>
 	
 	{% for s in sessions %}
 	<div class="sessions-session">
 	{% ifequal s.id session.id %}
 	<span class="session-active">Session {{s.number}}</span>
-		<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}" onclick="return confirm('Are you sure you want to delete Session {{s.number}}?')">X</a>
+		<a class="delete" title="Delete" href="{% url 'health-habit-plan-del-session' s.id %}" onclick="return confirm('Are you sure you want to delete Session {{s.number}}?')">X</a>
 	{% else %}
-	<a href="{% url health-habit-plan-session s.id %}">Session {{s.number}}</a>
-	<a class="delete" title="Delete" href="{% url health-habit-plan-del-session s.id %}" onclick="return confirm('Are you sure you want to delete Session {{s.number}}?')">X</a>
+	<a href="{% url 'health-habit-plan-session' s.id %}">Session {{s.number}}</a>
+	<a class="delete" title="Delete" href="{% url 'health-habit-plan-del-session' s.id %}" onclick="return confirm('Are you sure you want to delete Session {{s.number}}?')">X</a>
 	{% endifequal %}
 	</div>
 	{% endfor %}
 	
 	<div id="sessions-all">
-	  <a title="view all sessions" href="{% url health-habit-plan-all-sessions %}">Review All Sessions</a>
+	  <a title="view all sessions" href="{% url 'health-habit-plan-all-sessions' %}">Review All Sessions</a>
 	</div>
 
 </div>

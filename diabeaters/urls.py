@@ -1,9 +1,10 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
+from django.views.generic import TemplateView
 import os.path
 admin.autodiscover()
-from django.views.generic.simple import direct_to_template
+
 
 site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
@@ -21,7 +22,6 @@ urlpatterns = patterns(
     (r'^logout/$', 'django.contrib.auth.views.logout',
      {'next_page': '/home/'}),
     ('^accounts/', include('djangowind.urls')),
-    ('^munin/', include('munin.urls')),
     (r'^smoketest/', include('smoketest.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^pagetree/', include('pagetree.urls')),
@@ -31,7 +31,7 @@ urlpatterns = patterns(
      'django.views.static.serve', {'document_root': site_media_root}),
     (r'^uploads/(?P<path>.*)$',
      'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    (r'^_stats/', direct_to_template, {'template': 'main/stats.html'}),
+    (r'^_stats/', TemplateView.as_view(template_name="main/stats.html")),
     # very important that these three stay last and in this order
     (r'^edit/(?P<path>.*)$', 'diabeaters.main.views.edit_page'),
     (r'^instructor/(?P<path>.*)$', 'diabeaters.main.views.instructor_page'),

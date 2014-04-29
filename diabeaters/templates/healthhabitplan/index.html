@@ -8,13 +8,13 @@
 
 <ul>
   {% for session in sessions %}
-  <li><a href="{% url health-habit-plan-session session.id %}">{{session.number}} [{{session.saved}}]</a></li>
+  <li><a href="{% url 'health-habit-plan-session' session.id %}">{{session.number}} [{{session.saved}}]</a></li>
   {% endfor %}
 </ul>
 
 {% else %}
 <p>You do not have any sessions yet. </p>
-<form action="{% url health-habit-plan-new-session %}" method="post">
+<form action="{% url 'health-habit-plan-new-session' %}" method="post">
 <input type="submit" value="create new session" />
 </form>
 {% endif %}
