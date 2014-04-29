@@ -115,7 +115,6 @@ INSTALLED_APPS = [
     'diabeaters.quiz',
     'diabeaters.main',
     'diabeaters.healthhabitplan',
-    'munin',
     'django_statsd',
     'south',
     'smoketest',
@@ -186,3 +185,4 @@ LOGIN_REDIRECT_URL = "/"
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+SECRET_KEY = "asdfwertsdbsdrtfy"
