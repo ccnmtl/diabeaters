@@ -22,6 +22,67 @@ def flatpage_hack(request):
     return HttpResponseNotFound()
 
 
+def get_profile(request, path):
+    if not request.user.is_anonymous():
+        try:
+            profile = request.user.get_profile()
+            profile.current_location = path
+            profile.save()
+        except UserProfile.DoesNotExist:
+            pass
+    if not request.user.is_anonymous():
+        try:
+            return request.user.get_profile()
+        except UserProfile.DoesNotExist:
+            return None
+    return None
+
+
+def page_reset(request, section):
+    # it's a reset request
+    for p in section.pageblock_set.all():
+        if hasattr(p.block(), 'needs_submit'):
+            if p.block().needs_submit():
+                p.block().clear_user_submissions(request.user)
+    return HttpResponseRedirect(section.get_absolute_url())
+
+
+def get_form_data(request, prefix):
+    data = dict()
+    for k in request.POST.keys():
+        if k.startswith(prefix):
+            # handle lists for multi-selects
+            v = request.POST.getlist(k)
+            if len(v) == 1:
+                data[k[len(prefix):]] = request.POST[k]
+            else:
+                data[k[len(prefix):]] = v
+    return data
+
+
+def page_post(request, section):
+    # user has submitted a form. deal with it
+    if request.POST.get('action', '') == 'reset':
+        return page_reset(request, section)
+    proceed = True
+    for p in section.pageblock_set.all():
+        if hasattr(p.block(), 'needs_submit'):
+            if p.block().needs_submit():
+                prefix = "pageblock-%d-" % p.id
+                data = get_form_data(request, prefix)
+                p.block().submit(request.user, data)
+                if hasattr(p.block(), 'redirect_to_self_on_submit'):
+                    # semi bug here?
+                    # proceed will only be set by the last submittable
+                    # block on the page. previous ones get ignored.
+                    proceed = not p.block().redirect_to_self_on_submit()
+    if proceed:
+        return HttpResponseRedirect(section.get_next().get_absolute_url())
+    else:
+        # giving them feedback before they proceed
+        return HttpResponseRedirect(section.get_absolute_url())
+
+
 @login_required
 @render_to('main/page.html')
 def page(request, path):
@@ -30,55 +91,10 @@ def page(request, path):
     section = section.get_first_leaf()
     h = get_hierarchy()
 
-    if not request.user.is_anonymous():
-        try:
-            profile = request.user.get_profile()
-            profile.current_location = path
-            profile.save()
-        except UserProfile.DoesNotExist:
-            pass
-    profile = None
-
-    if not request.user.is_anonymous():
-        try:
-            profile = request.user.get_profile()
-        except UserProfile.DoesNotExist:
-            pass
+    profile = get_profile(request, path)
 
     if request.method == "POST":
-        # user has submitted a form. deal with it
-        if request.POST.get('action', '') == 'reset':
-            # it's a reset request
-            for p in section.pageblock_set.all():
-                if hasattr(p.block(), 'needs_submit'):
-                    if p.block().needs_submit():
-                        p.block().clear_user_submissions(request.user)
-            return HttpResponseRedirect(section.get_absolute_url())
-        proceed = True
-        for p in section.pageblock_set.all():
-            if hasattr(p.block(), 'needs_submit'):
-                if p.block().needs_submit():
-                    prefix = "pageblock-%d-" % p.id
-                    data = dict()
-                    for k in request.POST.keys():
-                        if k.startswith(prefix):
-                            # handle lists for multi-selects
-                            v = request.POST.getlist(k)
-                            if len(v) == 1:
-                                data[k[len(prefix):]] = request.POST[k]
-                            else:
-                                data[k[len(prefix):]] = v
-                    p.block().submit(request.user, data)
-                    if hasattr(p.block(), 'redirect_to_self_on_submit'):
-                        # semi bug here?
-                        # proceed will only be set by the last submittable
-                        # block on the page. previous ones get ignored.
-                        proceed = not p.block().redirect_to_self_on_submit()
-        if proceed:
-            return HttpResponseRedirect(section.get_next().get_absolute_url())
-        else:
-            # giving them feedback before they proceed
-            return HttpResponseRedirect(section.get_absolute_url())
+        return page_post(request, section)
     else:
         return dict(section=section,
                     needs_submit=needs_submit(section),
