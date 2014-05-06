@@ -49,7 +49,6 @@ SOUTH_TESTS_MIGRATE = False
 JENKINS_TASKS = (
     'django_jenkins.tasks.run_pylint',
     'django_jenkins.tasks.with_coverage',
-    'django_jenkins.tasks.django_tests',
     'django_jenkins.tasks.run_pep8',
     'django_jenkins.tasks.run_pyflakes',
 )
@@ -76,6 +75,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.request',
+    'django.core.context_processors.static',
     'stagingcontext.staging_processor',
 )
 
@@ -105,8 +105,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'django.contrib.markup',
-    'staticmedia',
+    'django.contrib.staticfiles',
     'sorl.thumbnail',
     'django.contrib.admin',
     'template_utils',
@@ -122,26 +121,25 @@ INSTALLED_APPS = [
     'django_jenkins',
     'waffle',
     'impersonate',
+    'django_markwhat',
 ]
 
 INTERNAL_IPS = ('127.0.0.1', )
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.version.VersionDebugPanel',
     'debug_toolbar.panels.timer.TimerDebugPanel',
-    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
     'debug_toolbar.panels.headers.HeaderDebugPanel',
     'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
     'debug_toolbar.panels.template.TemplateDebugPanel',
     'debug_toolbar.panels.sql.SQLDebugPanel',
     'debug_toolbar.panels.signals.SignalDebugPanel',
-    'debug_toolbar.panels.logger.LoggingPanel',
 )
 
 STATSD_CLIENT = 'statsd.client'
 STATSD_PREFIX = 'diabeaters'
 STATSD_HOST = 'localhost'
 STATSD_PORT = 8125
-STATSD_PATCHES = ['django_statsd.patches.db', ]
+#STATSD_PATCHES = ['django_statsd.patches.db', ]
 if 'test' in sys.argv:
     STATSD_HOST = '127.0.0.1'
 
