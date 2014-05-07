@@ -10,12 +10,12 @@
 	
 	<title>{% block title %}{% endblock %} diaBeaters!</title>
 	
-	<link rel="stylesheet" href="/site_media/css/main.css?site=diabeaters" media="screen" />
-	<link rel="stylesheet" href="/site_media/css/print.css" media="print" />
+	<link rel="stylesheet" href="{{STATIC_URL}}css/main.css?site=diabeaters" media="screen" />
+	<link rel="stylesheet" href="{{STATIC_URL}}css/print.css" media="print" />
 	<!--[if IE 6]>
-	<link rel="stylesheet" href="/site_media/css/main_ie6_1col.css" media="screen" />
+	<link rel="stylesheet" href="{{STATIC_URL}}css/main_ie6_1col.css" media="screen" />
 	<![endif]-->
-	<link rel="shortcut icon" href="/site_media/img/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
 	{% block css %}{% endblock %}
 	{% block js %}
 	{% endblock %}
@@ -117,7 +117,7 @@
 {% block footer %}
 	<!-- ###### Footer ###### -->
 	<div id="footer">
-	<p class="printonly"><br /><img src="/site_media/img/logo_ccnmtl_sidebar.gif" class="printonly" /></p>
+	<p class="printonly"><br /><img src="{{STATIC_URL}}img/logo_ccnmtl_sidebar.gif" class="printonly" /></p>
 	</div><!-- id="footer" -->
 {% endblock %}
 

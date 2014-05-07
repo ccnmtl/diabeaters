@@ -2,11 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.views.generic import TemplateView
-import os.path
 admin.autodiscover()
 
-
-site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
 urlpatterns = patterns(
     '',
@@ -27,8 +24,6 @@ urlpatterns = patterns(
     (r'^pagetree/', include('pagetree.urls')),
     (r'^quiz/', include('diabeaters.quiz.urls')),
     (r'^health-habit-plan/', include('diabeaters.healthhabitplan.urls')),
-    (r'^site_media/(?P<path>.*)$',
-     'django.views.static.serve', {'document_root': site_media_root}),
     (r'^uploads/(?P<path>.*)$',
      'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^_stats/', TemplateView.as_view(template_name="main/stats.html")),
