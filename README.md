@@ -1,7 +1,7 @@
 Diabeaters
 ==========
 
-[![Build Status](https://travis-ci.org/ccnmtl/Diabeaters.png)](https://travis-ci.org/ccnmtl/Diabeaters)
+[![Build Status](https://travis-ci.org/ccnmtl/diabeaters.png)](https://travis-ci.org/ccnmtl/diabeaters)
 
 Developed by the Columbia Center For New Media Teaching and Learning. 
 
