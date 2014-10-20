@@ -18,7 +18,7 @@ logilab-common==0.59.0
 logilab-astng==0.24.1
 pylint==0.26.0
 sqlparse==0.1.11
-djangowind==0.12.1
+djangowind==0.13.2
 sorl==3.1
 template_utils==0.4p2
 django-staticmedia==0.2.2

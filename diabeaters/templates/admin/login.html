@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block stylesheet %}{% load adminmedia %}{% admin_media_prefix %}css/login.css{% endblock %}
+{% block stylesheet %}/media/css/login.css{% endblock %}
 
 {% block bodyclass %}login{% endblock %}
 
@@ -23,13 +23,11 @@
 	<p>Columbia Users</p>
 	
 	<p>If you have a Columbia UNI, you already have an account and can
-	login through WIND with it</p>
+	login through CAS with it</p>
 	
-	<form method="get" action="https://wind.columbia.edu/login">
+	<form method="get" action="{{CAS_BASE}}cas/login">
 	
-	<input type="hidden" name="service" value="cnmtl_full_np" />
-	
-	<input type="hidden" name="destination" value="http{% if request.is_secure %}s{% endif %}://{{ request.get_host }}/accounts/windlogin/?next=/admin/&this_is_the_login_form=1" />
+	<input type="hidden" name="destination" value="http{% if request.is_secure %}s{% endif %}://{{ request.get_host }}/accounts/caslogin/?next=/admin/&this_is_the_login_form=1" />
 	
 	<input type="submit" value="Here" />
 	
