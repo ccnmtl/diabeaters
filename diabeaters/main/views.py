@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import HttpResponseNotFound
-from models import UserProfile
 import os
 from pagetree.helpers import (get_hierarchy, get_section_from_path, get_module,
                               needs_submit, submitted)
@@ -24,16 +23,14 @@ def flatpage_hack(request):
 
 def get_profile(request, path):
     if not request.user.is_anonymous():
-        try:
-            profile = request.user.get_profile()
+        if hasattr(request.user, 'profile'):
+            profile = request.user.profile
             profile.current_location = path
             profile.save()
-        except UserProfile.DoesNotExist:
-            pass
     if not request.user.is_anonymous():
-        try:
-            return request.user.get_profile()
-        except UserProfile.DoesNotExist:
+        if hasattr(request.user, 'profile'):
+            return request.user.profile
+        else:
             return None
     return None
 
@@ -131,8 +128,8 @@ def instructor_page(request, path):
 @login_required
 @render_to('main/home.html')
 def home(request):
-    if hasattr(request.user, 'get_profile'):
-        profile = request.user.get_profile()
+    if hasattr(request.user, 'profile'):
+        profile = request.user.profile
     else:
         profile = None
     return dict(profile=profile)

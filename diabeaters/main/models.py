@@ -4,7 +4,7 @@ from pagetree.helpers import get_section_from_path, get_module
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User, unique=True)
     current_location = models.CharField(max_length=256, default="", blank=True)
 
     def current_module(self):

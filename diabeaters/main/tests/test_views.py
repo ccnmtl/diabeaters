@@ -25,10 +25,6 @@ class TrivialViewsTest(TestCase):
         response = self.c.get("/smoketest/")
         self.assertEquals(response.status_code, 200)
 
-    def test_about(self):
-        response = self.c.get("/about/")
-        self.assertEquals(response.status_code, 200)
-
     def test_home(self):
         response = self.c.get("/home/")
         self.assertEquals(response.status_code, 302)
