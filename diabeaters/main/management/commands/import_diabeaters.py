@@ -7,10 +7,9 @@ from zipfile import ZipFile
 DEFAULT_PATH = "pagetree.zip"
 
 
-@transaction.commit_manually
 def import_zipfile(zipfile):
-    hierarchy = import_zip(zipfile)
-    transaction.commit()
+    with transaction.atomic():
+        hierarchy = import_zip(zipfile)
     return hierarchy
 
 
