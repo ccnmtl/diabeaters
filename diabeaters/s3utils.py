@@ -14,5 +14,5 @@ class CachedS3BotoStorage(S3BotoStorage):
         return name
 
 
-CompressorS3BotoStorage = lambda: CachedS3BotoStorage(location='compressor')
+CompressorS3BotoStorage = lambda: CachedS3BotoStorage(location='media')
 MediaRootS3BotoStorage = lambda: S3BotoStorage(location='media')
