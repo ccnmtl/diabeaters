@@ -21,6 +21,7 @@ DATABASES = {
         'PORT': 5432,
         'USER': '',
         'PASSWORD': '',
+        'ATOMIC_REQUEST': True,
     }
 }
 
@@ -33,6 +34,7 @@ if 'test' in sys.argv or 'jenkins' in sys.argv:
             'PORT': '',
             'USER': '',
             'PASSWORD': '',
+            'ATOMIC_REQUEST': True,
         }
     }
 
@@ -83,7 +85,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
     'waffle.middleware.WaffleMiddleware',
     'impersonate.middleware.ImpersonateMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',

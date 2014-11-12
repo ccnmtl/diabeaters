@@ -23,6 +23,7 @@ DATABASES = {
         'PORT' : 6432,
         'USER' : '',
         'PASSWORD' : '',
+        'ATOMIC_REQUEST': True,
         }
 }
 
