@@ -93,7 +93,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'diabeaters.urls'
 
 TEMPLATE_DIRS = (
-    "/var/www/diabeaters/templates/",
     os.path.join(os.path.dirname(__file__), "templates"),
 )
 
@@ -161,14 +160,15 @@ STATICMEDIA_MOUNTS = (
 )
 
 STATIC_URL = "/media/"
-STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "../media/")),
-)
-STATIC_ROOT = ""
+STATICFILES_DIRS = ("media/",)
+STATIC_ROOT = "/tmp/diabeaters/static"
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
+COMPRESS_URL = "/media/"
+COMPRESS_ROOT = STATIC_ROOT
 
 
 # WIND settings

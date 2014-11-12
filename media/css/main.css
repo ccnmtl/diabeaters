@@ -1140,9 +1140,9 @@ li.hs-control-hide, li.hs-control-show {
 }
 
 li.hs-control-hide {
-	background: url(/site_media/img/bullet_open.gif) no-repeat scroll left 4px transparent !important;
+	background: url(../img/bullet_open.gif) no-repeat scroll left 4px transparent !important;
 }
 
 li.hs-control-show {
-	background: url(/site_media/img/bullet_close.gif) no-repeat scroll left 4px transparent !important;
+	background: url(../img/bullet_close.gif) no-repeat scroll left 4px transparent !important;
 }
