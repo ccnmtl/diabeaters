@@ -152,7 +152,7 @@ img, img a
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: #fffbc7 url('../img/bg_header.jpg') left top no-repeat;
+	background: #fffbc7 url('/media/img/bg_header.jpg') left top no-repeat;
 }
 
 #header #logo_project
@@ -175,7 +175,7 @@ img, img a
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: transparent url('../img/logo_project.jpg') left center no-repeat;
+	background: transparent url('/media/img/logo_project.jpg') left center no-repeat;
 }
 
 .visualhide
