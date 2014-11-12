@@ -136,7 +136,7 @@ overflow: auto;
 	width: 270px;
 	height: 500px;
 	background-color: #FFF;
-	background-image: url('../img/fridge.png');
+	background-image: url('/media/img/fridge.png');
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -160,10 +160,10 @@ overflow: auto;
 }
 
 li.ui-corner-top { margin-left: 3px !important; }
-.eat-smart { background-image: url('../img/icon_eatsmart.png'); }
-.get-fit { background-image: url('../img/icon_getfit.png'); }
-.look-sharp { background-image: url('../img/icon_looksharp.png'); }
-.think-positive { background-image: url('../img/icon_thinkpositive.png'); }
+.eat-smart { background-image: url('/media/img/icon_eatsmart.png'); }
+.get-fit { background-image: url('/media/img/icon_getfit.png'); }
+.look-sharp { background-image: url('/media/img/icon_looksharp.png'); }
+.think-positive { background-image: url('/media/img/icon_thinkpositive.png'); }
 
 .ui-draggable-dragging
 {
@@ -194,8 +194,8 @@ li.ui-corner-top { margin-left: 3px !important; }
 	cursor: pointer;
 }
 
-.magnet-popup-close { background: url("../img/icon_close.png") no-repeat; }
-.magnet-trash { background: url("../img/icon_delete.png") no-repeat; }
+.magnet-popup-close { background: url("/media/img/icon_close.png") no-repeat; }
+.magnet-trash { background: url("/media/img/icon_delete.png") no-repeat; }
 #categories .label { width: 230px; }
 
 .ui-state-disabled .label

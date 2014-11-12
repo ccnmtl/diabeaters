@@ -42,7 +42,7 @@ body
 	margin: auto;
 	padding: 0;
 	border: 0;
-	background: #f1dfd8 url('../img/bg_body.jpg') left top repeat-x; 
+	background: #f1dfd8 url('/media/img/bg_body.jpg') left top repeat-x; 
 	font: normal 0.88em "lucida grande", arial, helvetica, sans-serif;
 	color: #000;
 }
@@ -228,7 +228,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/bg_header.jpg') left top no-repeat;
+	background: url('/media/img/bg_header.jpg') left top no-repeat;
 	position: relative;
 }
 
@@ -242,7 +242,7 @@ a:visited
 	margin: 40px 0 0 20px;
 	padding: 0;
 	border: 0;
-	background: url('../img/logo.png') left top no-repeat;
+	background: url('/media/img/logo.png') left top no-repeat;
 }
 
 #header h4 a
@@ -256,7 +256,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/logo_ccnmtl.png') right top no-repeat;
+	background: url('/media/img/logo_ccnmtl.png') right top no-repeat;
 }
 
 
@@ -315,7 +315,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/bg_primary_navigation.jpg') left top no-repeat; 
+	background: url('/media/img/bg_primary_navigation.jpg') left top no-repeat; 
 }
 
 #primary_navigation ul.globalnav
@@ -337,7 +337,7 @@ a:visited
 	border: 0;
 	font: normal 14px/31px "lucida grande", arial, helvetica, sans-serif;
 	list-style: 0;
-	background: url('../img/nav_divider.jpg') right bottom no-repeat;
+	background: url('/media/img/nav_divider.jpg') right bottom no-repeat;
 }
 
 #primary_navigation ul.globalnav li a
@@ -357,7 +357,7 @@ a:visited
 
 #primary_navigation ul.globalnav li.active
 {
-	background: url('../img/nav_divider.jpg') left bottom repeat-x; 
+	background: url('/media/img/nav_divider.jpg') left bottom repeat-x; 
 }
 
 #primary_navigation ul.globalnav li.active a
@@ -405,7 +405,7 @@ a:visited
 #primary_navigation ul.usernav li#logout
 {
 	padding: 0;
-	background: url('../img/icon_padlock.gif') left bottom no-repeat;
+	background: url('/media/img/icon_padlock.gif') left bottom no-repeat;
 }
 
 #primary_navigation ul.usernav li#logout a
@@ -426,7 +426,7 @@ a:visited
 	width: 912px;
 	margin: 0;
 	padding: 0;
-	background: url('../img/bg_pagebody.jpg') left top repeat-y; 
+	background: url('/media/img/bg_pagebody.jpg') left top repeat-y; 
 }
 
 .visualclear {clear: both;}
@@ -440,7 +440,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/bg_secondary_navigation.gif') right top repeat-y; 
+	background: url('/media/img/bg_secondary_navigation.gif') right top repeat-y; 
 }
 
 #secondary_navigation #fadetop
@@ -451,7 +451,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/bg_fade_top.gif') right top no-repeat; 
+	background: url('/media/img/bg_fade_top.gif') right top no-repeat; 
 }
 
 #secondary_navigation #fadebottom
@@ -462,7 +462,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/bg_fade_bottom.gif') right top no-repeat; 
+	background: url('/media/img/bg_fade_bottom.gif') right top no-repeat; 
 }
 
 #secondary_navigation .block
@@ -503,7 +503,7 @@ a:visited
 	padding: 0;
 	border: 0;
 	padding-left: 13px;
-	background: url('../img/bullet.gif') left 4px no-repeat;
+	background: url('/media/img/bullet.gif') left 4px no-repeat;
 }
 
 #secondary_navigation .block ul ul
@@ -522,7 +522,7 @@ a:visited
 	padding: 0;
 	border: 0;
 	padding-left: 13px;
-	background: url('../img/bullet_diamond.gif') left 4px no-repeat;
+	background: url('/media/img/bullet_diamond.gif') left 4px no-repeat;
 }
 
 #secondary_navigation .block ul ul ul
@@ -541,7 +541,7 @@ a:visited
 	padding: 0;
 	border: 0;
 	padding-left: 13px;
-	background: url('../img/bullet_diamond_hollow.gif') left 4px no-repeat;
+	background: url('/media/img/bullet_diamond_hollow.gif') left 4px no-repeat;
 }
 
 /* ***** Content ***** */
@@ -635,7 +635,7 @@ a:visited
 	margin: 0 10px;
 	padding: 0;
 	border: 0;
-	background: #fff url('../img/bg_login_middle.gif') repeat-y top;
+	background: #fff url('/media/img/bg_login_middle.gif') repeat-y top;
 }
 
 .loginbox .boxtop
@@ -645,7 +645,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: #fff url('../img/bg_login_top.gif') no-repeat top;
+	background: #fff url('/media/img/bg_login_top.gif') no-repeat top;
 }
 
 .loginbox .boxbottom
@@ -655,7 +655,7 @@ a:visited
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: #fff url('../img/bg_login_bottom.gif') no-repeat bottom;
+	background: #fff url('/media/img/bg_login_bottom.gif') no-repeat bottom;
 }
 
 .loginbox h2
@@ -927,7 +927,7 @@ body#poctools a#poctools
 	display: block;
 	height: 120px;
 	width: 400px;
-	background: url('../img/flashicon.jpg') top left no-repeat;
+	background: url('/media/img/flashicon.jpg') top left no-repeat;
 }
 
 #getFlash h3
@@ -1003,7 +1003,7 @@ body#poctools a#poctools
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: url('../img/bg_footer.jpg') left top no-repeat;
+	background: url('/media/img/bg_footer.jpg') left top no-repeat;
 }
 
 .block-edit {
@@ -1022,7 +1022,7 @@ textarea {width: 100%;}
 	margin: -20px 0 0 0;
 	padding: 0;
 	border: 0;
-    background: transparent url("../img/progress_bkend_right.gif") right 16px no-repeat;
+    background: transparent url("/media/img/progress_bkend_right.gif") right 16px no-repeat;
 	float: right;
 }
 
@@ -1032,7 +1032,7 @@ textarea {width: 100%;}
 	margin: 0;
 	padding: 0;
 	border: 0;
-    background: url("../img/progress_bkend_left.gif") left 16px no-repeat;
+    background: url("/media/img/progress_bkend_left.gif") left 16px no-repeat;
 }
 
 .caselab_progressbox li
@@ -1064,7 +1064,7 @@ textarea {width: 100%;}
 
 .progress_section li.active
 {
-    background: transparent url("../img/progress_indicator.gif") center 16px no-repeat;
+    background: transparent url("/media/img/progress_indicator.gif") center 16px no-repeat;
 	color: #000 !important;
 }
 
@@ -1140,9 +1140,9 @@ li.hs-control-hide, li.hs-control-show {
 }
 
 li.hs-control-hide {
-	background: url(../img/bullet_open.gif) no-repeat scroll left 4px transparent !important;
+	background: url(/media/img/bullet_open.gif) no-repeat scroll left 4px transparent !important;
 }
 
 li.hs-control-show {
-	background: url(../img/bullet_close.gif) no-repeat scroll left 4px transparent !important;
+	background: url(/media/img/bullet_close.gif) no-repeat scroll left 4px transparent !important;
 }
