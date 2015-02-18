@@ -19,6 +19,7 @@ sqlparse==0.1.11
 six==1.8.0
 boto==2.31.1
 django-storages==1.1.8
+python-dateutil==2.4.0
 
 djangowind==0.13.2
 sorl==3.1
