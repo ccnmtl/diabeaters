@@ -1,6 +1,6 @@
 Django==1.7.5
 feedparser==4.1
-Markdown==2.0
+Markdown==2.6.1
 simplejson==3.3.0
 smartypants==1.6.0.2
 uuid==1.30
