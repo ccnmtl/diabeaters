@@ -30,7 +30,7 @@ django-pageblocks==0.5.14
 django-indexer==0.2
 django-templatetag-sugar==0.1
 django-paging==0.2.2
-django-statsd-mozilla==0.3.11
+django-statsd-mozilla==0.3.14
 django-nose==1.2
 raven==5.1.1
 django-annoying==0.8.0
