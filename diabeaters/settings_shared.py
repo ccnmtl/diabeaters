@@ -136,7 +136,6 @@ STATSD_CLIENT = 'statsd.client'
 STATSD_PREFIX = 'diabeaters'
 STATSD_HOST = 'localhost'
 STATSD_PORT = 8125
-#STATSD_PATCHES = ['django_statsd.patches.db', ]
 if 'test' in sys.argv:
     STATSD_HOST = '127.0.0.1'
 
