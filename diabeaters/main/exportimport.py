@@ -42,7 +42,7 @@ def image_exporter(block, xmlfile, zipfile):
     zipfile.write(block.image.file.name, arcname=filename)
     print >> xmlfile, \
         u"""<img src="%s" caption="%s" />""" % (
-        filename, block.caption)
+            filename, block.caption)
 
 
 def quiz_exporter(block, xmlfile, zipfile):
@@ -93,7 +93,7 @@ def export_block(block, xmlfile, zipfile):
     type, export_fn = pageblock_exporters[object.__class__]
     print >> xmlfile, \
         u"""<pageblock id="%s" type="%s" label="%s" ordinality="%s">""" % (
-        block.pk, type, sanitize(block.label), block.ordinality)
+            block.pk, type, sanitize(block.label), block.ordinality)
     export_fn(object, xmlfile, zipfile)
     print >> xmlfile, "</pageblock>"
 
@@ -101,7 +101,7 @@ def export_block(block, xmlfile, zipfile):
 def export_node(node, xmlfile, zipfile):
     print >> xmlfile, \
         u"""<section slug="%s" label="%s" is_root="%s">""" % (
-        node.slug, sanitize(node.label), node.is_root)
+            node.slug, sanitize(node.label), node.is_root)
     for block in node.pageblock_set.all():
         export_block(block, xmlfile, zipfile)
     for child in node.get_children():
@@ -122,7 +122,7 @@ def export_zip(hierarchy):
 
     print >> xmlfile, \
         u"""<hierarchy name="%s" base_url="%s">""" % (
-        hierarchy.name, hierarchy.base_url)
+            hierarchy.name, hierarchy.base_url)
 
     export_node(root, xmlfile, zipfile)
     print >> xmlfile, "</hierarchy>"
