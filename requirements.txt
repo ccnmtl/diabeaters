@@ -28,7 +28,7 @@ pagetree==0.5.9
 django-pageblocks==0.5.14
 django-indexer==0.3.0
 django-templatetag-sugar==0.1
-django-paging==0.2.2
+django-paging==0.2.5
 django-statsd-mozilla==0.3.14
 raven==5.2.0
 django-annoying==0.8.1
