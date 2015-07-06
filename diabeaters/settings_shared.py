@@ -99,7 +99,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sorl.thumbnail',
     'django.contrib.admin',
-    'template_utils',
     'pagetree',
     'pageblocks',
     'diabeaters.quiz',
