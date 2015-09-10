@@ -11,7 +11,7 @@ pyflakes==0.8.1
 flake8==2.2.5
 logilab-common==1.0.2
 logilab-astng==0.24.1
-pylint==1.4.1
+pylint==1.4.4
 sqlparse==0.1.14
 six==1.9.0
 boto==2.38.0
