@@ -204,8 +204,8 @@ def quiz_importer(node, zipfile):
         type = child.get("type")
         ordinality = child.get("ordinality")
 
-        (text, explanation, introtext, answers) = (child.getchildren()[:3]
-                                                   + [child.getchildren()[3:]])
+        (text, explanation, introtext, answers) = (child.getchildren()[:3] +
+                                                   [child.getchildren()[3:]])
         path = text.get("src")
         text = zipfile.read(path)
         path = explanation.get("src")
