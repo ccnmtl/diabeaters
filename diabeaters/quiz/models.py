@@ -144,8 +144,8 @@ class Question(models.Model):
         return self.answer_set.filter(correct=True)[0].ordinality
 
     def correct_answer_letter(self):
-        if (self.question_type != "single choice"
-                or self.answer_set.count() == 0):
+        if (self.question_type != "single choice" or
+                self.answer_set.count() == 0):
             return None
         return chr(ord('A') + self.correct_answer_number() - 1)
 
