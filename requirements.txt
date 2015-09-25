@@ -42,5 +42,6 @@ gunicorn==19.3.0
 django_appconf==0.6
 django-compressor==1.5
 django-ga-context==0.1.0
+django-cacheds3storage==0.1.1
 
 ccnmtlsettings==0.1.0
