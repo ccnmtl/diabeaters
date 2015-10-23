@@ -8,6 +8,7 @@ locals().update(
         base=base,
         INSTALLED_APPS=INSTALLED_APPS,
         STATIC_ROOT=STATIC_ROOT,
+        cloudfront="d2pl7wm2o23pxj",
     ))
 
 try:
