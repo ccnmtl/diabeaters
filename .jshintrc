@@ -1,0 +1,17 @@
+{
+    "white": true,
+    "trailing": true,
+    "undef": true,
+    "browser": true,
+    "eqeqeq": true,
+    "curly": true,
+    "predef": [
+        "$",
+        "confirm",
+        "jQuery",
+				"saveURL",
+				"deleteURL",
+				"togglePopup",
+				"saveOrder"
+    ]
+}
