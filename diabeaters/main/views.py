@@ -1,10 +1,10 @@
-from annoying.decorators import render_to
 from diabeaters.main.exportimport import export_zip
 from diabeaters.main.exportimport import import_zip
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import HttpResponseNotFound
+from django.shortcuts import render
 import os
 from pagetree.helpers import (get_hierarchy, get_section_from_path, get_module,
                               needs_submit, submitted)
@@ -81,8 +81,8 @@ def page_post(request, section):
 
 
 @login_required
-@render_to('main/page.html')
 def page(request, path):
+    template_name = 'main/page.html'
     section = get_section_from_path(path)
     # redirects to first (welcome) page for parent nodes
     section = section.get_first_leaf()
@@ -93,46 +93,47 @@ def page(request, path):
     if request.method == "POST":
         return page_post(request, section)
     else:
-        return dict(section=section,
-                    needs_submit=needs_submit(section),
-                    module=get_module(section),
-                    profile=profile,
-                    is_submitted=submitted(section, request.user),
-                    root=h.get_root())
+        return render(
+            request, template_name,
+            dict(section=section,
+                 needs_submit=needs_submit(section),
+                 module=get_module(section),
+                 profile=profile,
+                 is_submitted=submitted(section, request.user),
+                 root=h.get_root()))
 
 
 @login_required
-@render_to('main/edit_page.html')
 def edit_page(request, path):
     section = get_section_from_path(path)
     h = get_hierarchy()
-    return dict(section=section,
-                module=get_module(section),
-                root=h.get_root())
+    return render(request, 'main/edit_page.html',
+                  dict(section=section,
+                       module=get_module(section),
+                       root=h.get_root()))
 
 
 @login_required
-@render_to('main/instructor_page.html')
 def instructor_page(request, path):
     section = get_section_from_path(path)
     h = get_hierarchy()
     quizzes = [p.block() for p in section.pageblock_set.all()
                if hasattr(p.block(), 'needs_submit') and
                p.block().needs_submit()]
-    return dict(section=section,
-                quizzes=quizzes,
-                module=get_module(section),
-                root=h.get_root())
+    return render(request, 'main/instructor_page.html',
+                  dict(section=section,
+                       quizzes=quizzes,
+                       module=get_module(section),
+                       root=h.get_root()))
 
 
 @login_required
-@render_to('main/home.html')
 def home(request):
     if hasattr(request.user, 'profile'):
         profile = request.user.profile
     else:
         profile = None
-    return dict(profile=profile)
+    return render(request, 'main/home.html', dict(profile=profile))
 
 
 def index(request):
@@ -159,10 +160,9 @@ def export(request):
 
 
 @staff_required()
-@render_to("main/import.html")
 def import_(request):
     if request.method == "GET":
-        return {}
+        return render(request, "main/import.html", {})
     file = request.FILES['file']
     zipfile = ZipFile(file)
     hierarchy = import_zip(zipfile)
