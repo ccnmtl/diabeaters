@@ -15,7 +15,7 @@ logilab-astng==0.24.3
 pylint==1.5.5
 sqlparse==0.1.19
 six==1.10.0
-boto==2.38.0
+boto==2.40.0
 django-storages-redux==1.3
 python-dateutil==2.5.3
 pyasn1==0.1.9
