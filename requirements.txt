@@ -36,7 +36,7 @@ django-smoketest==1.0.0
 django-debug-toolbar==1.4
 django-jenkins==0.18.1
 django-stagingcontext==0.1.0
-django-waffle==0.11
+django-waffle==0.11.1
 django-markwhat==1.5
 django-impersonate==1.0.1
 gunicorn==19.6.0
