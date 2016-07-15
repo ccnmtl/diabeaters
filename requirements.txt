@@ -2,7 +2,7 @@
 Django==1.9.7
 Markdown==2.6.6
 uuid==1.30
-psycopg2==2.6.1
+psycopg2==2.6.2
 Pillow==3.3.0
 statsd==3.2.1
 coverage==4.1
