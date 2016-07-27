@@ -32,7 +32,7 @@ django-staticmedia==0.2.2
 pagetree==0.6.2
 django-pageblocks==0.5.16
 django-statsd-mozilla==0.3.16
-raven==5.22.0
+raven==5.23.0
 django-smoketest==1.0.0
 django-debug-toolbar==1.5
 django-jenkins==0.19.0
