@@ -44,7 +44,7 @@ django-markwhat==1.5
 django-impersonate==1.0.1
 gunicorn==19.6.0
 django-appconf==1.0.2
-django-compressor==2.0
+django-compressor==2.1
 django-ga-context==0.1.0
 django-cacheds3storage==0.1.2
 django-smtp-ssl==1.0
