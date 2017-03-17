@@ -4,6 +4,12 @@ module.exports = {
         "jquery": true
     },
     "extends": "eslint:recommended",
+    "globals": {
+        "deleteURL": true,
+        "saveOrder": true,
+        "saveURL": true,
+        "togglePopup": true,
+    },
     "rules": {
         "indent": [
             "error",

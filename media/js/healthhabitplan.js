@@ -98,8 +98,9 @@ jQuery(function() {
 
                 var width = magnet.width();
                 var height = magnet.height();
-                magnet.offset({'top': event.pageY - height / 2,
-                               'left': event.pageX - width / 2});
+                magnet.offset({
+                    'top': event.pageY - height / 2,
+                    'left': event.pageX - width / 2});
 
                 magnet.draggable({
                     revert: 'invalid',

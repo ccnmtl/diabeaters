@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "positionMagnet" }]*/
 var positionMagnet = function(magnet, x, y) {
     var fridgeOffset = jQuery('#fridge').offset();
     fridgeOffset.left = fridgeOffset.left + x;
