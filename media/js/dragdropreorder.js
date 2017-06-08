@@ -84,7 +84,7 @@ function swapElements(child1, child2) {
 }
 
 function doUp(e) {
-    dragging.className = dragging.className.replace(/ dragging/,'');
+    dragging.className = dragging.className.replace(/ dragging/, '');
     dragging = null;
     document.onmousemove = null;
     saveOrder();

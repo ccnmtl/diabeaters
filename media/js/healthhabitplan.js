@@ -2,7 +2,7 @@ var saveMagnetPosition = function(id, x, y) {
     var req = new XMLHttpRequest();
     var url = saveURL + '?item_id=' + id + ';x=' + parseInt(x) +
         ';y=' + parseInt(y);
-    req.open('POST',url,true);
+    req.open('POST', url, true);
     req.send(null);
 };
 
@@ -23,7 +23,7 @@ var deleteMagnet = function(elem) {
     // delete from session
     var req = new XMLHttpRequest();
     var url = deleteURL + '?item_id=' + id;
-    req.open('POST',url,true);
+    req.open('POST', url, true);
     req.send(null);
 
     // hide on fridge -- NOT using display:none so the others stay put
