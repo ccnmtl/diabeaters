@@ -78,6 +78,7 @@ def quiz_exporter(block, xmlfile, zipfile):
         print >> xmlfile, "</question>"
     print >> xmlfile, "</quiz>"
 
+
 pageblock_exporters = {
     TextBlock: ('text', text_exporter),
     HTMLBlock: ('html', html_exporter),
@@ -225,6 +226,7 @@ def quiz_importer(node, zipfile):
                             value=value, label=label, correct=correct)
             answer.save()
     return q
+
 
 pageblock_importers = {
     'text': text_importer,

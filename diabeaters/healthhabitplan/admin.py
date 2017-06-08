@@ -11,6 +11,7 @@ class ItemInline(admin.StackedInline):
 class CategoryAdmin(admin.ModelAdmin):
     inlines = [ItemInline, ]
 
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Session)
 admin.site.register(Magnet)
