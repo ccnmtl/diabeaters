@@ -10,7 +10,7 @@ function doDown(e) {
         e.target.tagName === 'INPUT' ||
         e.target.tagName === 'SELECT' ||
         e.target.tagName === 'OPTION'
-     ) {
+    ) {
         return;
     }
     document.onmousemove = doDrag;

@@ -10,7 +10,7 @@ var disableLabel = function(magnet) {
     jQuery('#item-' + magnet.attr('id').split('-')[1] + '-label')
         .addClass('disabled');
     var grabber = jQuery('#item-' + magnet.attr('id')
-                         .split('-')[1] + '-grabber');
+        .split('-')[1] + '-grabber');
     grabber.addClass('category-icon');
     grabber.removeClass('grabber');
     grabber.draggable('option', 'disabled', true);
@@ -33,7 +33,7 @@ var deleteMagnet = function(elem) {
     jQuery('#item-' + magnet.attr('id').split('-')[1] + '-label')
         .removeClass('disabled');
     var grabber = jQuery('#item-' + magnet.attr('id')
-                         .split('-')[1] + '-grabber');
+        .split('-')[1] + '-grabber');
     grabber.removeClass('category-icon');
     grabber.addClass('grabber');
     grabber.draggable('option', 'disabled', false);
@@ -71,7 +71,7 @@ jQuery(function() {
         var width = parseInt(jQuery(this).css('width'));
         var height = parseInt(jQuery(this).css('height'));
         jQuery(this).draggable('option', 'cursorAt',
-                               {'top': height / 2, 'left': width / 2});
+            {'top': height / 2, 'left': width / 2});
     });
 
     jQuery('#fridge').droppable({
@@ -84,13 +84,13 @@ jQuery(function() {
             if (item.hasClass('grabber-in-menu')) {
                 // if the magnet is already on the fridge (but hidden), just re-use that one
                 var magnet = jQuery('#item-' + item.attr('id')
-                                    .split('-')[1] + '-magnet');
+                    .split('-')[1] + '-magnet');
                 if (magnet.length > 0) {
                     magnet.css('visibility', 'visible');
                 } else {
                     magnet = item.clone();
                     magnet.attr('id', 'item-' + magnet.attr('id')
-                                .split('-')[1] + '-magnet');
+                        .split('-')[1] + '-magnet');
                     magnet.removeClass('grabber-in-menu');
                     magnet.addClass('magnet');
                     magnet.appendTo('#fridge');
@@ -111,7 +111,7 @@ jQuery(function() {
 
                 // take its popup label too
                 var popup = jQuery('#item-' + magnet.attr('id')
-                                   .split('-')[1] + '-popup');
+                    .split('-')[1] + '-popup');
                 popup.appendTo('#fridge');
 
                 item = magnet;  // so the code below saves its position correctly
