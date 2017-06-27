@@ -1,3 +1,8 @@
+***Note:*** this project has been discontinued. You are free to keep
+using it or fork it, but after 2017-06-27, we will not be making
+any updates to it.
+
+
 Diabeaters
 ==========
 
