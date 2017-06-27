@@ -1,0 +1,6 @@
+.git
+ve
+*.pyc
+reports
+node_modules
+celerybeat-schedule

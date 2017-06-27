@@ -7,3 +7,4 @@ local_settings.py
 cover/
 reports/
 node_modules/
+wheelhouse/

@@ -1,0 +1,19 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  web:
+    image: ccnmtl/diabeaters
+    environment:
+      - APP=diabeaters
+      - SECRET_KEY=dummy-secret-key
+      - SETTINGS=settings_compose
+    command: manage runserver 0.0.0.0:8000
+    volumes:
+      - .:/app/
+    ports:
+      - "8000:8000"
+    links:
+      - db
+    depends_on:
+      - db
