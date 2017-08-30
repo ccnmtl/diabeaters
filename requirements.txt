@@ -34,7 +34,7 @@ djangowind==1.0.0
 ./requirements/src/sorl-3.1.tar.gz
 django-staticmedia==0.2.2
 pagetree==0.6.4
-django-pageblocks==0.5.16 # pyup: <1.0.0
+django-pageblocks==2.0.0 # pyup: <1.0.0
 django-statsd-mozilla==0.3.16
 raven==6.1.0
 django-smoketest==1.1.0
