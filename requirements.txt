@@ -20,7 +20,7 @@ pylint==1.7.2
 sqlparse==0.2.3
 six==1.10.0
 boto==2.47.0
-django-storages==1.6.3
+django-storages==1.6.5
 python-dateutil==2.6.0
 pyasn1==0.2.3
 pyOpenSSL==17.0.0
